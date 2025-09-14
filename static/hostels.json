@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Sunrise Hostel",
+    "mess": "Veg",
+    "type": "Girls",
+    "img": "/static/img3.jpg",
+    "page": "second"
+  },
+  {
+    "name": "Green Valley Hostel",
+    "mess": "Non-Veg",
+    "type": "Boys",
+    "img": "/static/img2.jpg",
+    "page": "third.html"
+  },
+  {
+    "name": "City Central Hostel",
+    "mess": "Both",
+    "type": "Boys",
+    "img": "/static/img1.jpg",
+    "page": "fourth.html"
+  },
+  {
+    "name": "Elite Residency",
+    "mess": "Veg",
+    "type": "Girls",
+    "img": "/static/img4.jpg",
+    "page": "fifth.html"
+  },
+  {
+    "name": "Royal Stay Hostel",
+    "mess": "Both",
+    "type": "Boys",
+    "img": "/static/img5.jpg",
+    "page": "sixth.html"
+  },
+  {
+    "name": "R K Hostel",
+    "mess": "Non-Veg",
+    "type": "Girls",
+    "img": "/static/main.jpg",
+    "page": "seven.html"
+  }
+]

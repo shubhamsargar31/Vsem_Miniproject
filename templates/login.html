@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      body {
+        display: flex;
+        height: 100vh;
+        width: 100%;
+        background: #fff;
+      }
+      .container {
+        display: flex;
+        width: 100%;
+        height: 100%;
+      }
+      .left {
+        width: 60%;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 40px;
+      }
+      .left h2 {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      form {
+        width: 100%;
+        max-width: 320px;
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+      }
+      label {
+        margin: 10px 0 5px;
+        font-weight: bold;
+        font-size: 14px;
+      }
+      input {
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+        outline: none;
+        width: 100%;
+        background: #f1f6f9;
+        font-size: 14px;
+      }
+      button {
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        background: #42e6f5;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+      }
+      button:hover {
+        background: #27c8d9;
+      }
+      .right {
+        width: 40%;
+        background: linear-gradient(135deg, #f39c12, #e74c3c, #2980b9, #27ae60);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+        text-align: center;
+        padding: 40px;
+      }
+      .right h2 {
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+      .right p {
+        margin-bottom: 20px;
+        font-size: 18px;
+        line-height: 1.4;
+      }
+      .right .signup-btn {
+        background: #fff;
+        color: black;
+        padding: 12px 30px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 15px;
+      }
+      .right .signup-btn:hover {
+        background: #f1f1f1;
+      }
+      /* Flash messages */
+      .flash-messages {
+        margin: 10px 0;
+        width: 100%;
+        max-width: 320px;
+      }
+      .flash {
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+      }
+      .flash.success {
+        background: #d4edda;
+        color: #155724;
+      }
+      .flash.error {
+        background: #f8d7da;
+        color: #721c24;
+      }
+      .flash.warning {
+        background: #fff3cd;
+        color: #856404;
+      }
+      .flash.info {
+        background: #d1ecf1;
+        color: #0c5460;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Left Section -->
+      <div class="left">
+        <h2>Login to Your Account</h2>
+
+        <!-- Flash Messages -->
+        <div class="flash-messages">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+        </div>
+
+        <form method="POST" action="/login">
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            required
+          />
+
+          <button type="submit">Login</button>
+        </form>
+      </div>
+
+      <!-- Right Section -->
+      <div class="right">
+        <h2>New Here?</h2>
+        <p>
+          Sign up and discover the Best Hostels Near You for a Comfortable Stay
+        </p>
+        <a href="/signup" class="signup-btn">Sign Up</a>
+      </div>
+    </div>
+  </body>
+</html>

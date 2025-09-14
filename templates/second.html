@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sunrise Hostel</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #f0f8ff, #ffffff);
+        scroll-behavior: smooth;
+        background-size: cover;
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(90deg, #007bff, #0056b3);
+        color: white;
+        padding: 15px;
+        font-size: 20px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+      }
+
+      .navbar a {
+        color: white;
+        text-decoration: none;
+        margin: 0 10px;
+        font-size: 16px;
+        transition: color 0.3s;
+      }
+
+      .navbar a:hover {
+        color: #ffd700;
+      }
+
+      /* Hero Section */
+      .hero {
+        text-align: center;
+        padding: 120px 20px 80px;
+        background: url("/static/hostel/img1.jpeg") center/cover no-repeat;
+        color: white;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+      }
+
+      .hero h1 {
+        font-size: 48px;
+        margin-bottom: 15px;
+      }
+
+      .btn {
+        display: inline-block;
+        background: linear-gradient(90deg, #007bff, #0056b3);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        transition: background 0.3s, transform 0.2s;
+      }
+
+      .btn:hover {
+        background: linear-gradient(90deg, #0056b3, #003f8c);
+        transform: scale(1.05);
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(6px); /* blur effect */
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 2000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Modal Box */
+      .modal-content {
+        /* background: white; */
+        background: linear-gradient(135deg, #89f7fe, #66a6ff);
+        padding: 25px;
+        border-radius: 15px;
+        max-width: 500px;
+        width: 90%;
+        animation: fadeIn 0.4s ease;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .modal-content h3 {
+        color: #007bff;
+        margin-bottom: 8px;
+      }
+
+      .modal-content p {
+        margin: 5px 0 15px;
+      }
+
+      .close-btn {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        float: right;
+      }
+
+      .close-btn:hover {
+        background: #0056b3;
+      }
+
+      /* Animation */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Container */
+      .container {
+        width: 95%;
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+
+      h2 {
+        color: #007bff;
+        margin-bottom: 20px;
+        font-size: 26px;
+        border-left: 5px solid #007bff;
+        padding-left: 10px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+        margin-bottom: 30px;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Gallery */
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .gallery img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s;
+      }
+
+      .gallery img:hover {
+        transform: scale(1.05);
+      }
+
+      /* Facilities */
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      ul li {
+        padding: 12px 15px;
+        margin-bottom: 10px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+      }
+      ul li::before {
+        content: "✔";
+        color: #007bff;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      /* Food Menu */
+      .food-menu {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      .food-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s;
+      }
+      .food-card:hover {
+        transform: scale(1.05);
+      }
+      .food-card img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 15px;
+      }
+      .food-card h3 {
+        color: #007bff;
+        margin: 10px 0;
+      }
+
+      /* Rooms */
+      .room-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+      }
+      .room-card {
+        background: #f8faff;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      .room-card h3 {
+        color: #007bff;
+      }
+
+      /* Stats */
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+      }
+      .stat-box {
+        background: #007bff;
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+      }
+      .stat-box h3 {
+        font-size: 22px;
+        margin-bottom: 10px;
+      }
+
+      /* Feedback */
+      .feedback-section textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin-bottom: 15px;
+        resize: none;
+        font-size: 15px;
+      }
+      .feedback-section button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 15px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .feedback-section button:hover {
+        background: #0056b3;
+      }
+      .feedback-item {
+        background: #fff;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+        font-size: 15px;
+      }
+      /* Feedback Section */
+      .feedback-section {
+        background: #f8faff;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
+      }
+
+      .feedback-section textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        margin-bottom: 15px;
+        resize: none;
+        font-size: 15px;
+        box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
+        transition: border 0.3s;
+      }
+
+      .feedback-section textarea:focus {
+        border: 1px solid #007bff;
+        outline: none;
+      }
+
+      .feedback-section button {
+        background: linear-gradient(90deg, #007bff, #0056b3);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 10px;
+        font-size: 15px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s;
+      }
+
+      .feedback-section button:hover {
+        background: linear-gradient(90deg, #0056b3, #004199);
+        transform: scale(1.05);
+      }
+
+      /* Rating Stars */
+      .rating {
+        font-size: 22px;
+        color: #ccc;
+        margin-bottom: 12px;
+        cursor: pointer;
+      }
+      .rating span.active {
+        color: gold;
+        text-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
+      }
+
+      /* Feedback List */
+      .feedback-list {
+        margin-top: 20px;
+      }
+
+      .feedback-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        background: #fff;
+        padding: 15px;
+        margin-bottom: 12px;
+        border-radius: 12px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        font-size: 15px;
+        animation: fadeIn 0.4s ease;
+      }
+
+      .feedback-item .avatar {
+        width: 40px;
+        height: 40px;
+        background: #007bff;
+        color: white;
+        font-weight: bold;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .feedback-item .text {
+        flex: 1;
+      }
+      .register-btn{
+        float: right;
+      }
+
+      
+      /* Animation */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      🏨 Sunrise Hostel
+      <div>
+        <a href="#about">About</a>
+        <a onclick="openModal()">Contact Us</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#facilities">Facilities</a>
+        <a href="#menu">Food Menu</a>
+        <a href="#rooms">Rooms</a>
+        <a href="#stats">Stats</a>
+        <a href="#feedback">Feedback</a>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>Welcome to Sunrise Hostel</h1>
+      <p>Your Comfortable Stay, Our Priority</p>
+      <a href="#facilities" class="btn">Explore More ➡</a>
+    </div>
+
+    <!-- About Section -->
+    <div class="container" id="about">
+      <h2>About Us</h2>
+      <p>
+        Sunrise Hostel offers premium facilities with affordable rooms, pure
+        vegetarian mess, study rooms, gym, and much more. Trusted by students
+        for over 20 years.
+      </p>
+    </div>
+
+    <div id="contactModal" class="modal">
+      <div class="modal-content">
+        <h3>📍 College Address</h3>
+        <p>
+          <b>Sunrise Hostel</b><br />
+          Near Main Road, Pune - 411001<br />
+          Maharashtra, India
+        </p>
+
+        <h3>☎ Contact Number</h3>
+        <p>+91 9876543210</p>
+
+        <h3>👨‍💼 Hostel Owner</h3>
+        <p><b>Name:</b> Mr. Ramesh Patil</p>
+        <p><b>Phone:</b> +91 9876543211</p>
+        <p><b>Email:</b> rameshpatil@hostel.com</p>
+
+        <button class="close-btn" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+
+    <!-- Gallery -->
+    <div class="container" id="gallery">
+      <h2>Hostel Interior Gallery</h2>
+      <div class="gallery">
+        <img src="/static/hostel/img1.jpeg" alt="Hostel Room" />
+        <img src="/static/hostel/img2.jpeg" alt="Study Room" />
+        <img src="/static/hostel/img3.jpeg" alt="Dining Area" />
+        <img src="/static/hostel/img4.jpeg" alt="Gym Facilities" />
+      </div>
+    </div>
+
+    <!-- Facilities -->
+    <div class="container" id="facilities">
+      <div class="card">
+        <h2>✨ Facilities Available</h2>
+        <ul>
+          <li>24/7 Security & CCTV</li>
+          <li>Pure Veg Mess Facility</li>
+          <li>WiFi Connectivity</li>
+          <li>Laundry Service</li>
+          <li>Hot Water Supply</li>
+          <li>Study Room & Library</li>
+          <li>Indoor Games</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Food Menu -->
+    <div class="container" id="menu">
+      <div class="card">
+        <h2>🥗 Pure Veg Mess Menu</h2>
+        <div class="food-menu">
+          <div class="food-card">
+            <img src="/static/food/img1.jpeg" alt="Breakfast" />
+            <h3>🍳 Breakfast</h3>
+            <p>Poha, Upma, Idli-Sambar, Dosa, Paratha, Tea & Coffee</p>
+          </div>
+          <div class="food-card">
+            <img src="/static/food/img2.jpeg" alt="Lunch" />
+            <h3>🍲 Lunch</h3>
+            <p>Chapati, Rice, Dal, Paneer Sabzi, Seasonal Veg Curry, Salad</p>
+          </div>
+          <div class="food-card">
+            <img src="/static/food/img3.jpeg" alt="Dinner" />
+            <h3>🍛 Dinner</h3>
+            <p>
+              Chapati, Rice, Dal Tadka, Mixed Veg Curry, Sweet Dish (Weekly)
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Room Availability -->
+    <div class="container" id="rooms">
+      <div class="card">
+        <h2>🛏 Room Availability & Cost</h2>
+        <div class="room-info">
+          <div class="room-card">
+            <h3>Single Room (Non-AC)</h3>
+            <p>💰 ₹6,000 / month</p>
+            <p>Available: 5 / 20</p>
+          </div>
+          <div class="room-card">
+            <h3>Double Sharing (Non-AC)</h3>
+            <p>💰 ₹4,500 / month</p>
+            <p>Available: 12 / 40</p>
+          </div>
+          <div class="room-card">
+            <h3>Single Room (AC)</h3>
+            <p>💰 ₹8,000 / month</p>
+            <p>Available: 2 / 15</p>
+          </div>
+          <div class="room-card">
+            <h3>Double Sharing (AC)</h3>
+            <p>💰 ₹6,000 / month</p>
+            <p>Available: 8 / 25</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="container" id="stats">
+      <div class="card">
+        <h2>📊 Hostel Stats</h2>
+        <div class="stats">
+          <div class="stat-box">
+            <h3>100+</h3>
+            <p>Total Capacity</p>
+          </div>
+          <div class="stat-box">
+            <h3>27</h3>
+            <p>Available Rooms</p>
+          </div>
+          <div class="stat-box">
+            <h3>20+</h3>
+            <p>Years of Service</p>
+          </div>
+          <div class="stat-box">
+            <h3>4.5⭐</h3>
+            <p>Student Rating</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customer Feedback Section -->
+    <div class="card feedback-section">
+      <h2>💬 Customer Feedback</h2>
+
+      <!-- Rating Stars -->
+      <div class="rating" id="ratingStars">⭐ ⭐ ⭐ ⭐ ⭐</div>
+
+      <!-- Feedback Input -->
+      <textarea
+        id="feedbackInput"
+        rows="4"
+        placeholder="Write your feedback here..."
+      ></textarea>
+      <button onclick="addFeedback()">Submit Feedback</button>
+      <!-- <button class="sample" onclick="addregisteration()">Student Register </button></div> -->
+      <button class="register-btn" onclick="addregisteration()" >
+        Student Register
+      </button>
+      <!-- Feedback List -->
+      <div class="feedback-list" id="feedbackList"></div>
+    </div>
+
+    <script>
+      function openModal() {
+        document.getElementById("contactModal").style.display = "flex";
+      }
+
+      function closeModal() {
+        document.getElementById("contactModal").style.display = "none";
+      }
+
+      window.onclick = function (event) {
+        let modal = document.getElementById("contactModal");
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+      let stars = document.getElementById("ratingStars");
+      let selectedRating = 0;
+
+      stars.innerHTML = "";
+      for (let i = 1; i <= 5; i++) {
+        let span = document.createElement("span");
+        span.innerHTML = "★";
+        span.dataset.value = i;
+        span.onclick = function () {
+          selectedRating = i;
+          document.querySelectorAll("#ratingStars span").forEach((s) => {
+            s.classList.toggle("active", s.dataset.value <= i);
+          });
+        };
+        stars.appendChild(span);
+      }
+
+      //registration
+      function addregisteration() {
+        window.location.href = "/login";
+      }
+
+      // Add Feedback
+      function addFeedback() {
+        let input = document.getElementById("feedbackInput");
+        let feedbackText = input.value.trim();
+        if (feedbackText === "") {
+          alert("Please enter your feedback!");
+          return;
+        }
+        if (selectedRating === 0) {
+          alert("Please select a star rating!");
+          return;
+        }
+
+        let feedbackList = document.getElementById("feedbackList");
+
+        let div = document.createElement("div");
+        div.className = "feedback-item";
+
+        let avatar = document.createElement("div");
+        avatar.className = "avatar";
+        avatar.innerText = feedbackText[0].toUpperCase();
+
+        let textDiv = document.createElement("div");
+        textDiv.className = "text";
+        textDiv.innerHTML = `<strong>${"⭐".repeat(
+          selectedRating
+        )}</strong><br>${feedbackText}`;
+
+        div.appendChild(avatar);
+        div.appendChild(textDiv);
+
+        feedbackList.prepend(div);
+        input.value = "";
+        selectedRating = 0;
+        document
+          .querySelectorAll("#ratingStars span")
+          .forEach((s) => s.classList.remove("active"));
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hostel Finder</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #6dd5ed, #cc99ff); 
+      color: #333;
+    }
+
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: transparent;
+    }
+
+    .navbar .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #1f2d5a; 
+    }
+
+    .navbar .buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .navbar .buttons a {
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .navbar .buttons .sign-in {
+      color: #1f2d5a;
+    }
+    .navbar .buttons .sign-in:hover {
+      text-decoration: underline;
+    }
+
+    .navbar .buttons .sign-up {
+      background: #1f2d5a;
+      color: white;
+    }
+    .navbar .buttons .sign-up:hover {
+      background: #141d3a;
+    }
+
+    /* Main Section */
+    .content {
+      max-width: 800px;
+      margin: 80px auto;
+      padding: 50px;
+      text-align: center;
+      background: linear-gradient(135deg, #ffffffee, #f5f0ffcc); /* white + light lavender */
+      border-radius: 16px;
+      box-shadow: 0px 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .content h1 {
+      color: #1f2d5a;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      font-size: 18px;
+      margin-bottom: 35px;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    /* Button */
+    .btn-primary {
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #1f2d5a, #394b9d);
+      color: #fff;
+      font-size: 17px;
+      font-weight: bold;
+      transition: 0.3s;
+      box-shadow: 0px 5px 15px rgba(31, 45, 90, 0.5);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(90deg, #394b9d, #1f2d5a);
+      box-shadow: 0px 7px 20px rgba(31, 45, 90, 0.7);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .content {
+        margin: 40px 20px;
+        padding: 30px;
+      }
+      .content h1 {
+        font-size: 28px;
+      }
+      .content p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">🏠 MultiHostel</div>
+  </div>
+  <!-- Main Section -->
+  <div class="content">
+    <h1>Welcome to Multi Hosteller</h1>
+    <p>Here you can search, compare and register for hostels easily.<br>
+    Find your hostel based on facilities, budget and comfort.</p>
+
+    <a href="first" class="btn-primary">Get Started</a>
+  </div>
+
+</body>
+</html>
