@@ -26,16 +26,57 @@ with app.app_context():
 def home():
     return render_template("landing.html")
 
-# ----------------- Registration (General Page) -----------------
-@app.route("/regi", methods=["GET", "POST"])
-def registration():
+@app.route("/first")
+def first():
+    return render_template("first.html")
+
+# ----------------- Hostel Pages -----------------
+@app.route("/sunrisehostel", methods=["GET", "POST"])
+def sunrisehostel():
     if request.method == "POST":
-        hostel_name = request.form.get("hostel_name")
-        if hostel_name:
-            return redirect(url_for("register", hostel_name=hostel_name))
-        else:
-            flash("⚠️ Please select a hostel", "error")
-    return render_template("registration.html", hostel_name="Default", success=False)
+        feedback_text = request.form.get("feedback")
+        rating = request.form.get("rating")
+
+        if "user" not in session:
+            flash(" Please login to give feedback", "warning")
+            return redirect(url_for("login"))
+
+        if not feedback_text or not rating:
+            flash(" Feedback and rating required!", "error")
+            return redirect(url_for("sunrisehostel"))
+
+        fb = Feedback(rating=int(rating), feedback_text=feedback_text)
+        db.session.add(fb)
+        db.session.commit()
+
+        flash(" Feedback submitted successfully!", "success")
+        return redirect(url_for("sunrisehostel"))
+
+    feedbacks = Feedback.query.order_by(Feedback.timestamp.desc()).all()
+    return render_template("sunrisehostel.html", feedbacks=feedbacks)
+
+@app.route("/GreenValleyHostel")
+def green_valley():
+    return render_template("GreenValleyHostel.html")
+
+@app.route("/CityCentralHostel")
+def city_central():
+    return render_template("CityCentralHostel.html")
+
+@app.route("/EliteResidency")
+def elite_residency():
+    return render_template("EliteResidency.html")
+
+# ----------------- Registration (General Page) -----------------
+# @app.route("/regi", methods=["GET", "POST"])
+# def registration():
+#     if request.method == "POST":
+#         hostel_name = request.form.get("hostel_name")
+#         if hostel_name:
+#             return redirect(url_for("register", hostel_name=hostel_name))
+#         else:
+#             flash("⚠️ Please select a hostel", "error")
+#     return render_template("registration.html", hostel_name="Default", success=False)
 
 # ----------------- Signup -----------------
 @app.route("/signup", methods=["GET", "POST"])
@@ -47,12 +88,12 @@ def signup():
         cpassword = request.form["cpassword"]
 
         if password != cpassword:
-            flash("⚠️ Passwords do not match", "error")
+            flash(" Passwords do not match", "error")
             return redirect(url_for("signup"))
 
         existing_user = User.query.filter_by(email=email).first()
         if existing_user:
-            flash("⚠️ Email already exists", "error")
+            flash(" Email already exists", "error")
             return redirect(url_for("signup"))
 
         new_user = User(fullname=fullname, email=email)
@@ -81,50 +122,20 @@ def login():
 
         if user and user.check_password(password):
             session["user"] = user.email
-            flash(" Login Successful", "success")
-            return redirect(url_for("registration"))
+            return render_template("registration.html", hostel_name="Default", success=False)
         else:
             flash("Incorrect Password. Try again.", "error")
             return redirect(url_for("login"))
 
     return render_template("login.html")
 
-# ----------------- Feedback Page -----------------
-@app.route("/second", methods=["GET", "POST"])
-def second():
-    if request.method == "POST":
-        feedback_text = request.form.get("feedback")
-        rating = request.form.get("rating")
 
-        if "user" not in session:
-            flash("⚠️ Please login to give feedback", "warning")
-            return redirect(url_for("login"))
-
-        if not feedback_text or not rating:
-            flash("⚠️ Feedback and rating required!", "error")
-            return redirect(url_for("second"))
-
-        fb = Feedback(rating=int(rating), feedback_text=feedback_text)
-        db.session.add(fb)
-        db.session.commit()
-
-        flash(" Feedback submitted successfully!", "success")
-        return redirect(url_for("second"))
-
-    feedbacks = Feedback.query.order_by(Feedback.timestamp.desc()).all()
-    return render_template("second.html", feedbacks=feedbacks)
-
-# ----------------- First Page -----------------
-@app.route("/first")
-def first():
-    return render_template("first.html")
 
 # ----------------- Student Registration -----------------
 @app.route("/register/<hostel_name>", methods=["GET", "POST"])
 def register(hostel_name):
     if request.method == "POST":
         try:
-            # File Save
             file = request.files.get("college_id_photo")
             filename = None
             if file and file.filename != "":
@@ -157,7 +168,7 @@ def register(hostel_name):
 
         except Exception as e:
             db.session.rollback()
-            flash(f"Error: {str(e)}", "error")
+            flash(f"❌ Error: {str(e)}", "error")
             return redirect(url_for("register", hostel_name=hostel_name))
 
     return render_template("registration.html", hostel_name=hostel_name, success=False)
@@ -166,7 +177,7 @@ def register(hostel_name):
 @app.route("/logout")
 def logout():
     session.pop("user", None)
-    flash("Logged out successfully", "info")
+    flash("✅ Logged out successfully", "info")
     return redirect(url_for("login"))
 
 # ----------------- Main -----------------

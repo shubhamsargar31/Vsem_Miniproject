@@ -15,7 +15,6 @@
         margin: 0;
         padding: 20px;
       }
-
       .form-container {
         background: #fff;
         padding: 35px 40px;
@@ -25,7 +24,6 @@
         max-width: 750px;
         animation: fadeIn 1s ease-in-out;
       }
-
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -36,7 +34,6 @@
           transform: translateY(0);
         }
       }
-
       .form-container h2 {
         text-align: center;
         color: #444;
@@ -44,7 +41,6 @@
         font-size: 28px;
         letter-spacing: 1px;
       }
-
       label {
         font-weight: 600;
         color: #333;
@@ -52,7 +48,6 @@
         margin-bottom: 5px;
         font-size: 14px;
       }
-
       input,
       select,
       textarea {
@@ -66,7 +61,6 @@
         transition: all 0.3s ease;
         background: #f9f9f9;
       }
-
       input:focus,
       select:focus,
       textarea:focus {
@@ -74,29 +68,21 @@
         background: #fff;
         box-shadow: 0 0 6px rgba(115, 102, 255, 0.5);
       }
-
       input[type="file"] {
         padding: 6px;
         background: #f1f1f1;
         border: 1px dashed #aaa;
         cursor: pointer;
       }
-
       .row {
         display: flex;
         gap: 15px;
         padding-top: 10px;
         margin-bottom: 10px;
       }
-
       .row .col {
         flex: 1;
       }
-
-      .row .col input {
-        width: 90%;
-      }
-
       .btn {
         width: 100%;
         padding: 14px;
@@ -110,13 +96,11 @@
         transition: 0.3s;
         letter-spacing: 1px;
       }
-
       .btn:hover {
         opacity: 0.95;
         transform: scale(1.02);
         box-shadow: 0 5px 14px rgba(115, 102, 255, 0.4);
       }
-
       .success {
         margin-top: 20px;
         padding: 10px;
@@ -127,25 +111,13 @@
         text-align: center;
         font-weight: 600;
         font-size: 14px;
-        animation: pop 0.5s ease-in-out;
-      }
-
-      @keyframes pop {
-        0% {
-          transform: scale(0.85);
-          opacity: 0;
-        }
-        100% {
-          transform: scale(1);
-          opacity: 1;
-        }
       }
     </style>
   </head>
   <body>
     <div class="form-container">
-      <h2>🏠 Hostel Student Registration</h2>
-      <form method="POST" enctype="multipart/form-data">
+      <h2>🏠 Hostel Student Registration - {{ hostel_name }}</h2>
+      <form id="registrationForm" method="POST" enctype="multipart/form-data">
         <div class="row">
           <div class="col">
             <label>Surname :</label>
@@ -153,47 +125,25 @@
           </div>
           <div class="col">
             <label>First Name :</label>
-            <input
-              type="text"
-              name="firstname"
-              placeholder="First Name"
-              required
-            />
+            <input type="text" name="firstname" placeholder="First Name" required />
           </div>
           <div class="col">
             <label>Middle Name :</label>
-            <input
-              type="text"
-              name="middlename"
-              placeholder="Middle Name"
-              required
-            />
+            <input type="text" name="middlename" placeholder="Middle Name" required />
           </div>
         </div>
 
-        <!-- Email with Phone -->
         <div class="row">
           <div class="col">
             <label>Email :</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="example@email.com"
-              required
-            />
+            <input type="email" name="email" placeholder="example@email.com" required />
           </div>
           <div class="col">
             <label>Phone Number :</label>
-            <input
-              type="tel"
-              name="phone"
-              placeholder="10-digit number"
-              required
-            />
+            <input type="tel" name="phone" placeholder="10-digit number" required />
           </div>
         </div>
 
-        <!-- Gender with DOB -->
         <div class="row">
           <div class="col">
             <label>Gender :</label>
@@ -211,40 +161,17 @@
         </div>
 
         <label>Currently Pursuing Education :</label>
-        <input
-          type="text"
-          name="education"
-          placeholder="e.g. B.Tech 2nd Year"
-          required
-        />
+        <input type="text" name="education" placeholder="e.g. B.Tech 2nd Year" required />
 
         <label>College Name :</label>
-        <input
-          type="text"
-          name="college_name"
-          placeholder="Enter College Name"
-          required
-        />
+        <input type="text" name="college_name" placeholder="Enter College Name" required />
 
         <label>Aadhar Card Number :</label>
-        <input
-          type="text"
-          name="aadhar"
-          maxlength="12"
-          pattern="\d{12}"
-          placeholder="Enter 12-digit Aadhar Number"
-          required
-        />
+        <input type="text" name="aadhar" maxlength="12" pattern="\d{12}" placeholder="Enter 12-digit Aadhar Number" required />
 
         <label>Upload College ID Photo :</label>
-        <input
-          type="file"
-          name="college_id_photo"
-          accept="image/*,.pdf"
-          required
-        />
+        <input type="file" name="college_id_photo" accept="image/*,.pdf" required />
 
-        <!-- Room Preference + AC/Non-AC -->
         <div class="row">
           <div class="col">
             <label>Room Preference :</label>
@@ -266,37 +193,16 @@
 
         <label>Gym Facility :</label>
         <select name="gym" required>
-          <option value="" disabled selected>
-            Do you want to opt for Gym?
-          </option>
+          <option value="" disabled selected>Do you want to opt for Gym?</option>
           <option>Yes</option>
           <option>No</option>
         </select>
 
         <label>Address :</label>
-        <textarea
-          name="address"
-          rows="3"
-          placeholder="Enter your permanent address"
-          required
-        ></textarea>
+        <textarea name="address" rows="3" placeholder="Enter your permanent address" required></textarea>
 
         <button type="submit" class="btn">Register</button>
       </form>
-
-      <div id="successMsg" style="display: none" class="success">
-        Registration Successful! Your details and documents have been submitted.
-      </div>
     </div>
-
-    <script>
-      document
-        .getElementById("registrationForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-          document.getElementById("successMsg").style.display = "block";
-          this.reset();
-        });
-    </script>
   </body>
 </html>
