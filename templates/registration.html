@@ -1,208 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hostel Student Registration</title>
-    <style>
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #4facfe, #7366ff);
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0;
-        padding: 20px;
-      }
-      .form-container {
-        background: #fff;
-        padding: 35px 40px;
-        border-radius: 18px;
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
-        width: 100%;
-        max-width: 750px;
-        animation: fadeIn 1s ease-in-out;
-      }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(-25px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .form-container h2 {
-        text-align: center;
-        color: #444;
-        margin-bottom: 20px;
-        font-size: 28px;
-        letter-spacing: 1px;
-      }
-      label {
-        font-weight: 600;
-        color: #333;
-        display: block;
-        margin-bottom: 5px;
-        font-size: 14px;
-      }
-      input,
-      select,
-      textarea {
-        width: 100%;
-        padding: 10px 12px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        margin-bottom: 18px;
-        font-size: 14px;
-        outline: none;
-        transition: all 0.3s ease;
-        background: #f9f9f9;
-      }
-      input:focus,
-      select:focus,
-      textarea:focus {
-        border-color: #7366ff;
-        background: #fff;
-        box-shadow: 0 0 6px rgba(115, 102, 255, 0.5);
-      }
-      input[type="file"] {
-        padding: 6px;
-        background: #f1f1f1;
-        border: 1px dashed #aaa;
-        cursor: pointer;
-      }
-      .row {
-        display: flex;
-        gap: 15px;
-        padding-top: 10px;
-        margin-bottom: 10px;
-      }
-      .row .col {
-        flex: 1;
-      }
-      .btn {
-        width: 100%;
-        padding: 14px;
-        background: linear-gradient(135deg, #4facfe, #7366ff);
-        border: none;
-        border-radius: 10px;
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.3s;
-        letter-spacing: 1px;
-      }
-      .btn:hover {
-        opacity: 0.95;
-        transform: scale(1.02);
-        box-shadow: 0 5px 14px rgba(115, 102, 255, 0.4);
-      }
-      .success {
-        margin-top: 20px;
-        padding: 10px;
-        background: #dfffe2;
-        border: 1px solid #4caf50;
-        color: #2e7d32;
-        border-radius: 8px;
-        text-align: center;
-        font-weight: 600;
-        font-size: 14px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="form-container">
-      <h2>🏠 Hostel Student Registration - {{ hostel_name }}</h2>
-      <form id="registrationForm" method="POST" enctype="multipart/form-data">
-        <div class="row">
-          <div class="col">
-            <label>Surname :</label>
-            <input type="text" name="surname" placeholder="Surname" required />
-          </div>
-          <div class="col">
-            <label>First Name :</label>
-            <input type="text" name="firstname" placeholder="First Name" required />
-          </div>
-          <div class="col">
-            <label>Middle Name :</label>
-            <input type="text" name="middlename" placeholder="Middle Name" required />
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hostel Student Registration</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #4facfe, #7366ff);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 35px 40px;
+      border-radius: 18px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 750px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-container h1 {
+      text-align: center;
+      color: #444;
+      margin-bottom: 25px;
+      font-size: 26px;
+      letter-spacing: 1px;
+    }
+
+    .section-title {
+      margin: 25px 0 15px;
+      color: #333;
+      font-size: 20px;
+      border-bottom: 2px solid #7366ff;
+      padding-bottom: 5px;
+    }
+
+    label { font-weight: 600; color: #333; display: block; margin-bottom: 5px; font-size: 14px; }
+    input, select, textarea {
+      width: 95%;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      outline: none;
+      background: #f9f9f9;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #7366ff;
+      background: #fff;
+      box-shadow: 0 0 6px rgba(115, 102, 255, 0.5);
+    }
+
+    .row { display: flex; gap: 15px; margin-bottom: 20px; }
+    .row .col { flex: 1; }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #4facfe, #7366ff);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      letter-spacing: 1px;
+    }
+    .btn:hover {
+      opacity: 0.95;
+      transform: scale(1.02);
+      box-shadow: 0 5px 14px rgba(115, 102, 255, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>🏠 Hostel Student Registration </h1>
+
+    <form id="registrationForm" method="POST" enctype="multipart/form-data">
+      
+      <!-- Personal Details -->
+      <h2 class="section-title">👤 Personal Details</h2>
+      <div class="row">
+        <div class="col">
+          <label>Surname :</label>
+          <input type="text" name="surname" placeholder="Surname" required />
         </div>
-
-        <div class="row">
-          <div class="col">
-            <label>Email :</label>
-            <input type="email" name="email" placeholder="example@email.com" required />
-          </div>
-          <div class="col">
-            <label>Phone Number :</label>
-            <input type="tel" name="phone" placeholder="10-digit number" required />
-          </div>
+        <div class="col">
+          <label>First Name :</label>
+          <input type="text" name="firstname" placeholder="First Name" required />
         </div>
-
-        <div class="row">
-          <div class="col">
-            <label>Gender :</label>
-            <select name="gender" required>
-              <option value="" disabled selected>Select Gender</option>
-              <option>Male</option>
-              <option>Female</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="col">
-            <label>Date of Birth :</label>
-            <input type="date" name="dob" required />
-          </div>
+        <div class="col">
+          <label>Middle Name :</label>
+          <input type="text" name="middlename" placeholder="Middle Name" required />
         </div>
+      </div>
 
-        <label>Currently Pursuing Education :</label>
-        <input type="text" name="education" placeholder="e.g. B.Tech 2nd Year" required />
-
-        <label>College Name :</label>
-        <input type="text" name="college_name" placeholder="Enter College Name" required />
-
-        <label>Aadhar Card Number :</label>
-        <input type="text" name="aadhar" maxlength="12" pattern="\d{12}" placeholder="Enter 12-digit Aadhar Number" required />
-
-        <label>Upload College ID Photo :</label>
-        <input type="file" name="college_id_photo" accept="image/*,.pdf" required />
-
-        <div class="row">
-          <div class="col">
-            <label>Room Preference :</label>
-            <select name="room" required>
-              <option value="" disabled selected>Select Room</option>
-              <option>Single Room</option>
-              <option>Double Sharing</option>
-            </select>
-          </div>
-          <div class="col">
-            <label>Room Type :</label>
-            <select name="ac_room" required>
-              <option value="" disabled selected>Select Type</option>
-              <option>AC</option>
-              <option>Non-AC</option>
-            </select>
-          </div>
+      <div class="row">
+        <div class="col">
+          <label>Email :</label>
+          <input type="email" name="email" placeholder="example@email.com" required />
         </div>
+        <div class="col">
+          <label>Phone Number :</label>
+          <input type="tel" name="phone" id="phone" placeholder="10-digit number" maxlength="10" required />
+        </div>
+      </div>
 
-        <label>Gym Facility :</label>
-        <select name="gym" required>
-          <option value="" disabled selected>Do you want to opt for Gym?</option>
-          <option>Yes</option>
-          <option>No</option>
-        </select>
+      <div class="row">
+        <div class="col">
+          <label>Gender :</label>
+          <select name="gender" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="col">
+          <label>Date of Birth :</label>
+          <input type="date" name="dob" required />
+        </div>
+      </div>
 
-        <label>Address :</label>
-        <textarea name="address" rows="3" placeholder="Enter your permanent address" required></textarea>
+      <label>Address :</label>
+      <textarea name="address" rows="3" placeholder="Enter your permanent address" required></textarea>
 
-        <button type="submit" class="btn">Register</button>
-      </form>
-    </div>
-  </body>
+      <!-- Parent Details -->
+      <h2 class="section-title">👨‍👩‍👦 Parent Details</h2>
+      <div class="row">
+        <div class="col">
+          <label>Parent Surname :</label>
+          <input type="text" name="parent_surname" placeholder="Parent's Surname" required />
+        </div>
+        <div class="col">
+          <label>Parent First Name :</label>
+          <input type="text" name="parent_firstname" placeholder="Parent's First Name" required />
+        </div>
+        <div class="col">
+          <label>Parent Middle Name :</label>
+          <input type="text" name="parent_middlename" placeholder="Parent's Middle Name" required />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>Parent Mobile No :</label>
+          <input type="tel" name="parent_phone" id="parent_phone" placeholder="10-digit number" maxlength="10" required />
+        </div>
+        <div class="col">
+          <label>Parent Email ID :</label>
+          <input type="email" name="parent_email" placeholder="Parent's Email ID" required />
+        </div>
+      </div>
+
+      <!-- Academic Details -->
+      <h2 class="section-title">📚 Academic Details</h2>
+      <label>Currently Pursuing Education :</label>
+      <input type="text" name="education" placeholder="e.g. B.Tech 2nd Year" required />
+
+      <label>College Name :</label>
+      <input type="text" name="college_name" placeholder="Enter College Name" required />
+
+      <label>Aadhar Card Number :</label>
+      <input type="text" name="aadhar" maxlength="12" pattern="\d{12}" placeholder="Enter 12-digit Aadhar Number" required />
+
+      <label>Upload College ID Photo :</label>
+      <input type="file" name="college_id_photo" accept="image/*,.pdf" required />
+
+      <!-- Hostel Preferences -->
+      <h2 class="section-title">🏢 Hostel Preferences</h2>
+      <div class="row">
+        <div class="col">
+          <label>Room Preference :</label>
+          <select name="room" required>
+            <option value="" disabled selected>Select Room</option>
+            <option>Single Room</option>
+            <option>Double Sharing</option>
+          </select>
+        </div>
+        <div class="col">
+          <label>Room Type :</label>
+          <select name="ac_room" required>
+            <option value="" disabled selected>Select Type</option>
+            <option>AC</option>
+            <option>Non-AC</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Gym Facility :</label>
+      <select name="gym" required>
+        <option value="" disabled selected>Do you want to opt for Gym?</option>
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+
+      <button type="submit" class="btn">Register</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("registrationForm").addEventListener("submit", function(e) {
+      let phone = document.getElementById("phone").value.trim();
+      let parentPhone = document.getElementById("parent_phone").value.trim();
+      let phonePattern = /^[0-9]{10}$/;
+
+      if (!phonePattern.test(phone)) {
+        alert("⚠️ Please enter a valid 10-digit Student Mobile Number.");
+        e.preventDefault();
+        return;
+      }
+
+      if (!phonePattern.test(parentPhone)) {
+        alert("⚠️ Please enter a valid 10-digit Parent Mobile Number.");
+        e.preventDefault();
+        return;
+      }
+    });
+  </script>
+</body>
 </html>

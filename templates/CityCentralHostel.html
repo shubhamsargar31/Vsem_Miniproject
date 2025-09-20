@@ -1,1 +1,1295 @@
-<p>fourth </p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>City Central Hostel</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #f0f8ff, #ffffff);
+        scroll-behavior: smooth;
+        line-height: 1.6;
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+        color: white;
+        padding: 15px 20px;
+        font-size: 20px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      .navbar .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 24px;
+      }
+
+      .navbar .nav-links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .navbar a {
+        color: white;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .navbar a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+        padding: 20px;
+        z-index: 999;
+      }
+
+      .mobile-menu.active {
+        display: block;
+      }
+
+      .mobile-menu a {
+        display: block;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      /* Hero Section */
+      .hero {
+        text-align: center;
+        padding: 120px 20px 80px;
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/static/assets/hero-hostel.jpg') center/cover no-repeat;
+        color: white;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        font-weight: 700;
+        background: linear-gradient(45deg, #ffffff, #e0e7ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        max-width: 600px;
+      }
+
+      .btn {
+        display: inline-block;
+        background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+        color: white;
+        padding: 15px 30px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background: linear-gradient(90deg, #1d4ed8, #1e3a8a);
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6);
+      }
+
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(8px);
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background: linear-gradient(135deg, #ffffff, #f8fafc);
+        padding: 40px;
+        border-radius: 20px;
+        max-width: 500px;
+        width: 90%;
+        animation: modalSlideIn 0.4s ease;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .modal-content h3 {
+        color: #3b82f6;
+        margin-bottom: 15px;
+        font-size: 1.4rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .modal-content p {
+        margin: 8px 0 20px;
+        color: #374151;
+        line-height: 1.6;
+      }
+
+      .close-btn {
+        background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        float: right;
+        transition: all 0.3s ease;
+      }
+
+      .close-btn:hover {
+        background: linear-gradient(90deg, #1d4ed8, #1e3a8a);
+        transform: translateY(-2px);
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-30px) scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* Container */
+      .container {
+        width: 95%;
+        max-width: 1200px;
+        margin: 60px auto;
+        padding: 20px;
+      }
+
+      h2 {
+        color: #3b82f6;
+        margin-bottom: 30px;
+        font-size: 2.2rem;
+        font-weight: 700;
+        text-align: center;
+        position: relative;
+      }
+
+      h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+        border-radius: 2px;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+        margin-bottom: 40px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.15);
+      }
+
+      /* About Section */
+      .about-content {
+        text-align: center;
+        font-size: 1.1rem;
+        color: #374151;
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.8;
+      }
+
+      .about-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .feature-card {
+        background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      }
+
+      .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      /* Gallery */
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 40px;
+      }
+
+      .gallery img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 15px;
+        box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+      }
+
+      .gallery img:hover {
+        transform: scale(1.05) rotate(1deg);
+        box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.25);
+      }
+
+      /* Facilities */
+      .facilities-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-top: 40px;
+      }
+
+      .facility-item {
+        background: linear-gradient(135deg, #eff6ff, #dbeafe);
+        padding: 25px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(59, 130, 246, 0.2);
+      }
+
+      .facility-item:hover {
+        transform: translateX(10px);
+        background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      }
+
+      .facility-icon {
+        font-size: 2rem;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      /* Food Menu */
+      .food-menu {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .food-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 0;
+        text-align: center;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+      }
+
+      .food-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.2);
+      }
+
+      .food-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .food-card-content {
+        padding: 25px;
+      }
+
+      .food-card h3 {
+        color: #3b82f6;
+        margin: 15px 0;
+        font-size: 1.4rem;
+      }
+
+      .food-time {
+        background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        display: inline-block;
+        margin-top: 10px;
+      }
+
+      /* Rooms */
+      .room-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-top: 40px;
+      }
+
+      .room-card {
+        background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .room-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+      }
+
+      .room-card:hover {
+        border-color: #3b82f6;
+        transform: translateY(-5px);
+        background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      }
+
+      .room-card h3 {
+        color: #3b82f6;
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+      }
+
+      .room-price {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #059669;
+        margin: 10px 0;
+      }
+
+      .room-availability {
+        color: #6b7280;
+        font-size: 0.9rem;
+      }
+
+      /* Stats */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 25px;
+        margin-top: 40px;
+      }
+
+      .stat-box {
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stat-box::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transform: rotate(45deg);
+        transition: all 0.3s ease;
+      }
+
+      .stat-box:hover::before {
+        animation: shimmer 1.5s ease-in-out;
+      }
+
+      .stat-box:hover {
+        transform: translateY(-10px) scale(1.05);
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      @keyframes shimmer {
+        0% { transform: translateX(-100%) rotate(45deg); }
+        100% { transform: translateX(100%) rotate(45deg); }
+      }
+
+      /* Feedback */
+      .feedback-section {
+        background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+        margin: 40px 0;
+      }
+
+      .rating {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .rating span {
+        color: #d1d5db;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 0 5px;
+      }
+
+      .rating span:hover,
+      .rating span.active {
+        color: #fbbf24;
+        text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+        transform: scale(1.2);
+      }
+
+      .feedback-input {
+        width: 100%;
+        padding: 15px;
+        border-radius: 12px;
+        border: 2px solid #e5e7eb;
+        margin-bottom: 20px;
+        resize: none;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        font-family: inherit;
+        box-sizing: border-box;
+      }
+
+      .feedback-input:focus {
+        border-color: #3b82f6;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .feedback-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .feedback-list {
+        margin-top: 40px;
+      }
+
+      .feedback-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        background: #fff;
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 15px;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+        animation: slideIn 0.5s ease;
+        border-left: 4px solid #3b82f6;
+      }
+
+      .feedback-avatar {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        color: white;
+        font-weight: 700;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 1.2rem;
+      }
+
+      .feedback-content {
+        flex: 1;
+      }
+
+      .feedback-rating {
+        color: #fbbf24;
+        margin-bottom: 8px;
+        font-size: 1.1rem;
+      }
+
+      .feedback-text {
+        color: #374151;
+        line-height: 1.6;
+      }
+
+      .feedback-time {
+        color: #9ca3af;
+        font-size: 0.8rem;
+        margin-top: 5px;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .navbar .nav-links {
+          display: none;
+        }
+        
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1rem;
+        }
+
+        .container {
+          padding: 15px;
+        }
+
+        h2 {
+          font-size: 1.8rem;
+        }
+
+        .card {
+          padding: 25px;
+        }
+
+        .gallery {
+          grid-template-columns: 1fr;
+        }
+
+        .feedback-buttons {
+          flex-direction: column;
+        }
+
+        .modal-content {
+          padding: 25px;
+        }
+      }
+
+      /* Smooth scrolling enhancement */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Loading animation */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        animation: fadeInUp 0.6s ease forwards;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="logo">
+        🏨 City Central Hostel
+      </div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a onclick="openModal()">Contact Us</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#facilities">Facilities</a>
+        <a href="#menu">Food Menu</a>
+        <a href="#rooms">Rooms</a>
+        <a href="#stats">Stats</a>
+        <a href="#feedback">Feedback</a>
+      </div>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about" onclick="closeMobileMenu()">About</a>
+      <a onclick="openModal(); closeMobileMenu();">Contact Us</a>
+      <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
+      <a href="#facilities" onclick="closeMobileMenu()">Facilities</a>
+      <a href="#menu" onclick="closeMobileMenu()">Food Menu</a>
+      <a href="#rooms" onclick="closeMobileMenu()">Rooms</a>
+      <a href="#stats" onclick="closeMobileMenu()">Stats</a>
+      <a href="#feedback" onclick="closeMobileMenu()">Feedback</a>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+      <h1>Welcome to City Central Hostel</h1>
+      <p>Your home away from home - Modern comfort meets student life in the heart of the city</p>
+      <a href="#about" class="btn">Explore Our Facilities ➡</a>
+    </header>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+      <div class="modal-content">
+        <h3>📍 Hostel Address</h3>
+        <p>
+          <strong>City Central Hostel</strong><br />
+          123 Central Avenue, University District<br />
+          Mumbai - 400001, Maharashtra<br />
+          India
+        </p>
+
+        <h3>☎ Contact Information</h3>
+        <p><strong>Main Office:</strong> +91 9876543210</p>
+        <p><strong>Emergency:</strong> +91 9876543211</p>
+
+        <h3>👨‍💼 Hostel Manager</h3>
+        <p><strong>Name:</strong> Mr. Rajesh Kumar</p>
+        <p><strong>Phone:</strong> +91 9876543212</p>
+        <p><strong>Email:</strong> manager@citycentral.com</p>
+
+        <h3>🕒 Office Hours</h3>
+        <p><strong>Monday - Saturday:</strong> 9:00 AM - 8:00 PM<br />
+        <strong>Sunday:</strong> 10:00 AM - 6:00 PM</p>
+
+        <button class="close-btn" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="container" id="about">
+      <div class="card fade-in">
+        <h2>About City Central Hostel</h2>
+        <div class="about-content">
+          <p>At City Central Hostel, we believe that your living space should inspire your academic journey. Located in the heart of the city, we provide modern, comfortable accommodation designed specifically for students who value both comfort and community.</p>
+          
+          <p>Our mission is to create a vibrant, supportive environment where students can thrive academically while building lifelong friendships. With over a decade of experience in student accommodation, we understand what matters most to you.</p>
+        </div>
+
+        <div class="about-features">
+          <div class="feature-card">
+            <span class="feature-icon">🏠</span>
+            <h3>Modern Living</h3>
+            <p>Contemporary rooms with all essential amenities for comfortable student life</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">👥</span>
+            <h3>Community Focus</h3>
+            <p>Vibrant community spaces designed to foster friendships and collaboration</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🎯</span>
+            <h3>Academic Support</h3>
+            <p>Quiet study areas and high-speed internet to support your educational goals</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="container" id="gallery">
+      <div class="card fade-in">
+        <h2>📸 Hostel Gallery</h2>
+        <div class="gallery">
+          <img src="/static/assets/room-1.jpg" alt="Modern Hostel Room with Study Desk" />
+          <img src="/static/assets/study-room.jpg" alt="Quiet Study Room with Library" />
+          <img src="/static/assets/dining-area.jpg" alt="Spacious Dining Area" />
+          <img src="/static/assets/gym.jpg" alt="Well-equipped Gym Facilities" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Facilities -->
+    <section class="container" id="facilities">
+      <div class="card fade-in">
+        <h2>✨ World-Class Facilities</h2>
+        <div class="facilities-grid">
+          <div class="facility-item">
+            <div class="facility-icon">🔒</div>
+            <div>
+              <h3>24/7 Security & CCTV</h3>
+              <p>Complete safety with round-the-clock security and surveillance</p>
+            </div>
+          </div>
+          <div class="facility-item">
+            <div class="facility-icon">🥗</div>
+            <div>
+              <h3>Pure Vegetarian Mess</h3>
+              <p>Nutritious, home-style vegetarian meals prepared with care</p>
+            </div>
+          </div>
+          <div class="facility-item">
+            <div class="facility-icon">📶</div>
+            <div>
+              <h3>High-Speed WiFi</h3>
+              <p>Unlimited high-speed internet access throughout the hostel</p>
+            </div>
+          </div>
+          <div class="facility-item">
+            <div class="facility-icon">👕</div>
+            <div>
+              <h3>Laundry Service</h3>
+              <p>Professional laundry and dry-cleaning services available</p>
+            </div>
+          </div>
+          <div class="facility-item">
+            <div class="facility-icon">🚿</div>
+            <div>
+              <h3>Hot Water 24/7</h3>
+              <p>Round-the-clock hot water supply in all rooms and bathrooms</p>
+            </div>
+          </div>
+          <div class="facility-item">
+            <div class="facility-icon">📚</div>
+            <div>
+              <h3>Study Room & Library</h3>
+              <p>Quiet study spaces with extensive library resources</p>
+            </div>
+          </div>
+          <div class="facility-item">
+            <div class="facility-icon">🏋️</div>
+            <div>
+              <h3>Fitness Center</h3>
+              <p>Modern gym equipment for maintaining physical wellness</p>
+            </div>
+          </div>
+          <div class="facility-item">
+            <div class="facility-icon">🎮</div>
+            <div>
+              <h3>Recreation Area</h3>
+              <p>Indoor games and entertainment facilities for relaxation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Food Menu -->
+    <section class="container" id="menu">
+      <div class="card fade-in">
+        <h2>🍽 Pure Vegetarian Mess Menu</h2>
+        <div class="food-menu">
+          <div class="food-card">
+            <img src="/static/assets/breakfast.jpg" alt="Nutritious Breakfast Spread" />
+            <div class="food-card-content">
+              <h3>🌅 Breakfast</h3>
+              <p>Start your day with wholesome options: Poha, Upma, Idli-Sambar, Masala Dosa, Stuffed Parathas, Fresh Tea & Coffee</p>
+              <div class="food-time">7:00 AM - 10:00 AM</div>
+            </div>
+          </div>
+          <div class="food-card">
+            <img src="/static/assets/lunch.jpg" alt="Traditional Lunch Thali" />
+            <div class="food-card-content">
+              <h3>☀️ Lunch</h3>
+              <p>Complete nutritious meals: Fresh Chapati, Steamed Rice, Dal Tadka, Paneer/Vegetable Curry, Seasonal Vegetables, Fresh Salad</p>
+              <div class="food-time">12:30 PM - 2:30 PM</div>
+            </div>
+          </div>
+          <div class="food-card">
+            <img src="/static/assets/dinner.jpg" alt="Delicious Dinner Options" />
+            <div class="food-card-content">
+              <h3>🌙 Dinner</h3>
+              <p>Satisfying evening meals: Roti/Chapati, Jeera Rice, Dal Curry, Mixed Vegetable Sabzi, Weekly Special Desserts</p>
+              <div class="food-time">7:30 PM - 9:30 PM</div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 40px; background: linear-gradient(135deg, #eff6ff, #dbeafe); padding: 25px; border-radius: 15px;">
+          <h3 style="color: #3b82f6; margin-bottom: 15px;">🕐 Mess Timings & Guidelines</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 8px 0; color: #374151;">✓ Breakfast: 7:00 AM - 10:00 AM</li>
+            <li style="padding: 8px 0; color: #374151;">✓ Lunch: 12:30 PM - 2:30 PM</li>
+            <li style="padding: 8px 0; color: #374151;">✓ Evening Snacks: 5:00 PM - 6:00 PM</li>
+            <li style="padding: 8px 0; color: #374151;">✓ Dinner: 7:30 PM - 9:30 PM</li>
+            <li style="padding: 8px 0; color: #374151;">✓ Special meals on festivals and occasions</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rooms -->
+    <section class="container" id="rooms">
+      <div class="card fade-in">
+        <h2>🛏 Room Types & Pricing</h2>
+        <div class="room-grid">
+          <div class="room-card">
+            <h3>Single Room (Non-AC)</h3>
+            <div class="room-price">₹8,000 / month</div>
+            <p class="room-availability">Available: 3 rooms</p>
+            <ul style="list-style: none; padding: 0; margin: 15px 0;">
+              <li>✓ Study desk & chair</li>
+              <li>✓ Storage wardrobe</li>
+              <li>✓ Attached bathroom</li>
+            </ul>
+            <!-- <button class="btn" onclick="showBookingInfo()">Book Now</button> -->
+          </div>
+          <div class="room-card">
+            <h3>Double Sharing (Non-AC)</h3>
+            <div class="room-price">₹5,500 / month</div>
+            <p class="room-availability">Available: 8 rooms</p>
+            <ul style="list-style: none; padding: 0; margin: 15px 0;">
+              <li>✓ Two study desks</li>
+              <li>✓ Individual storage</li>
+              <li>✓ Shared bathroom</li>
+            </ul>
+            <!-- <button class="btn" onclick="showBookingInfo()">Book Now</button> -->
+          </div>
+          <div class="room-card">
+            <h3>Single Room (AC)</h3>
+            <div class="room-price">₹12,000 / month</div>
+            <p class="room-availability">Available: 2 rooms</p>
+            <ul style="list-style: none; padding: 0; margin: 15px 0;">
+              <li>✓ Air conditioning</li>
+              <li>✓ Premium furniture</li>
+              <li>✓ Attached bathroom</li>
+            </ul>
+            <!-- <button class="btn" onclick="showBookingInfo()">Book Now</button> -->
+          </div>
+          <div class="room-card">
+            <h3>Double Sharing (AC)</h3>
+            <div class="room-price">₹8,500 / month</div>
+            <p class="room-availability">Available: 6 rooms</p>
+            <ul style="list-style: none; padding: 0; margin: 15px 0;">
+              <li>✓ Air conditioning</li>
+              <li>✓ Premium amenities</li>
+              <li>✓ Shared bathroom</li>
+            </ul>
+            <!-- <button class="btn" onclick="showBookingInfo()">Book Now</button> -->
+          </div>
+        </div>
+        
+        <div style="margin-top: 40px; background: linear-gradient(135deg, #f0fdf4, #dcfce7); padding: 25px; border-radius: 15px; border-left: 4px solid #16a34a;">
+          <h3 style="color: #16a34a; margin-bottom: 15px;">📋 Booking Information</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 8px 0; color: #374151;">💳 Security Deposit: ₹5,000 (refundable)</li>
+            <li style="padding: 8px 0; color: #374151;">📅 Minimum Stay: 3 months</li>
+            <li style="padding: 8px 0; color: #374151;">💰 Payment: Monthly advance required</li>
+            <li style="padding: 8px 0; color: #374151;">📄 Documents: ID proof, College ID required</li>
+            <li style="padding: 8px 0; color: #374151;">📞 For bookings, call: +91 9876543210</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="container" id="stats">
+      <div class="card fade-in">
+        <h2>📊 Why Choose Us?</h2>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-number">150+</span>
+            <p>Happy Students</p>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">19</span>
+            <p>Available Rooms</p>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">15+</span>
+            <p>Years of Excellence</p>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">4.8⭐</span>
+            <p>Student Rating</p>
+          </div>
+        </div>
+        
+        <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+          <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #fef3c7, #fed7aa); border-radius: 15px;">
+            <div style="font-size: 2rem; margin-bottom: 10px;">🎓</div>
+            <h4>95% Student Satisfaction</h4>
+          </div>
+          <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-radius: 15px;">
+            <div style="font-size: 2rem; margin-bottom: 10px;">🍽️</div>
+            <h4>Excellent Food Quality</h4>
+          </div>
+          <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #eff6ff, #dbeafe); border-radius: 15px;">
+            <div style="font-size: 2rem; margin-bottom: 10px;">🔐</div>
+            <h4>100% Safety Record</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feedback -->
+    <section class="container" id="feedback">
+      <div class="feedback-section fade-in">
+        <h2>💬 Student Feedback</h2>
+        
+        <div class="rating" id="ratingStars">
+          <span data-value="1">★</span>
+          <span data-value="2">★</span>
+          <span data-value="3">★</span>
+          <span data-value="4">★</span>
+          <span data-value="5">★</span>
+        </div>
+        
+        <textarea 
+          id="feedbackInput" 
+          class="feedback-input"
+          rows="4" 
+          placeholder="Share your experience with City Central Hostel..."
+        ></textarea>
+        
+        <div class="feedback-buttons">
+          <button class="btn" onclick="submitFeedback()">Submit Feedback</button>
+          <button class="btn" onclick="showRegistration()" style="background: linear-gradient(90deg, #059669, #047857);">Student Registration</button>
+        </div>
+        
+        <div class="feedback-list" id="feedbackList">
+          <!-- Sample feedback items -->
+          <div class="feedback-item">
+            <div class="feedback-avatar">A</div>
+            <div class="feedback-content">
+              <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
+              <div class="feedback-text">Excellent hostel with great facilities! The food is amazing and the study environment is perfect for academics. Highly recommended!</div>
+              <div class="feedback-time">2 days ago</div>
+            </div>
+          </div>
+          <div class="feedback-item">
+            <div class="feedback-avatar">R</div>
+            <div class="feedback-content">
+              <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
+              <div class="feedback-text">Living here for 2 years now. The management is very supportive and the community is like family. Great WiFi for online classes!</div>
+              <div class="feedback-time">1 week ago</div>
+            </div>
+          </div>
+          <div class="feedback-item">
+            <div class="feedback-avatar">S</div>
+            <div class="feedback-content">
+              <div class="feedback-rating">⭐⭐⭐⭐</div>
+              <div class="feedback-text">Clean rooms, good food, and excellent security. The gym facilities are a bonus. Only wish the library had more books.</div>
+              <div class="feedback-time">2 weeks ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Mobile menu functionality
+      function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenu.classList.toggle('active');
+      }
+
+      function closeMobileMenu() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenu.classList.remove('active');
+      }
+
+      // Modal functionality
+      function openModal() {
+        document.getElementById("contactModal").style.display = "flex";
+      }
+
+      function closeModal() {
+        document.getElementById("contactModal").style.display = "none";
+      }
+
+      // Close modal when clicking outside
+      window.onclick = function(event) {
+        const modal = document.getElementById("contactModal");
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      }
+
+      // Rating system
+      let selectedRating = 0;
+      const stars = document.querySelectorAll('#ratingStars span');
+
+      stars.forEach((star, index) => {
+        star.addEventListener('click', () => {
+          selectedRating = index + 1;
+          updateStarDisplay();
+        });
+
+        star.addEventListener('mouseover', () => {
+          highlightStars(index + 1);
+        });
+      });
+
+      document.getElementById('ratingStars').addEventListener('mouseleave', () => {
+        updateStarDisplay();
+      });
+
+      function highlightStars(rating) {
+        stars.forEach((star, index) => {
+          if (index < rating) {
+            star.classList.add('active');
+          } else {
+            star.classList.remove('active');
+          }
+        });
+      }
+
+      function updateStarDisplay() {
+        highlightStars(selectedRating);
+      }
+
+      // Feedback submission
+      function submitFeedback() {
+        const feedbackText = document.getElementById('feedbackInput').value.trim();
+        
+        if (feedbackText === '') {
+          alert('Please enter your feedback!');
+          return;
+        }
+        
+        if (selectedRating === 0) {
+          alert('Please select a star rating!');
+          return;
+        }
+
+        const feedbackList = document.getElementById('feedbackList');
+        const newFeedback = document.createElement('div');
+        newFeedback.className = 'feedback-item';
+        
+        const avatar = feedbackText.charAt(0).toUpperCase();
+        const starRating = '⭐'.repeat(selectedRating);
+        const timeStamp = 'Just now';
+        
+        newFeedback.innerHTML = `
+          <div class="feedback-avatar">${avatar}</div>
+          <div class="feedback-content">
+            <div class="feedback-rating">${starRating}</div>
+            <div class="feedback-text">${feedbackText}</div>
+            <div class="feedback-time">${timeStamp}</div>
+          </div>
+        `;
+        
+        feedbackList.insertBefore(newFeedback, feedbackList.firstChild);
+        
+        // Reset form
+        document.getElementById('feedbackInput').value = '';
+        selectedRating = 0;
+        updateStarDisplay();
+        
+        // Show success message
+        showToast('Thank you for your feedback!');
+      }
+
+      // Registration functionality
+      function showRegistration() {
+        showToast('Student registration portal will be available soon! Please contact the office for now.');
+        window.location.href = "/login";
+      }
+
+      // Booking information
+      function showBookingInfo() {
+        showToast('For room booking, please call +91 9876543210 or visit our office during business hours.');
+      }
+
+      // Toast notification
+      function showToast(message) {
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+          position: fixed;
+          top: 100px;
+          right: 20px;
+          background: linear-gradient(90deg, #10b981, #059669);
+          color: white;
+          padding: 15px 25px;
+          border-radius: 10px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+          z-index: 10000;
+          animation: slideInRight 0.5s ease;
+          max-width: 300px;
+          font-weight: 500;
+        `;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+          toast.style.animation = 'slideOutRight 0.5s ease';
+          setTimeout(() => {
+            document.body.removeChild(toast);
+          }, 500);
+        }, 3000);
+      }
+
+      // Add CSS for toast animations
+      const toastStyles = document.createElement('style');
+      toastStyles.textContent = `
+        @keyframes slideInRight {
+          from {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        @keyframes slideOutRight {
+          from {
+            transform: translateX(0);
+            opacity: 1;
+          }
+          to {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(toastStyles);
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Intersection Observer for fade-in animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+          }
+        });
+      }, observerOptions);
+
+      // Observe all fade-in elements
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.fade-in').forEach(el => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(30px)';
+          observer.observe(el);
+        });
+      });
+
+      // Navbar scroll effect
+      let lastScrollTop = 0;
+      window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar');
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+          navbar.style.transform = 'translateY(-100%)';
+        } else {
+          navbar.style.transform = 'translateY(0)';
+        }
+        
+        // Add background opacity based on scroll
+        const opacity = Math.min(scrollTop / 100, 1);
+        navbar.style.background = `linear-gradient(90deg, rgba(59, 130, 246, ${0.9 + opacity * 0.1}), rgba(29, 78, 216, ${0.9 + opacity * 0.1}))`;
+        
+        lastScrollTop = scrollTop;
+      });
+    </script>
+  </body>
+</html>

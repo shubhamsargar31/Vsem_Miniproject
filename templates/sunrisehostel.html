@@ -389,11 +389,10 @@
       .feedback-item .text {
         flex: 1;
       }
-      .register-btn{
+      .register-btn {
         float: right;
       }
 
-      
       /* Animation */
       @keyframes fadeIn {
         from {
@@ -568,7 +567,7 @@
     </div>
 
     <!-- Customer Feedback Section -->
-    <div class="card feedback-section">
+    <div class="card feedback-section" id="feedbackSection">
       <h2>💬 Customer Feedback</h2>
 
       <!-- Rating Stars -->
@@ -580,11 +579,18 @@
         rows="4"
         placeholder="Write your feedback here..."
       ></textarea>
-      <button onclick="addFeedback()">Submit Feedback</button>
-      <!-- <button class="sample" onclick="addregisteration()">Student Register </button></div> -->
-      <button class="register-btn" onclick="addregisteration()" >
+
+      <button id="submitFeedbackBtn" onclick="addFeedback()">
+        Submit Feedback
+      </button>
+      <button id="viewFeedbackBtn" onclick="viewFeedback()">
+        View Feedback
+      </button>
+
+      <button class="register-btn" onclick="addregisteration()">
         Student Register
       </button>
+
       <!-- Feedback List -->
       <div class="feedback-list" id="feedbackList"></div>
     </div>
@@ -664,6 +670,90 @@
           .querySelectorAll("#ratingStars span")
           .forEach((s) => s.classList.remove("active"));
       }
+
+// window.onload = function() {
+//   document.getElementById("submitFeedbackBtn").style.display = "none"; // Hide submit feedback
+//   document.getElementById("feedbackInput").style.display = "none"; // Hide textarea
+//   document.getElementById("viewFeedbackBtn").style.display = "inline-block"; // Show view feedback button
+// };
+
+// function saveFeedbackToStorage(feedback) {
+//   let allFeedback = JSON.parse(localStorage.getItem("hostelFeedback") || "[]");
+//   allFeedback.unshift(feedback);
+//   localStorage.setItem("hostelFeedback", JSON.stringify(allFeedback));
+// }
+
+// function getFeedbackFromStorage() {
+//   return JSON.parse(localStorage.getItem("hostelFeedback") || "[]");
+// }
+
+// function showStoredFeedback() {
+//   let feedbackList = document.getElementById("feedbackList");
+//   feedbackList.innerHTML = ""; // Clear old
+//   let allFeedback = getFeedbackFromStorage();
+
+//   if (allFeedback.length === 0) {
+//     feedbackList.innerHTML = "<p>No feedback yet.</p>";
+//     return;
+//   }
+
+//   allFeedback.forEach(fb => {
+//     let div = document.createElement("div");
+//     div.className = "feedback-item";
+
+//     let avatar = document.createElement("div");
+//     avatar.className = "avatar";
+//     avatar.innerText = fb.text[0].toUpperCase();
+
+//     let textDiv = document.createElement("div");
+//     textDiv.className = "text";
+//     textDiv.innerHTML = `<strong>${"⭐".repeat(fb.rating)}</strong><br>${fb.text}`;
+
+//     div.appendChild(avatar);
+//     div.appendChild(textDiv);
+
+//     feedbackList.appendChild(div);
+//   });
+// }
+
+// // Button click handlers
+// function addregisteration() {
+//   // After register: show feedback input and submit, hide view button
+//   alert("Registered successfully! You can now submit feedback.");
+//   document.getElementById("submitFeedbackBtn").style.display = "inline-block";
+//   document.getElementById("feedbackInput").style.display = "block";
+//   document.getElementById("viewFeedbackBtn").style.display = "none";
+//   document.getElementById("feedbackList").innerHTML = ""; // clear feedback shown earlier
+// }
+
+// function addFeedback() {
+//   let input = document.getElementById("feedbackInput");
+//   let feedbackText = input.value.trim();
+//   if (feedbackText === "") {
+//     alert("Please enter your feedback!");
+//     return;
+//   }
+//   if (selectedRating === 0) {
+//     alert("Please select a star rating!");
+//     return;
+//   }
+
+//   // Save to storage
+//   saveFeedbackToStorage({ rating: selectedRating, text: feedbackText });
+
+//   // Show feedback immediately
+//   showStoredFeedback();
+
+//   input.value = "";
+//   selectedRating = 0;
+//   document.querySelectorAll("#ratingStars span").forEach((s) => s.classList.remove("active"));
+// }
+
+// // View feedback button
+// function viewFeedback() {
+//   showStoredFeedback();
+// }
+
     </script>
   </body>
 </html>

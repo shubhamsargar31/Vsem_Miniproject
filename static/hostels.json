@@ -1,4 +1,12 @@
 [
+   {
+    "name": "City Central Hostel",
+    "mess": "Veg",
+    "type": "Boys",
+    "img": "/static/img1.jpg",
+   "hostel_name":"City Central Hostel",
+   "page":"CityCentralHostel"
+  },
   {
     "name": "Sunrise Hostel",
     "mess": "Veg",
@@ -16,17 +24,9 @@
     "page": "GreenValleyHostel"
   },
   {
-    "name": "City Central Hostel",
+    "name": "Elite Residency",
     "mess": "Both",
     "type": "Girls",
-    "img": "/static/img1.jpg",
-   "hostel_name":"City Central Hostel",
-   "page":"CityCentralHostel"
-  },
-  {
-    "name": "Elite Residency",
-    "mess": "Veg",
-    "type": "Boys",
     "img": "/static/img4.jpg",
     "hostel_name":"Elite Residency",
     "page": "EliteResidency"
