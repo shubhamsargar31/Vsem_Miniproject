@@ -1,0 +1,384 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Deccan Space Hostel - Boys Only</title>
+  <style>
+    /* General Reset & Body */
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      line-height: 1.6;
+      background: #f9fafb;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Particle Background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: moveParticles 60s linear infinite;
+      z-index: -1;
+    }
+    @keyframes moveParticles {
+      0% { background-position: 0 0; }
+      100% { background-position: 800px 800px; }
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(90deg,#2563eb,#1e3a8a);
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 25px;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0,0,0,.3);
+      transition: background 0.4s;
+    }
+    .navbar:hover { background: linear-gradient(90deg,#1e3a8a,#2563eb); }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: 600;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 0%;
+      background: #fff;
+      transition: width .3s;
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* Hero */
+    .hero {
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: url('https://lh3.googleusercontent.com/gps-cs-s/AC9h4npoGlX3dlqf_nh83lnvCMZKXNcwYI0GpOyuz3Pe0Fh3QyoQnQNmpPKnGaMM6Pv4g9xIc2yjFch_DQ_bBFln8JxpaaBLTzdJe-aIGsv6DQa56iC-sHIQCIozk06OCbY9TfdFnPSO=s680-w680-h510-rw') center/cover fixed no-repeat;
+      color: #fff;
+      padding: 100px 20px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,.7);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 0;
+    }
+    .hero h1, .hero p, .hero .btn { position: relative; z-index: 1; animation: fadeInUp 1s ease forwards; }
+    .hero h1 { font-size: 3rem; margin-bottom: 10px; }
+    .hero p { font-size: 1.2rem; margin-bottom: 20px; }
+
+    /* Scroll animations */
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    [data-animate].animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Buttons */
+    .btn {
+      background: linear-gradient(135deg,#2563eb,#1e3a8a);
+      color: #fff;
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform .3s, box-shadow .3s, filter .3s;
+      box-shadow: 0 0 15px rgba(37,99,235,0.5);
+    }
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(37,99,235,0.8);
+      filter: brightness(1.2);
+    }
+
+    /* Container & Cards */
+    .container { width: 90%; max-width: 1200px; margin: 80px auto 40px; }
+    .card {
+      background: linear-gradient(145deg,#fff,#f1f5f9);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+      margin-bottom: 35px;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,.12); }
+    h2 { margin-top: 0; color: #1d4ed8; border-bottom: 3px solid #e5e7eb; padding-bottom: 8px; display: inline-block; }
+
+    /* Grid & Icons */
+    .gallery, .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 20px; }
+    .grid-item {
+      background: linear-gradient(135deg,#e0f2fe,#dbeafe);
+      padding: 20px;
+      border-radius: 12px;
+      font-weight: 500;
+      transition: transform .3s, background .3s;
+      display: flex;
+      align-items: center;
+    }
+    .grid-item:hover { transform: translateY(-5px); background: linear-gradient(135deg,#bfdbfe,#93c5fd); }
+    .grid-item h3 { margin: 5px 0; color: #2563eb; }
+
+    /* Animated Icons */
+    .grid-item::before {
+      content: '🔹';
+      display: inline-block;
+      margin-right: 10px;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-8px); }
+      60% { transform: translateY(-4px); }
+    }
+
+    /* Gallery Images */
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform .5s, filter .5s;
+    }
+    .gallery img:hover { transform: scale(1.07); filter: brightness(1.1); }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(90deg,#1e3a8a,#2563eb);
+      color: #fff;
+      padding: 30px;
+      text-align: center;
+      margin-top: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    footer p { margin: 0; animation: fadeInUp 1s ease forwards; }
+
+    /* Feedback Section */
+    .feedback-slider {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 20px;
+      padding: 20px 0;
+    }
+    .feedback-slider::-webkit-scrollbar { display: none; }
+    .feedback-card {
+      min-width: 280px;
+      background: #f1f5f9;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.08);
+      flex-shrink: 0;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .feedback-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,.12); }
+    .feedback-card img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 15px;
+      border: 2px solid #2563eb;
+    }
+    .feedback-card h4 { margin: 5px 0; color: #1e3a8a; }
+    .stars {
+      color: #facc15;
+      margin-bottom: 10px;
+    }
+
+    /* Menu Food Images */
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 15px; margin-top: 15px; }
+    .menu-grid img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform .3s, filter .3s;
+    }
+    .menu-grid img:hover { transform: scale(1.05); filter: brightness(1.1); }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div><strong>🏨 Deccan Space Hostel (Boys Only)</strong></div>
+    <div class="nav-links">
+      <a href="#about">About</a><a href="#gallery">Gallery</a><a href="#facilities">Facilities</a>
+      <a href="#rooms">Rooms</a><a href="#menu">Menu</a><a href="#rules">Rules</a><a href="#feedback">Feedback</a><a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>Welcome to Deccan Space Hostel</h1>
+    <p>Modern boys-only student accommodation in the heart of the city</p>
+    <a href="#about" class="btn">Explore ➜</a>
+  </header>
+
+  <!-- About Section -->
+  <div class="container" id="about" data-animate>
+    <div class="card">
+      <h2>About Us</h2>
+      <p>Deccan Space Hostel is located at Plot 12, MG Road, City Central – 400001. Our hostel provides a secure, comfortable, and supportive environment for boys. Just 10 minutes from the university campus, with easy access to transport, shopping, and medical facilities.</p>
+      <p><strong>Capacity:</strong> 120 students</p>
+      <p><strong>Manager:</strong> Mr. Rajesh Sharma</p>
+    </div>
+  </div>
+
+  <!-- Gallery Section -->
+  <div class="container" id="gallery" data-animate>
+    <div class="card">
+      <h2>📸 Gallery</h2>
+      <div class="gallery">
+        <img src="https://i.ytimg.com/vi/uX4S23PZKbE/sddefault.jpg" alt="">
+        <img src="https://lh3.googleusercontent.com/p/AF1QipOac8Mo-k5cOHeFJzFOyk_Tl6NOj5fh_tmZeRy7=s680-w680-h510-rw" alt="">
+        <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4nrZDFeCFgEwhuFFraZZxHOVIcc3zwHHbUncLC0TaSh5gVRguLYZSqm0SzdjjqX4H9hbnM8KRmIPCoTu2Uxpica1VEVbzaeK-0_VR8c1yL7sF610oQO29BSf2-zgIZt-IbTCg-8=s680-w680-h510-rw" alt="">
+        <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4npZBtiXgEXzOd6HQmkbojazD_31Ko7lfVGqtoU-cwR0cZJIsk3siT1tJFE5RET7cCMQ-MfEHFPfjovM73BQ5red-JX4BMWV3XAI88xxUxfBD5XtiVFtxQQ07y2jp5d2xBeFCrK7dg=s680-w680-h510-rw" alt="">
+        <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4nr8Shmx_iE0zNPNgHWVTi28G5N0CcsWZa94CjWAuJEdT0inLTYRaM2qitNQqUCTFnJBNwSzHaG3Dg7Md8SQFS6z3Q2NfSgAid-xq0C7rBzIldZyAtezxtF7y7Cci6FWfftUSMjA=s680-w680-h510-rw" alt="">
+      </div>
+    </div>
+  </div>
+
+  <!-- Facilities Section -->
+  <div class="container" id="facilities" data-animate>
+    <div class="card">
+      <h2>✨ Facilities</h2>
+      <div class="grid">
+        <div class="grid-item">24/7 Security with CCTV</div>
+        <div class="grid-item">High-Speed WiFi</div>
+        <div class="grid-item">Pure Veg Mess with 3 meals daily</div>
+        <div class="grid-item">Laundry Service twice weekly</div>
+        <div class="grid-item">Study Lounge & Library</div>
+        <div class="grid-item">Recreation Room with indoor games</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rooms Section -->
+  <div class="container" id="rooms" data-animate>
+    <div class="card">
+      <h2>🛏 Rooms & Pricing</h2>
+      <div class="grid">
+        <div class="grid-item"><h3>Single Non-AC</h3><p>₹8,500/month</p></div>
+        <div class="grid-item"><h3>Single AC</h3><p>₹12,500/month</p></div>
+        <div class="grid-item"><h3>Double Non-AC</h3><p>₹6,000/person</p></div>
+        <div class="grid-item"><h3>Double AC</h3><p>₹8,500/person</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mess Menu Section -->
+  <div class="container" id="menu" data-animate>
+    <div class="card">
+      <h2>🍽 Mess Menu & Timings</h2>
+      <p><strong>Breakfast:</strong> 7:30 AM – 9:30 AM</p>
+      <p><strong>Lunch:</strong> 12:30 PM – 2:30 PM</p>
+      <p><strong>Dinner:</strong> 7:30 PM – 9:30 PM</p>
+      <p>Sample Dishes:</p>
+      <div class="menu-grid">
+        <img src="https://www.spiceupthecurry.com/wp-content/uploads/2014/04/batata-poha-recipe-1-500x375.jpg" alt="Poha">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTr04Iv6QAkjawMl_kXH2ZOxlLDekrHO-qYTg&s" alt="Dosa">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBiF5bOaM_lLzjSiUe7FzQRowh9p4ktQfTPQ&s" alt="Chapati">
+        <img src="https://i.pinimg.com/736x/cf/3f/96/cf3f96b965b52b7d16719fc1ac701045.jpg" alt="Rice & Dal">
+      </div>
+    </div>
+  </div>
+
+  <!-- Rules Section -->
+  <div class="container" id="rules" data-animate>
+    <div class="card">
+      <h2>📋 Hostel Rules</h2>
+      <div class="grid">
+        <div class="grid-item">Entry before 10 PM mandatory</div>
+        <div class="grid-item">Smoking & alcohol strictly prohibited</div>
+        <div class="grid-item">Visitors allowed only with permission</div>
+        <div class="grid-item">Keep rooms and common areas clean</div>
+        <div class="grid-item">Maintain study-friendly atmosphere</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feedback Section -->
+  <div class="container" id="feedback" data-animate>
+    <div class="card">
+      <h2>💬 Student Feedback</h2>
+      <div class="feedback-slider">
+        <div class="feedback-card">
+          <div style="display:flex;align-items:center;"><img src="data:image/jpeg;base64,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" alt=""><h4>Rohan S.</h4></div>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>"The hostel has excellent facilities, great food, and very supportive staff. Highly recommended!"</p>
+        </div>
+        <div class="feedback-card">
+          <div style="display:flex;align-items:center;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCHqGLlvNC_QMnwSkTZpRM6an7IMZ4RZ0nKA&s" alt=""><h4>Akash M.</h4></div>
+          <div class="stars">⭐⭐⭐⭐</div>
+          <p>"Comfortable rooms and good WiFi. Mess food is tasty and hygienic."</p>
+        </div>
+        <div class="feedback-card">
+          <div style="display:flex;align-items:center;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnOXA1uktUAnL0I5l1QIrGHuYF9i4vM4MqHfAo84-6pqTrOaykOtEow4TCeNgZjvpS0Xk&usqp=CAU" alt=""><h4>Vikram P.</h4></div>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>"Security is top-notch and the study lounge is perfect for exam prep."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="container" id="contact" data-animate>
+    <div class="card">
+      <h2>📞 Contact Us</h2>
+      <p><strong>Address:</strong> Plot 12, MG Road, Deccan Space – 400001</p>
+      <p><strong>Phone:</strong> +91 99222 33444</p>
+      <p><strong>Email:</strong> deccanspacehostel@gmail.com</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Deccan Space Hostel. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Scroll animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add('animate');
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

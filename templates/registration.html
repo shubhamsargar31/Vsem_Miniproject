@@ -91,7 +91,8 @@
 </head>
 <body>
   <div class="form-container">
-    <h1>🏠 Hostel Student Registration </h1>
+    <!-- Dynamic heading -->
+    <!-- <h1>🏠 Registration for {{ display_name }}</h1> -->
 
     <form id="registrationForm" method="POST" enctype="multipart/form-data">
       
@@ -186,22 +187,18 @@
 
       <!-- Hostel Preferences -->
       <h2 class="section-title">🏢 Hostel Preferences</h2>
+
+      <label>Hostel Name :</label>
+      <input type="text" id="hostelName" name="hostelName" value="{{ display_name }}" readonly />
+
       <div class="row">
         <div class="col">
-          <label>Room Preference :</label>
-          <select name="room" required>
-            <option value="" disabled selected>Select Room</option>
-            <option>Single Room</option>
-            <option>Double Sharing</option>
-          </select>
+          <label>Room Preference ({{ display_name }}) :</label>
+          <select id="roomPref" name="room" required></select>
         </div>
         <div class="col">
-          <label>Room Type :</label>
-          <select name="ac_room" required>
-            <option value="" disabled selected>Select Type</option>
-            <option>AC</option>
-            <option>Non-AC</option>
-          </select>
+          <label>Room Type ({{ display_name }}) :</label>
+          <select id="roomType" name="ac_room" required></select>
         </div>
       </div>
 
@@ -217,6 +214,7 @@
   </div>
 
   <script>
+    // Validate phone numbers
     document.getElementById("registrationForm").addEventListener("submit", function(e) {
       let phone = document.getElementById("phone").value.trim();
       let parentPhone = document.getElementById("parent_phone").value.trim();
@@ -234,6 +232,40 @@
         return;
       }
     });
+
+    // Load hostel details dynamically
+    async function loadHostelDetails() {
+      const response = await fetch("/static/hostels.json");
+      const hostels = await response.json();
+
+      const hostelName = "{{ hostel_name }}";
+      const hostel = hostels.find(h => h.page === hostelName);
+
+      if (hostel) {
+        // Fill Hostel Name field
+        document.getElementById("hostelName").value = hostel.name;
+
+        // Room preferences
+        const roomSelect = document.getElementById("roomPref");
+        hostel.rooms.forEach(r => {
+          const opt = document.createElement("option");
+          opt.value = r;
+          opt.textContent = r;
+          roomSelect.appendChild(opt);
+        });
+
+        // Room types
+        const typeSelect = document.getElementById("roomType");
+        hostel.types.forEach(t => {
+          const opt = document.createElement("option");
+          opt.value = t;
+          opt.textContent = t;
+          typeSelect.appendChild(opt);
+        });
+      }
+    }
+
+    window.onload = loadHostelDetails;
   </script>
 </body>
 </html>

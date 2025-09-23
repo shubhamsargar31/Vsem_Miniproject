@@ -19,12 +19,12 @@ db.init_app(app)
 
 
 
-HOSTEL_DETAILS = {
-    "sunrisehostel": "Sunrise Hostel",
-    "GreenValleyHostel": "Green Valley Hostel",
-    "CityCentralHostel": "City Central Hostel",
-    "EliteResidency": "Elite Residency"
-}
+# HOSTEL_DETAILS = {
+#     "sunrisehostel": "Sunrise Hostel",
+#     "GreenValleyHostel": "Green Valley Hostel",
+#     "CityCentralHostel": "City Central Hostel",
+#     "EliteResidency": "Elite Residency"
+# }
 
 # ----------------- Create Tables -----------------
 with app.app_context():
@@ -38,6 +38,14 @@ def home():
 @app.route("/first")
 def first():
     return render_template("first.html")
+
+@app.route("/Deccan")
+def deccan():
+    return render_template("deccanspace.html")
+
+@app.route("/sbphule")
+def sbphule():
+    return render_template("sbphule.html")
 
 # ----------------- Hostel Pages -----------------
 @app.route("/sunrisehostel", methods=["GET", "POST"])
@@ -68,21 +76,23 @@ def sunrisehostel():
 def green_valley():
     return render_template("GreenValleyHostel.html")
 
-@app.route("/CityCentralHostel")
-def city_central():
-    return render_template("CityCentralHostel.html")
+@app.route("/vritteGirlshostel")
+def vritteGirlshostel():
+    return render_template("vritteGirlshostel.html")
 
-@app.route("/EliteResidency")
-def elite_residency():
-    return render_template("EliteResidency.html")
+@app.route("/RBoyshostel")
+def RBoyshostel():
+    return render_template("RBoyshostel.html")
 
-
+# @app.route("/RBoyshostel")
+# def RBoyshostel():
+#     return render_template("RBoyshostel.html")
 
 
 # ----------------- Student Registration -----------------
 @app.route("/registration/<hostel_name>", methods=["GET", "POST"])
 def registration(hostel_name):
-    display_name = HOSTEL_DETAILS.get(hostel_name, hostel_name)
+    # display_name = HOSTEL_DETAILS.get(hostel_name, hostel_name)
     
     if request.method == "POST":
         try:

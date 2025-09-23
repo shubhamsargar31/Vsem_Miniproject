@@ -3,11 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elite Residancy Hostel - MUmbai Best Hostel for Girls</title>
-   <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <title>R Boys Hostel - Navi Mumbai Best Hostel for Boys</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <style>
@@ -113,12 +118,12 @@
       }
 
       .hero {
-        background: url("/static/assets/Eliteroom.jpg")  center center/cover no-repeat;
-        padding: 120px 0 80px;
+        background: url("/static/Rboys/hostelimg.jpg") center center/cover
+          no-repeat;
+        padding: 120px 0 200px;
         position: relative;
         overflow: hidden;
         object-fit: cover;
-        
       }
 
       .hero::before {
@@ -303,14 +308,12 @@
         position: relative;
         border-radius: 15px;
         overflow: hidden;
-        transition: transform 0.3s ease;
-        opacity: 0.7;
       }
 
-      .room-slide.active {
+      /* .room-slide.active {
         opacity: 1;
         transform: scale(1.05);
-      }
+      } */
 
       .room-slide img {
         width: 300px;
@@ -571,7 +574,7 @@
         max-width: 400px;
         height: auto;
       }
-       /* Feedback */
+      /* Feedback */
       .feedback-section {
         background: linear-gradient(135deg, #f8fafc, #e2e8f0);
         padding: 40px;
@@ -740,34 +743,70 @@
         color: #555;
         margin-bottom: 15px;
       }
- .btn {
-    background: linear-gradient(135deg, #8b45c0, #6c3bad);
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 30px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(139, 69, 192, 0.3);
-  }
+      .btn {
+        background: linear-gradient(135deg, #8b45c0, #6c3bad);
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 30px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(139, 69, 192, 0.3);
+      }
 
-  .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(139, 69, 192, 0.5);
-    background: linear-gradient(135deg, #6c3bad, #502c87);
-  }
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(139, 69, 192, 0.5);
+        background: linear-gradient(135deg, #6c3bad, #502c87);
+      }
 
-  .btn-green {
-    background: linear-gradient(135deg, #10b981, #059669);
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-  }
+      .btn-green {
+        background: linear-gradient(135deg, #10b981, #059669);
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+      }
 
-  .btn-green:hover {
-    background: linear-gradient(135deg, #059669, #047857);
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
-  }
+      .btn-green:hover {
+        background: linear-gradient(135deg, #059669, #047857);
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+      }
+      /* Modal Styles */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        max-width: 500px;
+        width: 90%;
+        position: relative;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background: #ff4d4f;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 5px 12px;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
     </style>
     <!-- Header -->
     <header class="header">
@@ -775,15 +814,14 @@
         <div class="nav-container">
           <div class="nav-logo">
             <!-- <img alt="Elite Hostel Logo" /> -->
-            <span>Elite Resistnacy </span>
+            <span>R Boys Hostel </span>
           </div>
           <ul class="nav-menu">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About Us</a></li>
             <li><a href="#rooms">Rooms</a></li>
             <li><a href="#amenities">Amenities</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a onclick="openModal(); closeMobileMenu();">Contact us</a></li>
           </ul>
           <div class="hamburger">
             <span></span>
@@ -793,13 +831,41 @@
         </div>
       </nav>
     </header>
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+      <div class="modal-content">
+        <h3>📍 Hostel Address</h3>
+        <p>
+          <strong>Vriitee Hostel</strong><br />
+          Plot No. 24, Sector 33, Kharghar, Navi Mumbai – 410210, Maharashtra
+          Near NMIMS College
+        </p>
+
+        <h3>☎ Contact Information</h3>
+        <p><strong>Main Office:</strong> +91 8591714474</p>
+        <p><strong>Emergency:</strong> +91 9819317824</p>
+
+        <h3>👨‍💼 Hostel Manager</h3>
+        <p><strong>Name:</strong> Mr. Rajesh Kumar</p>
+        <p><strong>Phone:</strong> +91 9876543212</p>
+        <p><strong>Email:</strong> Vriiteehostel@gmail.com</p>
+
+        <h3>🕒 Office Hours</h3>
+        <p>
+          <strong>Monday - Saturday:</strong> 9:00 AM - 8:00 PM<br />
+          <strong>Sunday:</strong> 10:00 AM - 6:00 PM
+        </p>
+
+        <button class="close-btn" onclick="closeModal()">Close</button>
+      </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
       <div class="hero-container">
         <div class="hero-content">
-          <h1>Welcome to Elite Residency Hostel</h1>
-          <p>Mumbai's finest accommodation for girls</p>
+          <h1>Welcome to R BOYS Hostel</h1>
+          <p>Kalamboli's finest accommodation for BOYS</p>
           <!-- <button class="cta-btn">Explore Our Rooms</button> -->
         </div>
       </div>
@@ -812,16 +878,19 @@
         <p>Come over and experience how a place to stay can be so much more</p>
         <div class="four-walls-content">
           <div class="four-walls-images">
-            <img src="/static/assets/elitesstudy.jpg" alt="Study Area" />
+            <img src="/static/Rboys/inte.jpg" alt="Study Area" />
             <img src="/static/assets/Eliteroom1.jpg" alt="Living Space" />
             <img src="/static/assets/Elitemain.jpg" alt="Bedroom" />
+            <img src="/static/Rboys/kitchen.jpg" alt="Study Area" />
+            <img src="/static/Rboys/gam.jpg" alt="Living Space" />
           </div>
           <div class="four-walls-text">
             <h3>Start living your best life from<br /><span>Day one</span></h3>
             <p>
-              Being a host of women, dreams, ambitions, and full of colours,
-              your personal space right here promises you a tranquil - safe
-              haven where you can just be, and be yourself, from day 1.
+              Being a host of young men, energy, ambitions, and endless
+              possibilities, your personal space here promises you a strong –
+              secure haven where you can grow, achieve, and be yourself from day
+              one.
             </p>
           </div>
         </div>
@@ -836,15 +905,19 @@
         <div class="room-types-slider">
           <div class="room-slide active">
             <img src="/static/assets/londry.jpg" alt="Luxury Section" />
-            <div class="room-label">Laundry Section</div>
+            <!-- <div class="room-label">Laundry Section</div> -->
           </div>
           <div class="room-slide">
             <img src="/static/assets/lockfaci.jpg" alt="Locker Facility" />
-            <div class="room-label">Locker Facility</div>
+            <!-- <div class="room-label">Locker Facility</div> -->
           </div>
           <div class="room-slide">
             <img src="/static/assets/tv.jpg" alt="AC Rooms" />
-            <div class="room-label">Tv Rooms</div>
+            <!-- <div class="room-label">Tv Rooms</div> -->
+          </div>
+          <div class="room-slide">
+            <img src="/static/Rboys/facility'.jpg" alt="AC Rooms" />
+            <!-- <div class="room-label">Fresh Rooms</div> -->
           </div>
         </div>
         <div class="slider-dots">
@@ -858,82 +931,74 @@
     <!-- Your Space Your Way -->
     <section class="your-space-section">
       <div class="container">
-        <h2>Your Space <span>Your Way</span></h2>
+        <h2>All Facilities Under <span>One Roof</span></h2>
         <p>Come over and experience how a place to stay can be so much more</p>
         <div class="space-gallery">
           <div class="space-item large">
-            <img src="/static/assets/welldesign.png" alt="Well Designed Room" />
+            <img src="/static/Rboys/kitchens.jpg" alt="Well Designed Room" />
             <div class="space-label">
               <i class="fas fa-home"></i>
-              <span>Well Designed Room</span>
+              <span>kitchen Room</span>
             </div>
           </div>
           <div class="space-item">
             <img src="/static/assets/2.png" alt="Clean Bathroom" />
           </div>
           <div class="space-item">
-            <img src="/static/assets/dinners.png" alt="Delicious Food" />
+            <img src="/static/virteehostel/lunch.jpg" alt="Delicious Food" />
           </div>
           <div class="space-item">
-            <img src="/static/assets/locker.png" alt="Storage Space" />
+            <img src="/static/Rboys/locker.jpg" alt="Storage Space" />
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Nearby Attractions -->
     <section class="attractions-section">
       <div class="container">
         <h2>Nearby <span>Attractions</span></h2>
         <p>Come over and experience how a place to stay can be so much more</p>
         <div class="attractions-grid">
           <div class="attraction-item">
-            <img src="/static/images/marien.jpg" alt="Marina Beach" />
+            <img src="/static/Rboys/5.jpg" alt="Kharghar Station" />
             <div class="attraction-label">
-              Marina Beach
-              <div>Around 23Km</div>
+              Kharghar Station
+              <div>Around 5 Km</div>
             </div>
           </div>
           <div class="attraction-item">
-            <img src="/static/images/2.jpg" alt="Vandalur Zoo" />
+            <img src="/static/Rboys/belapur.png" alt="Belapur CBD" />
             <div class="attraction-label">
-              Vandalur Zoo
-              <div>Around 31 Km</div>
+              Belapur CBD
+              <div>Around 12 Km</div>
             </div>
           </div>
           <div class="attraction-item">
-            <img src="/static/images/7.jpg" alt="Phoenix Mall" />
+            <img src="/static/Rboys/hill.png" alt="Parsik Hill" />
+            <div class="attraction-label">
+              Parsik Hill
+              <div>Around 14 Km</div>
+            </div>
+          </div>
+          <div class="attraction-item">
+            <img src="/static/Rboys/dypatil.png" alt="DY Patil Stadium" />
+            <div class="attraction-label">
+              DY Patil Stadium
+              <div>Around 13 Km</div>
+            </div>
+          </div>
+          <div class="attraction-item">
+            <img src="/static/Rboys/7.jpg" alt="Croma" />
             <div class="attraction-label">
               Croma
-              <div>Around 31Km</div>
+              <div>Around 3 Km</div>
             </div>
           </div>
           <div class="attraction-item">
-            <img src="/static/images/3.jpg" alt="T Nagar" />
+            <img src="/static/Rboys/6.jpg" alt="ISKCON Temple" />
             <div class="attraction-label">
-              CSMT Station
-              <div>Around 12Km</div>
-            </div>
-          </div>
-          <div class="attraction-item">
-            <img src="/static/images/4.jpg" alt="Kapaleeshwar Temple" />
-            <div class="attraction-label">
-              Mahalaxmi Temple
-              <div>Around 41Km</div>
-            </div>
-          </div>
-          <div class="attraction-item">
-            <img src="/static/images/5.jpg" alt="Central Station" />
-            <div class="attraction-label">
-              kharghar Station
-              <div>Around 14Km</div>
-            </div>
-          </div>
-          <div class="attraction-item">
-            <img src="/static/images/6.jpg" alt="Mahabalipuram" />
-            <div class="attraction-label">
-              ISKON Tample
-              <div>Around 23Km</div>
+              ISKCON Temple
+              <div>Around 10 Km</div>
             </div>
           </div>
         </div>
@@ -1022,7 +1087,7 @@
     <section class="container" id="feedback">
       <div class="feedback-section fade-in">
         <h2>💬 Student Feedback</h2>
-        
+
         <div class="rating" id="ratingStars">
           <span data-value="1">★</span>
           <span data-value="2">★</span>
@@ -1030,26 +1095,38 @@
           <span data-value="4">★</span>
           <span data-value="5">★</span>
         </div>
-        
-        <textarea 
-          id="feedbackInput" 
+
+        <textarea
+          id="feedbackInput"
           class="feedback-input"
-          rows="4" 
-          placeholder="Share your experience with City Central Hostel..."
+          rows="4"
+          placeholder="Share your experience with R Boys Hostel..."
         ></textarea>
-        
+
         <div class="feedback-buttons">
-          <button class="btn" onclick="submitFeedback()">Submit Feedback</button>
-          <button class="btn" onclick="showRegistration()" style="background: linear-gradient(90deg, #059669, #047857);">Student Registration</button>
+          <button class="btn" onclick="submitFeedback()">
+            Submit Feedback
+          </button>
+          <button
+            class="btn"
+            onclick="showRegistration()"
+            style="background: linear-gradient(90deg, #059669, #047857)"
+          >
+            Student Registration
+          </button>
         </div>
-        
+
         <div class="feedback-list" id="feedbackList">
           <!-- Sample feedback items -->
           <div class="feedback-item">
             <div class="feedback-avatar">A</div>
             <div class="feedback-content">
               <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
-              <div class="feedback-text">Excellent hostel with great facilities! The food is amazing and the study environment is perfect for academics. Highly recommended!</div>
+              <div class="feedback-text">
+                Excellent hostel with great facilities! The food is amazing and
+                the study environment is perfect for academics. Highly
+                recommended!
+              </div>
               <div class="feedback-time">2 days ago</div>
             </div>
           </div>
@@ -1057,7 +1134,10 @@
             <div class="feedback-avatar">R</div>
             <div class="feedback-content">
               <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
-              <div class="feedback-text">Living here for 2 years now. The management is very supportive and the community is like family. Great WiFi for online classes!</div>
+              <div class="feedback-text">
+                Living here for 2 years now. The management is very supportive
+                and the community is like family. Great WiFi for online classes!
+              </div>
               <div class="feedback-time">1 week ago</div>
             </div>
           </div>
@@ -1065,18 +1145,19 @@
             <div class="feedback-avatar">S</div>
             <div class="feedback-content">
               <div class="feedback-rating">⭐⭐⭐⭐</div>
-              <div class="feedback-text">Clean rooms, good food, and excellent security. The gym facilities are a bonus. Only wish the library had more books.</div>
+              <div class="feedback-text">
+                Clean rooms, good food, and excellent security. The gym
+                facilities are a bonus. Only wish the library had more books.
+              </div>
               <div class="feedback-time">2 weeks ago</div>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <script>
+    <!-- <script>
 
-      function showRegistration(){
-         window.location.href = "/login";
-      }
+      
   document.addEventListener("DOMContentLoaded", function () {
     // Intersection Observer for Animations
     const observerOptions = {
@@ -1150,6 +1231,27 @@
 
     console.log("Animations initialized successfully!");
   });
-</script>
+</script> -->
+    <script>
+      function openModal() {
+        const modal = document.getElementById("contactModal");
+        modal.style.display = "flex";
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("contactModal");
+        modal.style.display = "none";
+      }
+
+      window.onclick = function (event) {
+        const modal = document.getElementById("contactModal");
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+      function showRegistration(){
+         window.location.href = "/login";
+      }
+    </script>
   </body>
 </html>

@@ -1,34 +1,49 @@
 [
    {
-    "name": "City Central Hostel",
+    "id":"1",
+    "name": "VRIITEE Girls hostel",
     "mess": "Veg",
-    "type": "Boys",
-    "img": "/static/img1.jpg",
+    "type": "Girls",
+    "img": "/static/virteehostel/image.png",
    "hostel_name":"City Central Hostel",
-   "page":"CityCentralHostel"
+   "page":"vritteGirlshostel",
+   "rooms": ["Single Room", "Double Sharing", "Triple Sharing"],
+    "types": ["AC", "Non-AC"]
   },
   {
+    "id":"2",
+    "name": "R BOYS HOSTEL",
+    "mess": "Veg",
+    "type": "Boys",
+    "img": "/static/Rboys/RBoys.png",
+   "hostel_name":"R Boys Hostel ",
+   "page":"RBoyshostel"
+  },
+  {
+    "id":"3",
     "name": "Sunrise Hostel",
     "mess": "Veg",
     "type": "Girls",
-    "img": "/static/img3.jpg",
+    "img": "/static/sunrise.jpg",
    "hostel_name":"Sunrise Hostel",
-    "page": "sunrisehostel"
+   "page":"sunrisehostel"
   },
   {
-    "name": "Green Valley Hostel",
-    "mess": "Both",
+    "id":"4",
+    "name": "Deccan Space Hostel",
+    "mess": "Veg",
     "type": "Boys",
-    "img": "/static/img2.jpg",
-  "hostel_name": "Green Valley Hostel",
-    "page": "GreenValleyHostel"
+    "img": "/static/deccanspace/decanspace.png",
+   "hostel_name":"Deccan Sapace Hostel ",
+   "page":"Deccan"
   },
   {
-    "name": "Elite Residency",
+    "id":"5",
+    "name": "S B Phule Hostel ",
     "mess": "Both",
     "type": "Girls",
-    "img": "/static/img4.jpg",
-    "hostel_name":"Elite Residency",
-    "page": "EliteResidency"
+    "img": "/static/sbphule/sbphule.png",
+   "hostel_name":"S B Phule Hostel ",
+   "page":"sbphule"
   }
 ]
