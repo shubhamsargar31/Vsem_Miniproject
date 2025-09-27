@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Deccan Space Hostel - Boys Only</title>
   <style>
-    /* General Reset & Body */
     body {
       margin: 0;
       font-family: "Segoe UI", sans-serif;
@@ -176,56 +175,192 @@
     }
     .gallery img:hover { transform: scale(1.07); filter: brightness(1.1); }
 
-    /* Footer */
-    footer {
-      background: linear-gradient(90deg,#1e3a8a,#2563eb);
-      color: #fff;
-      padding: 30px;
-      text-align: center;
-      margin-top: 40px;
-      position: relative;
-      overflow: hidden;
-    }
-    footer p { margin: 0; animation: fadeInUp 1s ease forwards; }
+    /* Feedback */
+      .feedback-section {
+        background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+        margin: 40px 0;
+      }
 
-    /* Feedback Section */
-    .feedback-slider {
-      display: flex;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      gap: 20px;
-      padding: 20px 0;
-    }
-    .feedback-slider::-webkit-scrollbar { display: none; }
-    .feedback-card {
-      min-width: 280px;
-      background: #f1f5f9;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,.08);
-      flex-shrink: 0;
-      transition: transform .3s, box-shadow .3s;
-    }
-    .feedback-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,.12); }
-    .feedback-card img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-right: 15px;
-      border: 2px solid #2563eb;
-    }
-    .feedback-card h4 { margin: 5px 0; color: #1e3a8a; }
-    .stars {
-      color: #facc15;
-      margin-bottom: 10px;
-    }
+      .rating {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .rating span {
+        color: #d1d5db;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 0 5px;
+      }
+
+      .rating span:hover,
+      .rating span.active {
+        color: #fbbf24;
+        text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+        transform: scale(1.2);
+      }
+
+      .feedback-input {
+        width: 100%;
+        padding: 15px;
+        border-radius: 12px;
+        border: 2px solid #e5e7eb;
+        margin-bottom: 20px;
+        resize: none;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        font-family: inherit;
+        box-sizing: border-box;
+      }
+
+      .feedback-input:focus {
+        border-color: #3b82f6;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .feedback-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .feedback-list {
+        margin-top: 40px;
+      }
+
+      .feedback-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        background: #fff;
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 15px;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+        animation: slideIn 0.5s ease;
+        border-left: 4px solid #3b82f6;
+      }
+
+      .feedback-avatar {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        color: white;
+        font-weight: 700;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 1.2rem;
+      }
+
+      .feedback-content {
+        flex: 1;
+      }
+
+      .feedback-rating {
+        color: #fbbf24;
+        margin-bottom: 8px;
+        font-size: 1.1rem;
+      }
+
+      .feedback-text {
+        color: #374151;
+        line-height: 1.6;
+      }
+
+      .feedback-time {
+        color: #9ca3af;
+        font-size: 0.8rem;
+        margin-top: 5px;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .navbar .nav-links {
+          display: none;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1rem;
+        }
+
+        .container {
+          padding: 15px;
+        }
+
+        h2 {
+          font-size: 1.8rem;
+        }
+
+        .card {
+          padding: 25px;
+        }
+
+        .gallery {
+          grid-template-columns: 1fr;
+        }
+
+        .feedback-buttons {
+          flex-direction: column;
+        }
+
+        .modal-content {
+          padding: 25px;
+        }
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        animation: fadeInUp 0.6s ease forwards;
+      }
+
 
     /* Menu Food Images */
-    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 15px; margin-top: 15px; }
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 20px; margin-top: 15px; }
     .menu-grid img {
       width: 100%;
-      height: 120px;
+      height: 180px;
       object-fit: cover;
       border-radius: 10px;
       transition: transform .3s, filter .3s;
@@ -266,9 +401,8 @@
       <div class="gallery">
         <img src="https://i.ytimg.com/vi/uX4S23PZKbE/sddefault.jpg" alt="">
         <img src="https://lh3.googleusercontent.com/p/AF1QipOac8Mo-k5cOHeFJzFOyk_Tl6NOj5fh_tmZeRy7=s680-w680-h510-rw" alt="">
-        <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4nrZDFeCFgEwhuFFraZZxHOVIcc3zwHHbUncLC0TaSh5gVRguLYZSqm0SzdjjqX4H9hbnM8KRmIPCoTu2Uxpica1VEVbzaeK-0_VR8c1yL7sF610oQO29BSf2-zgIZt-IbTCg-8=s680-w680-h510-rw" alt="">
-        <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4npZBtiXgEXzOd6HQmkbojazD_31Ko7lfVGqtoU-cwR0cZJIsk3siT1tJFE5RET7cCMQ-MfEHFPfjovM73BQ5red-JX4BMWV3XAI88xxUxfBD5XtiVFtxQQ07y2jp5d2xBeFCrK7dg=s680-w680-h510-rw" alt="">
-        <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4nr8Shmx_iE0zNPNgHWVTi28G5N0CcsWZa94CjWAuJEdT0inLTYRaM2qitNQqUCTFnJBNwSzHaG3Dg7Md8SQFS6z3Q2NfSgAid-xq0C7rBzIldZyAtezxtF7y7Cci6FWfftUSMjA=s680-w680-h510-rw" alt="">
+        <img src="/static/deccanspace/mess.png">
+        <img src="/static/deccanspace/room.png">
       </div>
     </div>
   </div>
@@ -293,10 +427,9 @@
     <div class="card">
       <h2>🛏 Rooms & Pricing</h2>
       <div class="grid">
-        <div class="grid-item"><h3>Single Non-AC</h3><p>₹8,500/month</p></div>
-        <div class="grid-item"><h3>Single AC</h3><p>₹12,500/month</p></div>
-        <div class="grid-item"><h3>Double Non-AC</h3><p>₹6,000/person</p></div>
-        <div class="grid-item"><h3>Double AC</h3><p>₹8,500/person</p></div>
+        <div class="grid-item"><h3> Double Non-AC</h3><p>₹8,500/person</p></div>
+        <div class="grid-item"><h3>Tripple Non-AC</h3><p>₹6,500/person</p></div>
+        <div class="grid-item"><h3> Four-Shering Non-AC</h3><p>₹4,000/person</p></div>
       </div>
     </div>
   </div>
@@ -314,6 +447,7 @@
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTr04Iv6QAkjawMl_kXH2ZOxlLDekrHO-qYTg&s" alt="Dosa">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBiF5bOaM_lLzjSiUe7FzQRowh9p4ktQfTPQ&s" alt="Chapati">
         <img src="https://i.pinimg.com/736x/cf/3f/96/cf3f96b965b52b7d16719fc1ac701045.jpg" alt="Rice & Dal">
+        <img src="/static/deccanspace/dinner.png" alt="">
       </div>
     </div>
   </div>
@@ -331,44 +465,76 @@
       </div>
     </div>
   </div>
+   <section class="container" id="feedback">
+      <div class="feedback-section fade-in">
+        <h2>💬 Student Feedback</h2>
 
-  <!-- Feedback Section -->
-  <div class="container" id="feedback" data-animate>
-    <div class="card">
-      <h2>💬 Student Feedback</h2>
-      <div class="feedback-slider">
-        <div class="feedback-card">
-          <div style="display:flex;align-items:center;"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxITEhUTExMVFRUXFhgYFxgYGBUXFxcaFxgWFxcXFxUYHSggGBolGxYXITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGhAQGi0lHyUtLS0tKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIALEBHAMBIgACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAAEBQMGAAECBwj/xABCEAABAwIFAgMFBQYFAQkAAAABAAIRAyEEBRIxQVFhInGBBhORobEyQsHR8AcUI1Jy4RUzgsLxYiVDU3ODkpOisv/EABkBAAMBAQEAAAAAAAAAAAAAAAABAgMEBf/EACYRAAICAgICAgEFAQAAAAAAAAABAhEDITFBBBITIlEjQmFxgRT/2gAMAwEAAhEDEQA/AENOp9sg9onutVswAeY2DSPKyjgaz342/QusoUBdxuYPE3HksDZAFFxcY36AmI8u6yb6S3+a3BtYoxlP+GxxEG4K37tuthkzpv59fgjsOgCm5vu3DTxzx/ZMMvqgsER4WDVcDUC7cc2SvMqZGvQbX+ZH69U3y3C/wdToBaOgJgtt9VREjVahqMuidvMcahFzdc48WgeENm99wxxjvYwp8TVmqyH6bTEc28IAt1uo6xDyKcA31f0iW6tV5IuPgUyUBYN4JJBmBqMT4iGOIE9iQpMZhwMHVOuXiwbI2c0ONutz/wC1SZk2iyzd9DpAI4sBE9Cf1CFzGvrp1SLAtbbtZsfJIpO0U0LYXRYuoSbIIyFikhcEhIk21ZMKJ9ccKKSbkq1jb5HQQcRHddNxh6BCLYnor+OIxk3Mj/KP16KQ5sf5WpTrjlbNQ+aPjj+AG9LMr3EeUKwUangBVIaeyKpY17difKTHwWWTApcCotBceq3WpyyDvugctzNrx4gQRv09FNmOKOzVyyi06JYoqWKxpXT7rujhyeFrwM3Tv5JlgsJqMrMDlpPBViyvLTaywyZUhNi9uVgcfIKGvgjFm/JXyhlogWU78oB+6ub/AKqdBs8mquc0wpKeIcbK4557KlxJAgqrV8pqU5BBXVHJGS0ALjXzdLHo6tI3QhC0joZwAs1KQtH5rVldgXL930+ORAdpN5mPwXdN2kOcDEvIidrLnWQ2SAYfteBI6LKtM03DbSSHRPUEKzoXIHTLw2De8DtaERSp64cSPs99xaO2y5YS0FvU6h6WXdAAFrbu8MnsXXTDoWYuYc23MnyiIU9HH+FzW7Fu8RBaPmIXGLpOE3tO/N+i6OCDSyJJJJ3jj9fBAmiR2JJcx27WNE2FrjfzNvVGNY9lRpeAPC6NpFmmDO5FrKGmxuktaNMtuJ3IAMkc3v6I/DPc8u1H7IsTf7RaAHA/qyZMtIBzvDgOBY06nWA6agNj5yosVhdOHJLbw5pMbQ5nHaY/1Homj6gNSn96Kk6eARJ9OBF0PnzHvoGrNi6SOmupU2PIGn5oF0Ues3lRBEYgXUBYoJOXFDV3KerYINzlpjXYjQC6AXLSp2NWwyPZclxK6e2TZStwx+H6CTY6I2LT2FN8qywucTEhqOzDLAGmeLk9LWUOSTLWNtWVkMW9Pc/FdPpRdY3DyJ7KzMMyo+KDzHyM/grHiaALJCptN5bsn2WZjI03t90km3VvXyKwyxb2hNDXLso13lOcDlAmIQeWViDA2PKuGVgRsuDNOQgehgWssmOBoibIh1GRKlwdMDzXDJ2TQxwlHZO8NgBvCTYSr4grPhTZRhinLZaAsRgWkXCq+d5O2Nvkry9qW46iCLreUXeijw/2kynSbKrObBXq/tThhpcV5liqcErtxTtGYCSteq7rN56qFboD0CsSG1BBLi6RMRtIQWPqOquAsNIAtzzBPCmxI/h04JLiZcTeALC0IZ74dAvBvP1Wh0nLQWtBcLEkEjfaZuicQ6mKsURY026om59VxjCS3Qf5pHTayDouJdqBjSBt2/5TBhT3a4JbseLHfTsiq5p+81BpDYqANvYgWNzff5qClIrta4w0kEm9gYn6KOq5or3Pg1C4uYJifkgGTa2zceIAT6NG364RtCi5jKtTS6A5rYJubA+G21wlFZ4LasmYG433t5f2VxwIFSg2eQ0+R0DTYfVHBEiv16zg8NgtcKliNQN5dceomd0NnYqfus6/BqaI5MOdBHSCD8U2zF04lj9AOgMc5p+/LRubxvGyRZ63+FTIDgA09NJJeZLR6oDorb6fKgLEwi0LmnSUWZtiXH2OnoJKECMzcRUPkEEt4cDNtKMwtEuQlNsp0ynoDO5+Qv8AmhyouMbN0sK0Ojv8lK1g8yTb5f2Qr8TZ7uXGG8mJM/ryVh9nMgfUcHvBgDwjoCdz3KTkki4xcnSD8twwa0NaBP6uUL7S1mtaKbbuO/4khWx+SO93pY/Qf5ougcN7GMaSXuL3Hkzfz6rFTV2zpeN1SPOxh432/V03wWVagTwBAjY9z2VqreyQ1SXEjpEfRcPy0skMMf8ATEtnqP5fpbZafImZfDTPO8XhodpHUoVktcCNwU/9o8KaVZsj9bFK9bStk7RzyVMfZRiZdfm/qrtl7y0T1VC9nRNRo3/L9QvRaGHsCvL8uoyohk/76eUI3NTqiVxjAeEHhsMZ1SuNRiSy3ZDVL3z0VzwZVM9mGR5K64fZTCCcrKXAQ6oFWs8zItMDZOcU+AqPn+JkuV5Jfb1B8CT2hx0ghef1xLj5p1m+OJkJE+quvEqRAPiAhCiK+6HJXREZ6DUqtJGidGmGzY+qCFJxqgk7u57b3TfEYZkU3hwvfTx1sPkocXSDHNa6Ib6bmfktDoXANmxa2qY2kW7wLoAODQQBuR5xKYZzSHvBzqgjnbulOIYWhp6naItuU0AxpPJLnONtM6ZM2kRPX80M7DGDUsZgi/R0T2WqdZwlpALXH1uLz3lR0Afd+K0GDMiQOyADMVQJ1iRNhx3G44gplleYBjHA3h5320gRxwPxQDmh5ABguInciObjtPxU9PDtcHS+KhqaW2JAYAJc6BczFvXqUCdHGIeKlSmWA6nVG3vAsxojtMeqBzV04djibh8cQ4ETPoR5XRZIpOAJnSAGkTeHNIDuINp/ULM/qABrRAAJ2A4JA68BHQnwBMau2PEqOm7w79lJTp9x81kkYMRZ+P4s9Wj8Qlif+1NCCxw2iPxH4qvhdGN3FFrgNwNOSnQy19QiDFoHba/66JblTNyrDlVCrVdoYdLdi78lE3s6YLQ69nvZ+m10uItZvbr6k8q74OlSFgRKpdT2Za0AuxLgek/ghqZ927/MdvvcTG26zlT3ZvFtao9M90ISfNM3FKwbJ4Hxj6KXKcX7wCDKVe1Li3YXi56BZp7NXdC9j8binQXtpM6gCfRNafssGiWYioHehHwKqjjiRp0sLw6eSSOLtkNbwYuY6Jvl2CxzSHQ0N7uc0+rZcD8lq3JLoxSTfYP7VZK6rRIcAatO4I2cOsfgvLzIK91xIcWjWIK8iz3AH94cxou5xged/wA1eKVmWeFUxj7DUy6uI7/DuvV6eG8Ko/sBlRpF73y1wdoIPkD+B+K9DFQRZeb5kvbJo5pRcXTFWKoABAYdoJhMcwri90ho1YcsIRZDLhlrw0AKwYTFqiYHMOpTijmIjdZ/ZSGmP8xxTYN1517QZkLgJpnWaDSbqhZhiJO62xQcpWJuwDEv3lAvKJxLbqJtNdqVICCs2yG0pg5qg933VJgXStBYwj7X6kBRZhhJ92biW32+7yiTWGgM0w4OsRPiB7KHMah8LS0AiLzuDeIW50rgHzGnUc8bANaBN/1yuMfTIbTEG0mYvxzyERmVVzgRsIExva9+ygr0y6lqnYAAdeUwMY3+I2BNpA9NyfVTvBfTdAjS2/IMjb9dF1lNBwaHlpGoxyCGhtgfW65w9qb7m5gj1Iv80C5JMAbNDnW0wDP8w68f2UmCY6mGGznNnm4JafFB36+oQ2OaGxaY4g20j/hZTovFwLhxk32cOJ6XCBMkxNFtQ0xSH3i8EyNeu/jHXwmPOEizV0tFz/mOMHiwuB6hPMG9waxjiZa5jdhs4Pkd7n6Hok2cYcgMduHOeQ69xDdIIN50wfVKXBEuASkFK0wsYABK4DZWUdmVWc5tQNSlA3bBVVIV2p09Ivzuk2bYEbgDn6la45paNYQZDk20K54RrmUx7sXIt5lUvJT4iF6BkdUaWg3U5eTqw7Qvw+Q4l/ifVDbkkTIPSevrbsjv8JAAEyRMuaNM+Yu09NlbaGCaRIaPgFHjMOQ08BR8jqjdYo8geQsLJi08JnjMJr8XKBylhc4QrBVwToss6dmuqFFHAjkmfNMcNhQLx8brkBzBLgERhMYx1ueUNfkCDGUZEFUbGZSTjG1gB/DAJnzV6x9cbBIRd7hqDQ6ziRJiPu/3VRlRm420c4p7fE9sDVocfOXNJ+AC7ZijHklXtBUNOltALmsbzIYCSfUn6JZRxZjfdc2THbs4vLf6g1xNckz1UOgj1QtOpJ3RjKk2U1RznbQRdS+9dwhqlQE9guqTbyoaRIPjy6dklfSkyQrLXojlL6uGCqE0IR16SENI8JziKPC1h8BK6FJJbGKKtExMbqD3ZVqflgIgeiWVcBdKORMLGuLeQ5ojcN0mdo4UZqifF15v8ETXw+un7yLNAiSJny6IDLy7WzW2Q4iByIK7aOq9BOZhx1aeWQ71+iiwDR7olwJ8MC+3Bd3TfMsKNg/cT3EbA9kpp1tTSwwAdo2BJj4ICIyw+MP7uSXanBrmgnoBa/lCS4F5PvNRNosTEySQbHvwu6bCGuotBguF5MQNx6/gohSl7g0WLQOeDYJkpBTWhzRPiOmTJifE0A+acsaHlrAYdpsTGlvBnnkHblIsOHO8ppgizbAiRJtN5TFlQBzgAWt12dzP2XduRbuUCkgJ7i4Sb/xhMRfwgbdxN0tzWudFFpERrMzJMlt442TRkN9yIsamoE21C2kWvHE+WySZo0tLAeNXp4v7KZcClwbYDEIijshmPC0/FXsLLBJsiATVchahBjzHwNl1TfIPdDvqALRKjeLpkRwwbULgYPI6qz5JV2SWpQ1CdMkxB580dlMtdpO4MFEto3jpnomCxgDULisYHgjhKmVnFjo3AKB/xRtM6XuDek8/msopnQ5JDyjnZY7w0oA73PkIj5pm72mY5hDSQSORcfGySYPEUnXIeRBMgWgWJ8kwoZa4uAZhqrjuNQIb5kkALRIlv+jik8SXXJPJJJ+aCzOqWEPBh2w79j1CcZjhfctArV20nubLGMALzBAdA3dEjYWlVvJsiqEe+rvc933QTt6bShx/IlK+B5RrF7Gu2kShMRmLaLxqZqDhPEgjz80wNMNDW9Aqv7R1/wCIB0H1/wCFgLPkcIWuQH2hzU4h48OljZ0t89ye9gl4euMRiRKjFWQVTgeZKTk7Z0MaQbGyZ4LHE3Veci8PVsnKKoksjKwROHdJVZdjYgI/A5gZC554nQD6ueEBVBndSHFgrZqNhYJNAB1wi8MEBiKouVmGzALX1biA7LYCAqU5KJdiJaFA5zVEVQjrCUnCm4wAAIg8ieAhaQpivTh0mxvIElTCoWMc0Qbb2+SihwNKoGielojp2K9U7OqCM8f/ABToLSSIeRx8eUNl2Be4Oc1pIFg4j+VTZtiAamsjTqdpI3tp/MLjA13Nb7vUQ15nncXnzsExA2WAy8DYm9pPO3Tc7LVCoWuDQ4AvHhniCDPYqeljtLKoaxoLfvX1F0mCSeUHTDqhLjENBvYfacAI7pkkuWMIIganF5Mu2uGzvvvIUlZ4g9yXDgCC2Z6CAfWEdiDopDxRBGkyfF4m8H7oHfhLy/xRaRTfEmCZJEQdrAbcpiTsmxdKBSAIBDg76Wi3IPcSk+ZtadJ4gnruZ/FNXEg0w3Y2IJ5JdzwbDnollWhOlo20i/nJWc3omXAK2n4fkoKlLum37vbsgcTTiVlCV8GcRdUqkWULzPK6q/RQCVrRoxlgMe9mxHqJhS5Vij71xcZ1GfI7H8EBTpnouzTcCCptWCyNNHoWXVg1wJ2NijcflVN8iAWm47Ht0VVyvGamgEqzYLEyACbhS4uLs9CMk0c0n4lhDaeINMCftMpuBmxuRv36nlP/APEMQWtBrOBAiQaTZ2EnSCSbcEIP3IdutNy4TYnylUpsv44Po1gcBSDnFvje4kuedRNyT9p0k3J+JTR9OwA4XWGoBjYsFvE1Q1pKluwkxTjHwSVQc0xQe55mLx6Cyt2NxOowF57mD/4jx/1O+qSicnkttIiqv7roPQNRxXVJxPotfU4wqo5ZTffdQGVI1tknERjql90XhK0BL6gXLXEIcbQx8MQI3XTsaOqQmuVJSr3lZPEA3xDp5UVEX3QwrSumVEq0Ib0qxWe/7oUPMCBusv0KzURDjFECmGh2/wBbWUuIxElrTDQ0b9Y6oCo1v8roM/KxK2XgNkOvtJ+MLsOwhzamZBBuL9jb48oltfTTYb2HhkRxB9brrMmeIFwEfWW7/roh61J2mmDyCRcwBsq6EQYQk62nZ0GZ424+iNouApvFhaODab/ruhXCKjINogSJtfZGVcKXBjdUe9eQBeQGjaOPF5oEyDES2GF2oam6Yg3a2+24sQpBpLnOgwKRgWO7xMWG8nsu24MkkSSKdm7HcOgAjjdboYU6/d3b/BM8kgeKDNt/LbhMngkNOX6bks0xtxqJLh8fRQ0cMCZF9r9YFvlCkxdLSS8/aDmhxm0Nm/ncfFWPIsJqotce4FosDG3mCubyZeuMmfAir0wBKrmYHdeiY3LfCRCpGb4UtJ/Jc+CezKJWa4vCIwWE1FQ1/tJ3lTJiF2t6NG9B2Cy+QpKmUFxhoJsbDtun+W4Q7q25HksDWRvt5LDDGWTJ/HZlezxjBVS0qx4LGAxBg9D+Cf8Atp7EOaTiMO2Qb1KY3HV7Rz3CpraEixXVNeumd2P7K0XnLsaCIKZtqAcrz3D4mszY6h0N/numVDOXDdrvIEFZVHo3UpLkuD8YB5JLmWZF/hagamMfUERAXVChG/PxU+yRXq5GU6e68+zN/wDFqf1u+pXpWmyA9pfZpmKw5r4dmnEUmzUYNqzWiC8D+cAT3vyqxL2sw8qOkeZucpaKHDkbhWrZnEzrQpGKdYG8qGSA1ioip6oKHfdAyNxWNetmmei0GFMCcVV3TqKC66aoYDWnXtHwWfvBQLJWe8Kj1JouIp1GNbJAEk3+YC1jqbNJdAuQ223hAvPVT06jX+GpIDJjvyJQVd7AWNMubcmOSTdbHYT42qajqekkaKYvFrA3PxUVVxe9kElsAAxAMb2T32nuKD2ANbtEAE7DcWIhc5JjaFJtSlUBDjz9qRHy3TJvQprUD7xoH2iBo2iZESt4zB1KT6bKn2miQ4HrJ+MygK1R3vA5szs39egTnM8Yar2+K32TBjVpDrgnzKAYudX0Nc3SQKkB25gj70zteUZUcRUOsatDWNgSA4Cbg8wR+C5xGgtBLTqdOuTtGmG37CZ7lQCgHGoXCxmYncMdpIH9QB9ECCXYZpFWpADdLQAIgTFh063jZXv2SpasMCbw94/+0j6/JVDBVCaVaSTrosA5u0eF0dJO/aFevYR+rC3iQ9wMbXAd+K5/JVw/0mXB1j8OAFQPaClc2Xp2PoyCqfnGXyCuOLqRieU4mjDtlY8gw4MWQme4fS4DvCunsVk5NRhcwgbwRvHZehTmqRbehxk+EnS0A/A2HJV3w9C0AbLlmAAdq2tEI6m1deLFHGqRCRC1irvtD7C0a5NSlFKqbn+R5/6gNj3HzVsDFI0JySemXCTi7R4tiskqUXaKrNJ4nY92nYhRVMrESAva8VgqdVumowOb0I+Y6HuqpmnscWy7DmR/I6J/0v8Az+K4p4GtxO/H5EHqWjz/AA4IsUaxiizEHD1AKzHsnq0/qO+yPpQYIMhYSi1ydUWnwQPZZR+x+YEYupSm7Yc3uCbj4ojFmAk3s1T/AO1aRH3mVB8G6r/Bb+O6kYeSvqV79p3s07CYt1RrIoVyX0yNg43fT7EGSB0PYwJkuXy0kjfZfQuaZNQxVH3NdgeyQRMghw2cCLg3N+6peM/Z4WGKFUaeGvmR/qG/wXTkhL9p5uih0cpDtgpK3s+Ysr/gfZh9L7QB7tuEyflzY2Xn5J5Iumgq+DxHMcrcy0EojJvZ99Rw8K9RqZCHmSAmWWZIGcKVnk9JE0UVnsk3lqBx/s01oMNXrpy4QgsZlII2UuU12FHhGMy7RNkD7nsvU/aD2aky0Kq/4G4OuFvHKq2IRMwthIWHC9lam5OY2Qr8BB2PwSWQDeCw/ge6bh3/ADHGy3iJLg2I0tkcai6NvRHYR2mmWWBN4NuJBnyUeXOZVqlxdHu2yZiCQeAulHU+CLFB2prTJA+yJjTbjohQ0e+GoiNMeeqVziK/vH7m7t9+8oPFl7ngE30+EeR8OyYuhgGBtVtpi/lANjPMpqcvY1rXEgOa0mBYkuBkkHqkeHqP1OJu4gdLbGe6PzSuPdNe0AaCGi8mCOCN4MIQnZNWw7dALNiCSLkGWkNjneN1Dg6jjRqOAu6dIET93nfvwisBUfoANVrTpMNiAONTj6xHYqGlTecNpaA4lo0CIILCCb82Ex2CdEOwg4oOw4dtrZDoAhuk+LTEaTv8B63X9mdM/uj3Wh1Z5bHQBoH0Xm+HonRiWEydXMlwD5dN/vEzHcL0j9n2Lpsw5a6qyDWf7mS3U5pDTIi5uT8R2WOeLlGkDeizVqSrmbFlwCCegunubViQGMmHfacNgOk9T9EFSykuIEQ0cp4vEU1ctGTYpyP2eZq94WhzuJEx+St9DBNp+K0rqg0NhrRAU1Siu9JRVICPBPLpnqiAYN9vp/ZawLYkKYtQ+RnbWqQBQ0zFuOPyU4UMZgXS1K04pAQYykx40Pa145DgCPgUjx3sjQcD7qaTuIJLPItMwPJPfdFS6fNTKKfJcMko8M8gzSg5mpjwQ5tihvY/DE4+m8D7LXk+WnT9XBXL9oeBd4awEtgNeel/CT2Mx8En/Z7R14l8bNpgE+bgf9qwhD1nR3Tye+L2L7XeWsLhd3A6dytYWs2oLWdFxyPzCYBguhMRl7TceFwuCF1pnnHPu1w/CtO4REdd1opvYqAnYOO4+anoUgiAFprLrnl40HtaGdCio6lEIgFckLncFYCbF4IFKamUN6K1VGIN9JZTxpsCtV8tAFhulzsovsrbXooJ7Lp/BZJ488h7WODobMEGxEWu75oPDPIBEiL+oaeTyjniZa1osGn4W9SjBl7RpIGkO33iDM+S6bOqrF2IdpqS0/aHAnfsUrxFWKgJkw2PI87bhOq+ILKwIggNAAN4HQ2SjH0ZquLLt1EathLt78IZLNh9pDovvBjb+6bU/E1gAg+Gxk7kSO2wQ7mt0tb4dQEOgdDBd3sBdG4aNRLnEjV4XAXlpAFtoumO9AeZZkQ8aZDg5wJgEbeEbfqUbhaLvcUmmGkujV/KdQ3IvERson0WkVDLgC8lzmiTIJABHQqSrVimYJnY8xsfhI+IVEcmsvwznPLhzLdW88m1ySZiY3dvunn7PcsLsfV1GfcMLeR4nOBMTx/ZI8txppyd9LqhDSIPhIEz6D4K4/suEH3n/jh5nuHkj1j6LTFyTM9BaLBvA4RTmz2UBbdEgLVkIhbRMyiQF0xdlnRS2MgY26kIW2sXTxyhsDiF21aC7BSAy62AsW0gMWwtLYQMGzDBtrU30nfZe0tPaefMG/oqR+yvAOp/vhePE2sKJ86QJd6eML0BB4PBNpuqlv8A3tX3h8yymw//AIn1SrdlKX1aCCuV0tEJkETguCFMuCFSYGgFtoWLYQBomCtOcuqoQlV658q3YElSqEK+sEPXrQl9XElRpEtjCtWCWVcRdZUJI5Q5olNsR5/Q/wA3/wBP8FKf9/4LFiTOxCXMtz/X+C4xu1b/AMwfgsWJsnsExH22/wBJ/BFZd9pv9Y+oWLEw6J6X2a/9X+6ouHf5bv8AT9HrFipkIiZ/mf8AyfQr0P8AZ7/kYT1+jltYtcXZMz0B24U7VixaEEgUrFixZsZrkrbtisWIA54C2FixAHQWLFiAMW1pYgDa5W1iAOQtFbWIA5K5KxYmgOStrFiYG6iW11ixZZeEJizFoA7raxc0+SGFtWLFiJDP/9k=" alt=""><h4>Rohan S.</h4></div>
-          <div class="stars">⭐⭐⭐⭐⭐</div>
-          <p>"The hostel has excellent facilities, great food, and very supportive staff. Highly recommended!"</p>
+        <div class="rating" id="ratingStars">
+          <span data-value="1">★</span>
+          <span data-value="2">★</span>
+          <span data-value="3">★</span>
+          <span data-value="4">★</span>
+          <span data-value="5">★</span>
         </div>
-        <div class="feedback-card">
-          <div style="display:flex;align-items:center;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCHqGLlvNC_QMnwSkTZpRM6an7IMZ4RZ0nKA&s" alt=""><h4>Akash M.</h4></div>
-          <div class="stars">⭐⭐⭐⭐</div>
-          <p>"Comfortable rooms and good WiFi. Mess food is tasty and hygienic."</p>
+
+        <textarea
+          id="feedbackInput"
+          class="feedback-input"
+          rows="4"
+          placeholder="Share your experience with deccanspace Hostel..."
+        ></textarea>
+
+        <div class="feedback-buttons">
+          <button class="btn" onclick="submitFeedback()">
+            Submit Feedback
+          </button>
+          <a href="{{ url_for('login', next_hostel='Deccan Space Hostel') }}">
+          <button
+            class="btn"
+            onclick="showRegistration()"
+            style="background: linear-gradient(90deg, #059669, #047857)"
+            
+          >
+            Student Registration
+          </button>
+          </a>
         </div>
-        <div class="feedback-card">
-          <div style="display:flex;align-items:center;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnOXA1uktUAnL0I5l1QIrGHuYF9i4vM4MqHfAo84-6pqTrOaykOtEow4TCeNgZjvpS0Xk&usqp=CAU" alt=""><h4>Vikram P.</h4></div>
-          <div class="stars">⭐⭐⭐⭐⭐</div>
-          <p>"Security is top-notch and the study lounge is perfect for exam prep."</p>
+
+        <div class="feedback-list" id="feedbackList">
+          <!-- Sample feedback items -->
+          <div class="feedback-item">
+            <div class="feedback-avatar">A</div>
+            <div class="feedback-content">
+              <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
+              <div class="feedback-text">
+               My experience at the hostel has been extremely positive. Right from the beginning of my college life to the very end, the hostel provided a safe, comfortable, and homely environment. The warden was always approachable and supportive, and her assurance truly helped me settle in without any worries. Being one of the first hostel inmates, I always felt a personal touch in the way things were managed. I’m grateful for the care and smooth experience throughout my stay.
+              </div>
+              <div class="feedback-time">2 days ago</div>
+            </div>
+          </div>
+          <div class="feedback-item">
+            <div class="feedback-avatar">R</div>
+            <div class="feedback-content">
+              <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
+              <div class="feedback-text">
+               Great hostel! Very close to the college and other facilities are also nearby. Good homemade food is available. Security overall is good with warden being there for any concerns you might have. Near to the metro station as well
+              </div>
+              <div class="feedback-time">1 week ago</div>
+            </div>
+          </div>
+          <div class="feedback-item">
+            <div class="feedback-avatar">S</div>
+            <div class="feedback-content">
+              <div class="feedback-rating">⭐⭐⭐⭐</div>
+              <div class="feedback-text">
+              I had a wonderful experience. I found the warden and the head of the hostel to be very caring, taking personal care of each and every student in the hostel. They provide good quality food and ensure security. Overall, the management is excellent. The room sizes are adequate, and the number of students per room is reasonable. I am 100% satisfied with Vritee girls’ hostel system.♥️
+              </div>
+              <div class="feedback-time">2 weeks ago</div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Contact Section -->
-  <div class="container" id="contact" data-animate>
-    <div class="card">
-      <h2>📞 Contact Us</h2>
-      <p><strong>Address:</strong> Plot 12, MG Road, Deccan Space – 400001</p>
-      <p><strong>Phone:</strong> +91 99222 33444</p>
-      <p><strong>Email:</strong> deccanspacehostel@gmail.com</p>
-    </div>
-  </div>
-
-  <footer>
-    <p>© 2025 Deccan Space Hostel. All Rights Reserved.</p>
-  </footer>
+    </section>
 
   <script>
     // Scroll animations
@@ -378,6 +544,228 @@
       });
     }, { threshold: 0.2 });
     document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+
+      function toggleMobileMenu() {
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileMenu.classList.toggle("active");
+      }
+
+      function closeMobileMenu() {
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileMenu.classList.remove("active");
+      }
+
+      // Modal functionality
+      function openModal() {
+        document.getElementById("contactModal").style.display = "flex";
+      }
+
+      function closeModal() {
+        document.getElementById("contactModal").style.display = "none";
+      }
+
+      // Close modal when clicking outside
+      window.onclick = function (event) {
+        const modal = document.getElementById("contactModal");
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      };
+
+      // Rating system
+      let selectedRating = 0;
+      const stars = document.querySelectorAll("#ratingStars span");
+
+      stars.forEach((star, index) => {
+        star.addEventListener("click", () => {
+          selectedRating = index + 1;
+          updateStarDisplay();
+        });
+
+        star.addEventListener("mouseover", () => {
+          highlightStars(index + 1);
+        });
+      });
+
+      document
+        .getElementById("ratingStars")
+        .addEventListener("mouseleave", () => {
+          updateStarDisplay();
+        });
+
+      function highlightStars(rating) {
+        stars.forEach((star, index) => {
+          if (index < rating) {
+            star.classList.add("active");
+          } else {
+            star.classList.remove("active");
+          }
+        });
+      }
+
+      function updateStarDisplay() {
+        highlightStars(selectedRating);
+      }
+
+      // Feedback submission
+      function submitFeedback() {
+        const feedbackText = document
+          .getElementById("feedbackInput")
+          .value.trim();
+
+        if (feedbackText === "") {
+          alert("Please enter your feedback!");
+          return;
+        }
+
+        if (selectedRating === 0) {
+          alert("Please select a star rating!");
+          return;
+        }
+
+        const feedbackList = document.getElementById("feedbackList");
+        const newFeedback = document.createElement("div");
+        newFeedback.className = "feedback-item";
+
+        const avatar = feedbackText.charAt(0).toUpperCase();
+        const starRating = "⭐".repeat(selectedRating);
+        const timeStamp = "Just now";
+
+        newFeedback.innerHTML = `
+          <div class="feedback-avatar">${avatar}</div>
+          <div class="feedback-content">
+            <div class="feedback-rating">${starRating}</div>
+            <div class="feedback-text">${feedbackText}</div>
+            <div class="feedback-time">${timeStamp}</div>
+          </div>
+        `;
+
+        feedbackList.insertBefore(newFeedback, feedbackList.firstChild);
+
+        // Reset form
+        document.getElementById("feedbackInput").value = "";
+        selectedRating = 0;
+        updateStarDisplay();
+
+        // Show success message
+        showToast("Thank you for your feedback!");
+      }
+
+      // Registration functionality
+      function showRegistration() {
+        showToast(
+          "Student registration portal will be available soon! Please contact the office for now."
+        );
+        window.location.href = "/login";
+      }
+
+      // Booking information
+      function showBookingInfo() {
+        showToast(
+          "For room booking, please call +91 9876543210 or visit our office during business hours."
+        );
+      }
+
+      // Toast notification
+      function showToast(message) {
+        const toast = document.createElement("div");
+        toast.style.cssText = `
+          position: fixed;
+          top: 100px;
+          right: 20px;
+          background: linear-gradient(90deg, #10b981, #059669);
+          color: white;
+          padding: 15px 25px;
+          border-radius: 10px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+          z-index: 10000;
+          animation: slideInRight 0.5s ease;
+          max-width: 300px;
+          font-weight: 500;
+        `;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.animation = "slideOutRight 0.5s ease";
+          setTimeout(() => {
+            document.body.removeChild(toast);
+          }, 500);
+        }, 3000);
+      }
+
+      // Add CSS for toast animations
+      const toastStyles = document.createElement("style");
+      toastStyles.textContent = `
+        @keyframes slideInRight {
+          from {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        @keyframes slideOutRight {
+          from {
+            transform: translateX(0);
+            opacity: 1;
+          }
+          to {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(toastStyles);
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Observe all fade-in elements
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".fade-in").forEach((el) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(30px)";
+          observer.observe(el);
+        });
+      });
+
+      // Navbar scroll effect
+      let lastScrollTop = 0;
+      window.addEventListener("scroll", () => {
+        const navbar = document.querySelector(".navbar");
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+          navbar.style.transform = "translateY(-100%)";
+        } else {
+          navbar.style.transform = "translateY(0)";
+        }
+
+        // Add background opacity based on scroll
+        const opacity = Math.min(scrollTop / 100, 1);
+        navbar.style.background = `linear-gradient(90deg, rgba(59, 130, 246, ${
+          0.9 + opacity * 0.1
+        }), rgba(29, 78, 216, ${0.9 + opacity * 0.1}))`;
+
+        lastScrollTop = scrollTop;
+      });
+
   </script>
 
 </body>

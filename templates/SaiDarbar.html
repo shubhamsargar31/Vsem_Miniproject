@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sai Darbar Boys Hostel</title>
+    <style>
+      :root {
+        --bg: #121212;
+        --text: #f1f1f1;
+        --accent: #00f0ff;
+        --muted: #aaa;
+        --card-bg: #1e1e1e;
+        --btn-bg: #00f0ff;
+        --btn-text: #121212;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* NAVBAR */
+      .topbar {
+        position: sticky;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 28px;
+        background: #111;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+      .brand h1 {
+        font-size: 1.2rem;
+        color: var(--accent);
+        margin: 0;
+      }
+      .navlinks a {
+        margin-left: 18px;
+        font-weight: 600;
+        color: var(--text);
+        transition: 0.2s;
+      }
+      .navlinks a:hover {
+        color: var(--accent);
+      }
+
+      /* HERO */
+      .hero {
+        position: relative;
+        height: 420px;
+        background: url("/static/saidarbar/hostel.jpg");
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        text-align: center;
+      }
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .hero-content {
+        position: relative;
+        z-index: 1;
+      }
+      .hero-content h2 {
+        font-size: 2.2rem;
+        margin-bottom: 12px;
+        color: var(--accent);
+      }
+      .hero-content p {
+        font-size: 1rem;
+        color: var(--text);
+        max-width: 700px;
+        margin: 0 auto 18px;
+      }
+      .hero-content .btn-primary {
+        background: var(--btn-bg);
+        color: var(--btn-text);
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: 0.2s;
+      }
+      .hero-content .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 255, 255, 0.4);
+      }
+
+      /* SECTIONS */
+      main {
+        max-width: 1200px;
+        margin: 32px auto;
+        padding: 0 20px;
+      }
+      section.block {
+        margin-bottom: 32px;
+      }
+      section h2 {
+        color: var(--accent);
+        margin-bottom: 18px;
+        font-size: 1.8rem;
+      }
+
+      /* FACILITIES HORIZONTAL SCROLL */
+      .facilities {
+        display: flex;
+        overflow-x: auto;
+        gap: 16px;
+        padding-bottom: 10px;
+      }
+      .fac-card {
+        min-width: 200px;
+        background: var(--card-bg);
+        padding: 16px;
+        border-radius: 12px;
+        flex-shrink: 0;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        transition: transform 0.2s;
+      }
+      .fac-card:hover {
+        transform: translateY(-4px);
+      }
+      .fac-card h4 {
+        margin: 8px 0;
+        color: var(--accent);
+      }
+      .fac-card p {
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      .fac-card .icon {
+        font-size: 28px;
+      }
+
+      /* ROOMS SLIDER */
+      .rooms-slider {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        padding: 12px;
+        scrollbar-width: thin;
+      }
+
+      .room-card {
+        min-width: 280px;
+        background: var(--card-bg);
+        border-radius: 12px;
+        flex-shrink: 0;
+        overflow: hidden;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+        transition: transform 0.2s;
+      }
+      .room-card:hover {
+        transform: translateY(-4px);
+      }
+      .room-card img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+      }
+      .room-card .room-info {
+        padding: 12px;
+      }
+      .room-card .room-info h4 {
+        margin: 4px 0;
+        color: var(--accent);
+      }
+      .room-card .room-info p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .room-card .price {
+        margin-top: 8px;
+        font-weight: 700;
+        color: var(--accent);
+      }
+
+      /* MENU TABS */
+      .menu-tabs {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+      }
+      .menu-tab {
+        padding: 10px 14px;
+        border-radius: 10px;
+        background: #222;
+        cursor: pointer;
+        font-weight: 700;
+        color: var(--muted);
+        transition: 0.2s;
+      }
+      .menu-tab.active {
+        background: var(--accent);
+        color: #121212;
+      }
+      .menu-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 12px;
+        padding-bottom: 10px;
+      }
+      .dish {
+        min-width: 230px;
+        background: var(--card-bg);
+        border-radius: 10px;
+        overflow: hidden;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        transition: transform 0.2s;
+      }
+      .dish:hover {
+        transform: translateY(-4px);
+      }
+      .dish img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+      .dish h5 {
+        margin: 6px 10px 0;
+        color: var(--accent);
+      }
+      .dish p {
+        margin: 0 10px 10px;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      /* Facilities */
+      .facilities-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-top: 40px;
+      }
+
+      .facility-item {
+        background: linear-gradient(135deg, #eff6ff, #dbeafe);
+        padding: 25px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(59, 130, 246, 0.2);
+      }
+
+      .facility-item:hover {
+        transform: translateX(10px);
+        background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      }
+
+      .facility-icon {
+        font-size: 2rem;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      /* Food Menu */
+      .food-menu {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .food-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 0;
+        text-align: center;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+      }
+
+      .food-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.2);
+      }
+
+      .food-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .food-card-content {
+        padding: 25px;
+      }
+
+      .food-card h3 {
+        color: #3b82f6;
+        margin: 15px 0;
+        font-size: 1.4rem;
+      }
+
+      .food-time {
+        background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        display: inline-block;
+        margin-top: 10px;
+      }
+
+       /* Feedback */
+  
+      .rating {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .rating span {
+        color: #d1d5db;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 0 5px;
+      }
+
+      .rating span:hover,
+      .rating span.active {
+        color: #fbbf24;
+        text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+        transform: scale(1.2);
+      }
+
+      .feedback-input {
+        width: 100%;
+        padding: 15px;
+        border-radius: 12px;
+        border: 2px solid #e5e7eb;
+        margin-bottom: 20px;
+        resize: none;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        font-family: inherit;
+        box-sizing: border-box;
+      }
+
+      .feedback-input:focus {
+        border-color: #3b82f6;
+        outline: none;
+        box-shadow: 0 0 0 3px white;
+      }
+
+      .feedback-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .feedback-list {
+        margin-top: 40px;
+      }
+
+      .feedback-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        background: black;
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 15px;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+        animation: slideIn 0.5s ease;
+        border-left: 4px solid #3b82f6;
+      }
+
+      .feedback-avatar {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        color: white;
+        font-weight: 700;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 1.2rem;
+      }
+
+      .feedback-content {
+        flex: 1;
+      }
+
+      .feedback-rating {
+        color: #fbbf24;
+        margin-bottom: 8px;
+        font-size: 1.1rem;
+      }
+
+      .feedback-text {
+        color: #ffffff;
+        line-height: 1.6;
+      }
+
+      .feedback-time {
+        color: #9ca3af;
+        font-size: 0.8rem;
+        margin-top: 5px;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+       .btn {
+        display: inline-block;
+        background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+        color: white;
+        padding: 15px 30px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background: linear-gradient(90deg, #1d4ed8, #1e3a8a);
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6);
+      }
+
+      /* Gallery */
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 40px;
+      }
+
+      .gallery img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 15px;
+        box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+      }
+
+      .gallery img:hover {
+        transform: scale(1.05) rotate(1deg);
+        box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.25);
+      }
+       /* Modal Styles */
+      .modal {
+        display: none; 
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background-color:black;
+        padding: 30px;
+        border-radius: 15px;
+        max-width: 500px;
+        width: 90%;
+        position: relative;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background: #ff4d4f;
+        color:black;
+        border: none;
+        border-radius: 10px;
+        padding: 5px 12px;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+      .navlinks {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-menu a:hover {
+      color: #ffd700;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <div class="topbar">
+      <div class="brand"><h1>Sai Darbar Boys Hostel</h1></div>
+    <ul><nav class="navlinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#facilities">Facilities</a></li>
+        <li><a href="#rooms">Rooms</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#feedback">Testimonials</a></li>
+     <li><a onclick="openModal(); closeMobileMenu();">Contact us</a></li> 
+    </ul>
+      </nav>
+    </div>
+
+   <div id="contactModal" class="modal">
+      <div class="modal-content">
+        <h3>📍 Hostel Address</h3>
+        <p>
+          <strong>R Boys Hostel</strong><br />
+          Plot No 15, Sector 4, Panvel, Opposite Shree Swami Samarth Math, Near Cidco Garden, Kalamboli-410218
+        </p>
+
+        <h3>☎ Contact Information</h3>
+        <p><strong>Main Office:</strong> +91 8591714474</p>
+        <p><strong>Emergency:</strong> +91 9819317824</p>
+
+        <h3>👨‍💼 Hostel Manager</h3>
+        <p><strong>Name:</strong> Mr. Rajesh Kumar</p>
+        <p><strong>Phone:</strong> +91 9876543212</p>
+        <p><strong>Email:</strong> RBoysHostel @gmail.com</p>
+
+        <h3>🕒 Office Hours</h3>
+        <p>
+          <strong>Monday - Saturday:</strong> 9:00 AM - 8:00 PM<br />
+          <strong>Sunday:</strong> 10:00 AM - 6:00 PM
+        </p>
+
+        <button class="close-btn" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h2>Modern Premium Boys Hostel</h2>
+        <p>
+          Comfortable and secure accommodation for boys with private and shared
+          rooms, modern facilities, non-veg & veg mess, and 24/7 support.
+        </p>
+        <button
+          class="btn-primary"
+          onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"
+        >
+          Book a Visit
+        </button>
+      </div>
+    </div>
+
+    <main>
+      <!-- ABOUT -->
+      <section class="block" id="about">
+        <h2>About Sai Darbar Hostel</h2>
+        <p class="muted">
+          Sai Darbar Telugu Boys Hostel is a dedicated accommodation facility
+          located in Sector 20, Kopar Khairane, Navi Mumbai, catering
+          specifically to Telugu-speaking male students and professionals.
+          Situated in a well-connected area, the hostel offers a homely
+          environment with amenities tailored to meet the needs of its
+          residents.
+        </p>
+      </section>
+
+      <!-- FACILITIES -->
+      <section class="block" id="facilities">
+        <h2>Facilities</h2>
+        <div class="facilities">
+          <div class="fac-card">
+            <div class="icon">🔐</div>
+            <h4>Security</h4>
+            <p>
+              24/7 CCTV surveillance and restricted access for resident safety.
+            </p>
+          </div>
+          <div class="fac-card">
+            <div class="icon">📚</div>
+            <h4>Library</h4>
+            <p>Quiet study rooms and library access for students.</p>
+          </div>
+          <div class="fac-card">
+            <div class="icon">🍴</div>
+            <h4>Mess</h4>
+            <p>Daily veg & non-veg meals prepared fresh.</p>
+          </div>
+          <div class="fac-card">
+            <div class="icon">🛏</div>
+            <h4>Housekeeping</h4>
+            <p>Clean rooms and linens provided weekly.</p>
+          </div>
+          <div class="fac-card">
+            <div class="icon">💧</div>
+            <h4>Water Supply</h4>
+            <p>Hot and cold water available 24/7.</p>
+          </div>
+          <div class="fac-card">
+            <div class="icon">🌐</div>
+            <h4>Wi-Fi</h4>
+            <p>High-speed internet connectivity for all residents.</p>
+          </div>
+        </div>
+      </section>
+
+       <!-- Gallery -->
+    <section class="container" id="gallery">
+      <div class="card fade-in">
+        <h2>📸 Hostels Rooms </h2>
+        <div class="gallery">
+          <img
+            src="/static/saidarbar/private.png"
+            alt="Modern Hostel Room with Study Desk"
+          />
+          <img
+            src="/static/saidarbar/failities.png"
+            alt="Quiet Study Room with Library"
+          />
+          <img
+            src="/static/saidarbar/therr.png"
+            alt="Spacious Dining Area"
+          />
+          <img
+            src="/static/saidarbar/four.png"
+            alt="Well-equipped Gym Facilities"
+          />
+        </div>
+      </div>
+    </section>
+
+      <!-- ROOMS -->
+      <section class="block" id="rooms">
+        <h2>Rooms & Pricing</h2>
+        <div class="rooms-slider">
+          <div class="room-card">
+            <div class="room-info">
+              <h4>Private AC Room</h4>
+              <p>
+                Single occupancy with AC, ensuite bathroom, wardrobe, study
+                table, and Wi-Fi.
+              </p>
+              <div class="price">₹8,500</div>
+            </div>
+          </div>
+
+          <div class="room-card">
+            <div class="room-info">
+              <h4>2-Share Non-AC</h4>
+              <p>2-bed room with a common bathroom and shared facilities.</p>
+              <div class="price">₹7,000</div>
+            </div>
+          </div>
+
+          <div class="room-card">
+            <div class="room-info">
+              <h4>3-Share Non-AC</h4>
+              <p>3-bed room with a common bathroom and shared amenities.</p>
+              <div class="price">₹6,500</div>
+            </div>
+          </div>
+
+          <div class="room-card">
+            <div class="room-info">
+              <h4>4-Share Non-AC</h4>
+              <p>4-bed room with a common bathroom and basic facilities.</p>
+              <div class="price">₹6,000</div>
+            </div>
+          </div>
+
+          <div class="room-card">
+            <div class="room-info">
+              <h4>Private AC</h4>
+              <p>
+                Single or double occupancy with AC, ensuite bathroom, and modern
+                amenities.
+              </p>
+              <div class="price">₹9,000</div>
+            </div>
+          </div>
+
+          <div class="room-card">
+            <div class="room-info">
+              <h4>2-Share AC</h4>
+              <p>
+                2-bed room with AC and shared bathroom facilities, ideal for
+                couples or friends.
+              </p>
+              <div class="price">₹8,000</div>
+            </div>
+          </div>
+
+          <div class="room-card">
+            <div class="room-info">
+              <h4>3-Share AC</h4>
+              <p>
+                3-bed room with AC and common bathroom, suitable for small
+                groups.
+              </p>
+              <div class="price">₹7,000</div>
+            </div>
+          </div>
+
+          <div class="room-card">
+            <div class="room-info">
+              <h4>4-Share AC</h4>
+              <p>
+                4-bed room with AC and shared bathroom, perfect for
+                budget-friendly stay.
+              </p>
+              <div class="price">₹6,500</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- MESS MENU -->
+      <section class="block" id="menu">
+        <h2>Mess Menu</h2>
+        <div class="menu-tabs">
+          <div class="menu-tab active" onclick="switchMenu('veg')">Veg</div>
+          <div class="menu-tab" onclick="switchMenu('nonveg')">Non-Veg</div>
+          <div class="menu-tab" onclick="switchMenu('specials')">Specials</div>
+        </div>
+        <div class="menu-grid" id="menu-items">
+          <!-- Veg -->
+          <div class="dish veg">
+            <img src="/static/virteehostel/breakfast.jpg" alt="Paneer Masala" />
+            <h5>Breakfast</h5>
+            <!-- <p></p> -->
+          </div>
+          <div class="dish veg">
+            <img src="/static/virteehostel/lunch1.jpg" alt="Idli" />
+            <h5>Lunch</h5>
+          </div>
+          <div class="dish veg">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO4C-2qFJDctQSPedqlkpOHKXMhozvayUrKw&s"
+              alt="Mixed Veg"
+            />
+            <h5>Mixed Vegetable</h5>
+            <p></p>
+          </div>
+
+          <!-- Non-Veg -->
+          <div class="dish nonveg" style="display: none">
+            <img src="/static/saidarbar/breakfast .jpg" alt="Chicken Curry" />
+            <h5>Break Sunday</h5>
+            <p></p>
+          </div>
+          <div class="dish nonveg" style="display: none">
+            <img src="/static/saidarbar/nonveg2.png" alt="Fish Fry" />
+            <h5>Lunch sunday</h5>
+            <p></p>
+          </div>
+          <div class="dish nonveg" style="display: none">
+            <img src="/static/saidarbar/nonveg1.png" alt="Fish Fry" />
+            <h5>Dinner sunday</h5>
+            <p></p>
+          </div>
+
+          <!-- Specials -->
+          <div class="dish specials" style="display: none">
+            <img
+              src="data:image/jpeg;base64,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"
+              alt="Biryani"
+            />
+            <h5>Chicken Biryani</h5>
+            <p>Special Biryani on weekends</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feedback -->
+    <section class="container" id="feedback">
+      <div class="feedback-section fade-in">
+        <h2>💬 Student Feedback</h2>
+
+        <div class="rating" id="ratingStars">
+          <span data-value="1">★</span>
+          <span data-value="2">★</span>
+          <span data-value="3">★</span>
+          <span data-value="4">★</span>
+          <span data-value="5">★</span>
+        </div>
+
+        <textarea
+          id="feedbackInput"
+          class="feedback-input"
+          rows="4"
+          placeholder="Share your experience with Sai Darbar Hostel..."
+        ></textarea>
+
+        <div class="feedback-buttons">
+          <button class="btn" onclick="submitFeedback()">
+            Submit Feedback
+          </button>
+          <a href="{{ url_for('login', next_hostel='Sai Darbar Hostel') }}">
+          <button
+            class="btn"
+            onclick="showRegistration()"
+            style="background: linear-gradient(90deg, #059669, #047857)"
+            
+          >
+            Student Registration
+          </button>
+          </a>
+        </div>
+
+        <div class="feedback-list" id="feedbackList">
+          <!-- Sample feedback items -->
+          <div class="feedback-item">
+            <div class="feedback-avatar">A</div>
+            <div class="feedback-content">
+              <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
+              <div class="feedback-text">
+               My experience at the hostel has been extremely positive. Right from the beginning of my college life to the very end, the hostel provided a safe, comfortable, and homely environment. The warden was always approachable and supportive, and her assurance truly helped me settle in without any worries. Being one of the first hostel inmates, I always felt a personal touch in the way things were managed. I’m grateful for the care and smooth experience throughout my stay.
+              </div>
+              <div class="feedback-time">2 days ago</div>
+            </div>
+          </div>
+          <div class="feedback-item">
+            <div class="feedback-avatar">R</div>
+            <div class="feedback-content">
+              <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
+              <div class="feedback-text">
+               Great hostel! Very close to the college and other facilities are also nearby. Good homemade food is available. Security overall is good with warden being there for any concerns you might have. Near to the metro station as well
+              </div>
+              <div class="feedback-time">1 week ago</div>
+            </div>
+          </div>
+          <div class="feedback-item">
+            <div class="feedback-avatar">S</div>
+            <div class="feedback-content">
+              <div class="feedback-rating">⭐⭐⭐⭐</div>
+              <div class="feedback-text">
+              I had a wonderful experience. I found the warden and the head of the hostel to be very caring, taking personal care of each and every student in the hostel. They provide good quality food and ensure security. Overall, the management is excellent. The room sizes are adequate, and the number of students per room is reasonable. I am 100% satisfied with Vritee girls’ hostel system.♥️
+              </div>
+              <div class="feedback-time">2 weeks ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      function openModal() {
+        const modal = document.getElementById("contactModal");
+        modal.style.display = "flex";
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("contactModal");
+        modal.style.display = "none";
+      }
+
+      window.onclick = function (event) {
+        const modal = document.getElementById("contactModal");
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+      // Rating system
+      let selectedRating = 0;
+      const stars = document.querySelectorAll("#ratingStars span");
+
+      stars.forEach((star, index) => {
+        star.addEventListener("click", () => {
+          selectedRating = index + 1;
+          updateStarDisplay();
+        });
+
+        star.addEventListener("mouseover", () => {
+          highlightStars(index + 1);
+        });
+      });
+
+      document
+        .getElementById("ratingStars")
+        .addEventListener("mouseleave", () => {
+          updateStarDisplay();
+        });
+
+      function highlightStars(rating) {
+        stars.forEach((star, index) => {
+          if (index < rating) {
+            star.classList.add("active");
+          } else {
+            star.classList.remove("active");
+          }
+        });
+      }
+
+      function updateStarDisplay() {
+        highlightStars(selectedRating);
+      }
+
+      // Feedback submission
+      function submitFeedback() {
+        const feedbackText = document
+          .getElementById("feedbackInput")
+          .value.trim();
+
+        if (feedbackText === "") {
+          alert("Please enter your feedback!");
+          return;
+        }
+
+        if (selectedRating === 0) {
+          alert("Please select a star rating!");
+          return;
+        }
+
+        const feedbackList = document.getElementById("feedbackList");
+        const newFeedback = document.createElement("div");
+        newFeedback.className = "feedback-item";
+
+        const avatar = feedbackText.charAt(0).toUpperCase();
+        const starRating = "⭐".repeat(selectedRating);
+        const timeStamp = "Just now";
+
+        newFeedback.innerHTML = `
+          <div class="feedback-avatar">${avatar}</div>
+          <div class="feedback-content">
+            <div class="feedback-rating">${starRating}</div>
+            <div class="feedback-text">${feedbackText}</div>
+            <div class="feedback-time">${timeStamp}</div>
+          </div>
+        `;
+
+        feedbackList.insertBefore(newFeedback, feedbackList.firstChild);
+
+        // Reset form
+        document.getElementById("feedbackInput").value = "";
+        selectedRating = 0;
+        updateStarDisplay();
+
+        // Show success message
+        showToast("Thank you for your feedback!");
+      }
+
+      // Registration functionality
+      function showRegistration() {
+        showToast(
+          "Student registration portal will be available soon! Please contact the office for now."
+        );
+        window.location.href = "/login";
+      }
+
+      // Booking information
+      function showBookingInfo() {
+        showToast(
+          "For room booking, please call +91 9876543210 or visit our office during business hours."
+        );
+      }
+
+      // Toast notification
+      function showToast(message) {
+        const toast = document.createElement("div");
+        toast.style.cssText = `
+          position: fixed;
+          top: 100px;
+          right: 20px;
+          background: linear-gradient(90deg, #10b981, #059669);
+          color: white;
+          padding: 15px 25px;
+          border-radius: 10px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+          z-index: 10000;
+          animation: slideInRight 0.5s ease;
+          max-width: 300px;
+          font-weight: 500;
+        `;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.animation = "slideOutRight 0.5s ease";
+          setTimeout(() => {
+            document.body.removeChild(toast);
+          }, 500);
+        }, 3000);
+      }
+
+      // Add CSS for toast animations
+      const toastStyles = document.createElement("style");
+      toastStyles.textContent = `
+        @keyframes slideInRight {
+          from {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        @keyframes slideOutRight {
+          from {
+            transform: translateX(0);
+            opacity: 1;
+          }
+          to {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(toastStyles);
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Navbar scroll effect
+      let lastScrollTop = 0;
+      window.addEventListener("scroll", () => {
+        const navbar = document.querySelector(".navbar");
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+          navbar.style.transform = "translateY(-100%)";
+        } else {
+          navbar.style.transform = "translateY(0)";
+        }
+
+        // Add background opacity based on scroll
+        const opacity = Math.min(scrollTop / 100, 1);
+        navbar.style.background = `linear-gradient(90deg, rgba(59, 130, 246, ${
+          0.9 + opacity * 0.1
+        }), rgba(29, 78, 216, ${0.9 + opacity * 0.1}))`;
+
+        lastScrollTop = scrollTop;
+      });
+      function switchMenu(tab) {
+        document
+          .querySelectorAll(".menu-tab")
+          .forEach((t) => t.classList.remove("active"));
+        event.target.classList.add("active");
+        document
+          .querySelectorAll(".dish")
+          .forEach((d) => (d.style.display = "none"));
+        document
+          .querySelectorAll("." + tab)
+          .forEach((d) => (d.style.display = "block"));
+      }
+      
+    </script>
+  </body>
+</html>

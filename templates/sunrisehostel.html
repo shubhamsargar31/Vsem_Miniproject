@@ -384,6 +384,65 @@
         align-items: center;
         justify-content: center;
       }
+      .feedback-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        background: #fff;
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 15px;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+        animation: slideIn 0.5s ease;
+        border-left: 4px solid #3b82f6;
+      }
+
+      .feedback-avatar {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        color: white;
+        font-weight: 700;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 1.2rem;
+      }
+
+      .feedback-content {
+        flex: 1;
+      }
+
+      .feedback-rating {
+        color: #fbbf24;
+        margin-bottom: 8px;
+        font-size: 1.1rem;
+      }
+
+      .feedback-text {
+        color: #374151;
+        line-height: 1.6;
+      }
+
+      .feedback-time {
+        color: #9ca3af;
+        font-size: 0.8rem;
+        margin-top: 5px;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
 
       .feedback-item .text {
         flex: 1;
@@ -582,18 +641,49 @@
       <button id="submitFeedbackBtn" onclick="addFeedback()">
         Submit Feedback
       </button>
-      <button id="viewFeedbackBtn" onclick="viewFeedback()">
-        View Feedback
-      </button>
 
+ <a href="{{ url_for('login', next_hostel='Sunrise Hostel') }}">
       <button class="register-btn" onclick="addregisteration()">
         Student Register
       </button>
-
-      <!-- Feedback List -->
-      <div class="feedback-list" id="feedbackList"></div>
-    </div>
-
+</a>
+      <div class="feedback-list" id="feedbackList">
+          <!-- Sample feedback items -->
+          <div class="feedback-item">
+            <div class="feedback-avatar">A</div>
+            <div class="feedback-content">
+              <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
+              <div class="feedback-text">
+                Excellent hostel with great facilities! The food is amazing and
+                the study environment is perfect for academics. Highly
+                recommended!
+              </div>
+              <div class="feedback-time">2 days ago</div>
+            </div>
+          </div>
+          <div class="feedback-item">
+            <div class="feedback-avatar">R</div>
+            <div class="feedback-content">
+              <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
+              <div class="feedback-text">
+                Living here for 2 years now. The management is very supportive
+                and the community is like family. Great WiFi for online classes!
+              </div>
+              <div class="feedback-time">1 week ago</div>
+            </div>
+          </div>
+          <div class="feedback-item">
+            <div class="feedback-avatar">S</div>
+            <div class="feedback-content">
+              <div class="feedback-rating">⭐⭐⭐⭐</div>
+              <div class="feedback-text">
+                Clean rooms, good food, and excellent security. The gym
+                facilities are a bonus. Only wish the library had more books.
+              </div>
+              <div class="feedback-time">2 weeks ago</div>
+            </div>
+          </div>
+        </div>
     <script>
       function openModal() {
         document.getElementById("contactModal").style.display = "flex";

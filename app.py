@@ -1,4 +1,5 @@
 import os
+import json
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.utils import secure_filename
 from Database import db, User, Feedback, Student
@@ -16,15 +17,6 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 db.init_app(app)
-
-
-
-# HOSTEL_DETAILS = {
-#     "sunrisehostel": "Sunrise Hostel",
-#     "GreenValleyHostel": "Green Valley Hostel",
-#     "CityCentralHostel": "City Central Hostel",
-#     "EliteResidency": "Elite Residency"
-# }
 
 # ----------------- Create Tables -----------------
 with app.app_context():
@@ -56,7 +48,7 @@ def sunrisehostel():
 
         if "user" not in session:
             flash(" Please login to give feedback", "warning")
-            return redirect(url_for("login"))
+            return redirect(url_for("login", next_hostel="sunrisehostel"))
 
         if not feedback_text or not rating:
             flash(" Feedback and rating required!", "error")
@@ -72,28 +64,23 @@ def sunrisehostel():
     feedbacks = Feedback.query.order_by(Feedback.timestamp.desc()).all()
     return render_template("sunrisehostel.html", feedbacks=feedbacks)
 
-@app.route("/GreenValleyHostel")
-def green_valley():
-    return render_template("GreenValleyHostel.html")
 
 @app.route("/vritteGirlshostel")
 def vritteGirlshostel():
     return render_template("vritteGirlshostel.html")
 
+@app.route("/saiDarbar")
+def saidarbar():
+    return render_template("SaiDarbar.html")
 @app.route("/RBoyshostel")
 def RBoyshostel():
     return render_template("RBoyshostel.html")
 
-# @app.route("/RBoyshostel")
-# def RBoyshostel():
-#     return render_template("RBoyshostel.html")
-
-
 # ----------------- Student Registration -----------------
 @app.route("/registration/<hostel_name>", methods=["GET", "POST"])
 def registration(hostel_name):
-    # display_name = HOSTEL_DETAILS.get(hostel_name, hostel_name)
-    
+    display_name = hostel_name.replace("_", " ").title()  
+
     if request.method == "POST":
         try:
             file = request.files.get("college_id_photo")
@@ -117,7 +104,7 @@ def registration(hostel_name):
                 ac_room=request.form.get("ac_room"),
                 gym=request.form.get("gym"),
                 address=request.form.get("address"),
-                hostel_name=hostel_name,
+                hostel_name=display_name,
                 college_id_photo=filename,
             )
             db.session.add(student)
@@ -131,67 +118,40 @@ def registration(hostel_name):
             flash(f"⚠️ Error: {str(e)}", "error")
             return redirect(url_for("registration", hostel_name=hostel_name))
 
-    return render_template("registration.html", hostel_name=hostel_name, display_name=display_name, success=False)
-
-
-
-# ----------------- Signup -----------------
-@app.route("/signup", methods=["GET", "POST"])
-def signup():
-    if request.method == "POST":
-        fullname = request.form["fullname"]
-        email = request.form["email"]
-        password = request.form["password"]
-        cpassword = request.form["cpassword"]
-
-        if password != cpassword:
-            flash(" Passwords do not match", "error")
-            return redirect(url_for("signup"))
-
-        existing_user = User.query.filter_by(email=email).first()
-        if existing_user:
-            flash(" Email already exists", "error")
-            return redirect(url_for("signup"))
-
-        new_user = User(fullname=fullname, email=email)
-        new_user.set_password(password)
-
-        db.session.add(new_user)
-        db.session.commit()
-
-        flash("Signup Successful! Please Login", "success")
-        return redirect(url_for("login"))
-
-    return render_template("signup.html")
-
+    return render_template("registration.html", hostel_name=hostel_name, display_name=display_name)
 # ----------------- Login -----------------
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    next_hostel = request.args.get("next_hostel")
+
     if request.method == "POST":
-        email = request.form.get("email") 
+        email = request.form.get("email")
         password = request.form.get("password")
 
         user = User.query.filter_by(email=email).first()
 
         if not user:
             flash("⚠️ Email not registered! Please signup first.", "error")
-            return redirect(url_for("login"))
+            return redirect(url_for("signup"))
 
         if user.check_password(password):
             session["user"] = user.email
-            return redirect(url_for("registration", hostel_name="Default"))
+
+            if next_hostel:
+                return redirect(url_for("registration", hostel_name=next_hostel))
+            else:
+                return redirect(url_for("first"))  
         else:
-            flash(" Incorrect Password. Try again.", "error")
+            flash("Incorrect Password. Try again.", "error")
             return redirect(url_for("login"))
 
-    return render_template("login.html")
-
+    return render_template("login.html", next_hostel=next_hostel)
 
 # ----------------- Logout -----------------
 @app.route("/logout")
 def logout():
     session.pop("user", None)
-    flash("✅ Logged out successfully", "info")
+    flash(" Logged out successfully", "info")
     return redirect(url_for("login"))
 
 # ----------------- Main -----------------

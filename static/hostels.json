@@ -7,8 +7,9 @@
     "img": "/static/virteehostel/image.png",
    "hostel_name":"City Central Hostel",
    "page":"vritteGirlshostel",
-   "rooms": ["Single Room", "Double Sharing", "Triple Sharing"],
-    "types": ["AC", "Non-AC"]
+   "rooms": ["Single Room", "Double Sharing"],
+    "types": ["AC", "Non-AC"],
+    "gym": true
   },
   {
     "id":"2",
@@ -17,7 +18,10 @@
     "type": "Boys",
     "img": "/static/Rboys/RBoys.png",
    "hostel_name":"R Boys Hostel ",
-   "page":"RBoyshostel"
+   "page":"RBoyshostel",
+   "rooms": ["Single Room", "Double Sharing","Triple Shearing"],
+    "types": ["AC", "Non-AC"],
+    "gym":false
   },
   {
     "id":"3",
@@ -26,7 +30,9 @@
     "type": "Girls",
     "img": "/static/sunrise.jpg",
    "hostel_name":"Sunrise Hostel",
-   "page":"sunrisehostel"
+   "page":"sunrisehostel",
+   "rooms": ["Single Room", "Double Sharing","Triple Shearing"],
+    "types": ["AC", "Non-AC"]
   },
   {
     "id":"4",
@@ -35,15 +41,18 @@
     "type": "Boys",
     "img": "/static/deccanspace/decanspace.png",
    "hostel_name":"Deccan Sapace Hostel ",
-   "page":"Deccan"
+   "page":"Deccan",
+   "rooms": ["Single Room", "Double Sharing","Triple Shearing"],
+    "types": ["AC", "Non-AC"]
   },
   {
-    "id":"5",
-    "name": "S B Phule Hostel ",
+     "id":"5",
+    "name": "Sai Darbar Boys Hostel",
     "mess": "Both",
-    "type": "Girls",
-    "img": "/static/sbphule/sbphule.png",
-   "hostel_name":"S B Phule Hostel ",
-   "page":"sbphule"
+    "type": "Boys",
+    "img": "/static/saidarbar/hostel.jpg",
+   "hostel_name":"saiDarbar Boys Hostel ",
+   "page":"saiDarbar"
+
   }
 ]
