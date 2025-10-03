@@ -35,9 +35,10 @@ def first():
 def deccan():
     return render_template("deccanspace.html")
 
-@app.route("/sbphule")
-def sbphule():
-    return render_template("sbphule.html")
+@app.route("/jbhostel")
+def jbhostel():
+    return render_template("jbhostel.html")
+
 
 # ----------------- Hostel Pages -----------------
 @app.route("/sunrisehostel", methods=["GET", "POST"])
@@ -79,8 +80,7 @@ def RBoyshostel():
 # ----------------- Student Registration -----------------
 @app.route("/registration/<hostel_name>", methods=["GET", "POST"])
 def registration(hostel_name):
-    display_name = hostel_name.replace("_", " ").title()  
-
+    display_name = hostel_name.replace("_", " ").title()
     if request.method == "POST":
         try:
             file = request.files.get("college_id_photo")
@@ -90,6 +90,7 @@ def registration(hostel_name):
                 file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
 
             student = Student(
+                hostel_name=request.form.get("hostelName"),
                 surname=request.form.get("surname"),
                 firstname=request.form.get("firstname"),
                 middlename=request.form.get("middlename"),
@@ -97,32 +98,37 @@ def registration(hostel_name):
                 phone=request.form.get("phone"),
                 gender=request.form.get("gender"),
                 dob=request.form.get("dob"),
+                address=request.form.get("address"),
+
+                parent_surname=request.form.get("parent_surname"),
+                parent_firstname=request.form.get("parent_firstname"),
+                parent_middlename=request.form.get("parent_middlename"),
+                parent_phone=request.form.get("parent_phone"),
+                parent_email=request.form.get("parent_email"),
+
                 education=request.form.get("education"),
                 college_name=request.form.get("college_name"),
                 aadhar=request.form.get("aadhar"),
+                college_id_photo=filename,
+
                 room=request.form.get("room"),
                 ac_room=request.form.get("ac_room"),
-                gym=request.form.get("gym"),
-                address=request.form.get("address"),
-                hostel_name=display_name,
-                college_id_photo=filename,
+                gym=request.form.get("gym")
             )
             db.session.add(student)
             db.session.commit()
-
-            flash(f" Registered successfully in {display_name}", "success")
-            return redirect(url_for("home"))
-
+            # flash(f"✅ Registered successfully in {display_name}", "success")
+            return redirect(url_for(hostel_name=hostel_name))
         except Exception as e:
             db.session.rollback()
             flash(f"⚠️ Error: {str(e)}", "error")
             return redirect(url_for("registration", hostel_name=hostel_name))
+    return render_template("registration.html", display_name=display_name, hostel_name=hostel_name)
 
-    return render_template("registration.html", hostel_name=hostel_name, display_name=display_name)
 # ----------------- Login -----------------
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    next_hostel = request.args.get("next_hostel")
+    next_hostel = request.form.get("next_hostel") or request.args.get("next_hostel")
 
     if request.method == "POST":
         email = request.form.get("email")
@@ -140,12 +146,13 @@ def login():
             if next_hostel:
                 return redirect(url_for("registration", hostel_name=next_hostel))
             else:
-                return redirect(url_for("first"))  
+                return redirect(url_for("first")) 
         else:
             flash("Incorrect Password. Try again.", "error")
-            return redirect(url_for("login"))
+            return redirect(url_for("login", next_hostel=next_hostel))
 
     return render_template("login.html", next_hostel=next_hostel)
+    
 
 # ----------------- Logout -----------------
 @app.route("/logout")

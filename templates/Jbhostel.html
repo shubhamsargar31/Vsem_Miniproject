@@ -1,0 +1,2871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>
+        /* ===== CSS VARIABLES ===== */
+:root {
+  /* Colors */
+  --primary-color: #ff6b6b;
+  --primary-dark: #f03e3e;
+  --secondary-color: #4ecdc4;
+  --accent-color: #45b7aa;
+  --text-dark: #2c3e50;
+  --text-light: #6c757d;
+  --text-muted: #adb5bd;
+  --white: #ffffff;
+  --light-gray: #f8f9fa;
+  --border-light: #dee2e6;
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.15);
+  --shadow-dark: rgba(0, 0, 0, 0.3);
+  --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  --gradient-secondary: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+  
+  /* Typography */
+  --font-primary: 'Poppins', sans-serif;
+  --font-secondary: 'Inter', sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+  --font-size-4xl: 2.5rem;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Z-index */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal: 1040;
+  --z-popover: 1050;
+  --z-tooltip: 1060;
+}
+
+/* ===== RESET & BASE STYLES ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.6;
+  color: var(--text-dark);
+  background-color: var(--white);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-normal);
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: var(--transition-normal);
+}
+
+ul {
+  list-style: none;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.section {
+  padding: var(--spacing-3xl) 0;
+}
+
+.section:nth-child(even) {
+  background-color: var(--light-gray);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--spacing-3xl);
+}
+
+.section-title {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-md);
+  position: relative;
+  display: inline-block;
+}
+
+.section-divider {
+  width: 80px;
+  height: 4px;
+  background: var(--gradient-primary);
+  margin: 0 auto var(--spacing-lg);
+  border-radius: var(--radius-full);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-divider::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.section-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left var(--transition-slow);
+  z-index: -1;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn-primary {
+  background: var(--gradient-primary);
+  color: var(--white);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+  background: var(--primary-color);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-dark);
+  border: 2px solid var(--border-light);
+}
+
+.btn-outline:hover {
+  background: var(--text-dark);
+  color: var(--white);
+  border-color: var(--text-dark);
+  transform: translateY(-2px);
+}
+
+.btn-full {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ===== LOADING SCREEN ===== */
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+  opacity: 1;
+  visibility: visible;
+  transition: all var(--transition-slow);
+}
+
+#loading-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader {
+  text-align: center;
+}
+
+.loader-text {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-lg);
+  animation: pulse 2s infinite;
+}
+
+.loader-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--border-light);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== BACK TO TOP BUTTON ===== */
+.back-to-top {
+  position: fixed;
+  bottom: var(--spacing-xl);
+  right: var(--spacing-xl);
+  width: 50px;
+  height: 50px;
+  background: var(--gradient-primary);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+  z-index: var(--z-fixed);
+  transform: translateY(100px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+}
+
+.back-to-top.visible {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.back-to-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+}
+
+/* ===== HEADER & NAVIGATION ===== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--white);
+  box-shadow: 0 2px 20px var(--shadow-light);
+  z-index: var(--z-fixed);
+  transition: all var(--transition-normal);
+}
+
+.header.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.navbar {
+  padding: var(--spacing-md) 0;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo h2 {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-color);
+  text-shadow: 0 2px 4px rgba(255, 107, 107, 0.2);
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xl);
+}
+
+.nav-link {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-dark);
+  position: relative;
+  transition: var(--transition-normal);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  transition: width var(--transition-normal);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary-color);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.nav-hamburger .bar {
+  width: 25px;
+  height: 3px;
+  background: var(--text-dark);
+  border-radius: var(--radius-full);
+  transition: var(--transition-normal);
+}
+
+.nav-hamburger.active .bar:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.nav-hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-hamburger.active .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+              url('https://lh3.googleusercontent.com/p/AF1QipMXyNTOwfuZRw1mzjqF3odvUiAB70mDy5aiLaZ4=w141-h176-n-k-no-nu') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+  animation: gradientShift 6s ease-in-out infinite alternate;
+}
+
+@keyframes gradientShift {
+  0% { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 2;
+  max-width: 800px;
+  padding: 0 var(--spacing-lg);
+}
+
+.hero-title {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--white);
+  margin-bottom: var(--spacing-lg);
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero-title-line {
+  display: inline-block;
+  margin: 0 var(--spacing-md);
+  animation: fadeInUp 1s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.hero-title-line:nth-child(1) { animation-delay: 0.2s; }
+.hero-title-line:nth-child(2) { animation-delay: 0.4s; }
+.hero-title-line:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-subtitle {
+  font-size: var(--font-size-xl);
+  color: var(--white);
+  margin-bottom: var(--spacing-2xl);
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.8s forwards;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: var(--spacing-lg);
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 1s forwards;
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: var(--spacing-2xl);
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: var(--white);
+  animation: bounce 2s infinite;
+}
+
+.scroll-mouse {
+  width: 24px;
+  height: 40px;
+  border: 2px solid var(--white);
+  border-radius: 20px;
+  margin: 0 auto var(--spacing-sm);
+  position: relative;
+}
+
+.scroll-wheel {
+  width: 4px;
+  height: 8px;
+  background: var(--white);
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scroll 1.5s infinite;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(-50%) translateY(0); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateX(-50%) translateY(16px); opacity: 0; }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+  40% { transform: translateX(-50%) translateY(-10px); }
+  60% { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* ===== ABOUT SECTION ===== */
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-3xl);
+  align-items: center;
+}
+
+.about-description {
+  font-size: var(--font-size-lg);
+  color: var(--text-light);
+  margin-bottom: var(--spacing-2xl);
+  line-height: 1.8;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-lg);
+}
+
+.stat-item {
+  text-align: center;
+  padding: var(--spacing-lg);
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 4px 15px var(--shadow-light);
+  transition: var(--transition-normal);
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px var(--shadow-medium);
+}
+
+.stat-number {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-light);
+  font-weight: var(--font-weight-medium);
+}
+
+.about-image {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 10px 30px var(--shadow-medium);
+}
+
+.about-image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  transition: var(--transition-slow);
+}
+
+.about-image:hover img {
+  transform: scale(1.05);
+}
+
+.about-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(255, 107, 107, 0.8), rgba(78, 205, 196, 0.8));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition-normal);
+}
+
+.about-image:hover .about-image-overlay {
+  opacity: 1;
+}
+
+.about-image-overlay i {
+  font-size: var(--font-size-4xl);
+  color: var(--white);
+}
+
+/* ===== FACILITIES SECTION ===== */
+.facilities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.facility-card {
+  background: var(--white);
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-xl);
+  text-align: center;
+  box-shadow: 0 4px 15px var(--shadow-light);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.facility-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 107, 107, 0.05), transparent);
+  transition: left var(--transition-slow);
+}
+
+.facility-card:hover::before {
+  left: 100%;
+}
+
+.facility-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px var(--shadow-medium);
+}
+
+.facility-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--spacing-lg);
+  transition: var(--transition-normal);
+}
+
+.facility-card:hover .facility-icon {
+  transform: rotateY(360deg);
+}
+
+.facility-icon i {
+  font-size: var(--font-size-2xl);
+  color: var(--white);
+}
+
+.facility-title {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-md);
+}
+
+.facility-description {
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+/* ===== ROOMS SECTION ===== */
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: var(--spacing-3xl);
+}
+
+.room-card {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 8px 25px var(--shadow-light);
+  transition: var(--transition-normal);
+}
+
+.room-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px var(--shadow-medium);
+}
+
+.room-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.room-image img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: var(--transition-slow);
+}
+
+.room-card:hover .room-image img {
+  transform: scale(1.1);
+}
+
+.room-overlay {
+  position: absolute;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+}
+
+.room-price {
+  background: var(--gradient-primary);
+  color: var(--white);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.room-content {
+  padding: var(--spacing-2xl);
+}
+
+.room-title {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-md);
+}
+
+.room-description {
+  color: var(--text-light);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.7;
+}
+
+.room-amenities {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xl);
+}
+
+.room-amenities li {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--text-light);
+  font-size: var(--font-size-sm);
+}
+
+.room-amenities i {
+  color: var(--primary-color);
+  font-size: var(--font-size-base);
+}
+
+/* ===== GALLERY SECTION ===== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 8px 25px var(--shadow-light);
+  cursor: pointer;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: var(--transition-slow);
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(255, 107, 107, 0.9), rgba(78, 205, 196, 0.9));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition-normal);
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+.gallery-content {
+  text-align: center;
+  color: var(--white);
+}
+
+.gallery-content i {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.gallery-content p {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ===== MENU SECTION ===== */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-2xl);
+}
+
+.menu-card {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 8px 25px var(--shadow-light);
+  transition: var(--transition-normal);
+}
+
+.menu-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px var(--shadow-medium);
+}
+
+.menu-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: var(--transition-slow);
+}
+
+.menu-card:hover .menu-image img {
+  transform: scale(1.05);
+}
+
+.menu-time {
+  position: absolute;
+  top: var(--spacing-md);
+  left: var(--spacing-md);
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--white);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.menu-content {
+  padding: var(--spacing-xl);
+}
+
+.menu-title {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-md);
+}
+
+.menu-description {
+  color: var(--text-light);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.7;
+}
+
+.menu-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.menu-tag {
+  background: var(--light-gray);
+  color: var(--text-dark);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: var(--transition-normal);
+}
+
+.menu-tag:hover {
+  background: var(--primary-color);
+  color: var(--white);
+  transform: scale(1.05);
+}
+
+/* ===== REVIEWS SECTION ===== */
+.reviews-slider {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.review-card {
+  background: var(--white);
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 8px 25px var(--shadow-light);
+  text-align: center;
+  display: none;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.review-card.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.review-stars {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-lg);
+}
+
+.review-stars i {
+  color: #ffc107;
+  font-size: var(--font-size-lg);
+}
+
+.review-text {
+  font-size: var(--font-size-lg);
+  color: var(--text-dark);
+  font-style: italic;
+  line-height: 1.8;
+  margin-bottom: var(--spacing-xl);
+  position: relative;
+}
+
+.review-text::before,
+.review-text::after {
+  content: '"';
+  font-size: var(--font-size-4xl);
+  color: var(--primary-color);
+  font-family: Georgia, serif;
+  position: absolute;
+  top: -10px;
+}
+
+.review-text::before {
+  left: -20px;
+}
+
+.review-text::after {
+  right: -20px;
+}
+
+.review-author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+.author-name {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-xs);
+}
+
+.author-role {
+  color: var(--text-light);
+  font-size: var(--font-size-sm);
+}
+
+.review-navigation {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+}
+
+.review-btn {
+  width: 50px;
+  height: 50px;
+  background: var(--white);
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-normal);
+  box-shadow: 0 4px 15px var(--shadow-light);
+}
+
+.review-btn:hover {
+  background: var(--primary-color);
+  color: var(--white);
+  transform: scale(1.1);
+}
+
+/* ===== CONTACT SECTION ===== */
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-3xl);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.contact-card {
+  background: var(--white);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 4px 15px var(--shadow-light);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  transition: var(--transition-normal);
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px var(--shadow-medium);
+}
+
+.contact-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-icon i {
+  font-size: var(--font-size-xl);
+  color: var(--white);
+}
+
+.contact-details h4 {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-xs);
+}
+
+.contact-details p {
+  color: var(--text-light);
+  margin-bottom: var(--spacing-sm);
+}
+
+.contact-link {
+  color: var(--primary-color);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  text-decoration: underline;
+  transition: var(--transition-normal);
+}
+
+.contact-link:hover {
+  color: var(--primary-dark);
+}
+
+/* ===== CONTACT FORM ===== */
+.contact-form {
+  background: var(--white);
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 8px 25px var(--shadow-light);
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: var(--spacing-xl);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: var(--spacing-lg) var(--spacing-md);
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  background: var(--white);
+  transition: var(--transition-normal);
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.form-group label {
+  position: absolute;
+  top: 50%;
+  left: var(--spacing-md);
+  transform: translateY(-50%);
+  color: var(--text-light);
+  font-size: var(--font-size-base);
+  transition: var(--transition-normal);
+  pointer-events: none;
+  background: var(--white);
+  padding: 0 var(--spacing-xs);
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group select:focus + label,
+.form-group select:not([value=""]) + label,
+.form-group textarea:focus + label,
+.form-group textarea:not(:placeholder-shown) + label {
+  top: 0;
+  left: var(--spacing-md);
+  transform: translateY(-50%);
+  font-size: var(--font-size-sm);
+  color: var(--primary-color);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--text-dark);
+  color: var(--white);
+  padding: var(--spacing-3xl) 0 var(--spacing-xl);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-2xl);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.footer-section h3,
+.footer-section h4 {
+  font-family: var(--font-primary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.footer-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-color);
+}
+
+.footer-subtitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--white);
+}
+
+.footer-description {
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-lg);
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.social-link {
+  width: 40px;
+  height: 40px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-normal);
+}
+
+.social-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+}
+
+.social-link i {
+  color: var(--white);
+  font-size: var(--font-size-base);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  transition: var(--transition-normal);
+}
+
+.footer-links a:hover {
+  color: var(--primary-color);
+  padding-left: var(--spacing-xs);
+}
+
+.footer-contact,
+.footer-hours {
+  color: var(--text-muted);
+}
+
+.footer-contact p,
+.footer-hours p {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-contact i {
+  color: var(--primary-color);
+  width: 20px;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+}
+
+.footer-bottom p {
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-bottom i {
+  color: var(--primary-color);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+  
+  .hero-title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+  }
+  
+  .about-image {
+    order: -1;
+  }
+  
+  .contact-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .rooms-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background: var(--white);
+    box-shadow: 0 4px 20px var(--shadow-light);
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--spacing-2xl);
+    transition: left var(--transition-normal);
+    z-index: var(--z-dropdown);
+  }
+  
+  .nav-menu.active {
+    left: 0;
+  }
+  
+  .nav-hamburger {
+    display: flex;
+  }
+  
+  .hero {
+    height: 80vh;
+  }
+  
+  .hero-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .section-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .facilities-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .about-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .review-text::before,
+  .review-text::after {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: var(--spacing-2xl) 0;
+  }
+  
+  .hero-title-line {
+    display: block;
+    margin: var(--spacing-xs) 0;
+  }
+  
+  .facility-card,
+  .room-card,
+  .menu-card,
+  .contact-form {
+    padding: var(--spacing-lg);
+  }
+  
+  .rooms-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .room-card {
+    min-width: unset;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .back-to-top {
+    bottom: var(--spacing-lg);
+    right: var(--spacing-lg);
+    width: 45px;
+    height: 45px;
+  }
+}
+
+/* ===== AOS ANIMATIONS OVERRIDE ===== */
+[data-aos] {
+  transition-duration: 0.8s;
+  transition-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* ===== CUSTOM SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* ===== SELECTION STYLING ===== */
+::selection {
+  background: rgba(255, 107, 107, 0.2);
+  color: var(--text-dark);
+}
+
+/* ===== FOCUS STYLES ===== */
+*:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JP Women Hostel in New Panvel - Safe, comfortable, and affordable accommodation for working women and students.">
+    <meta name="keywords" content="women hostel, New Panvel, accommodation, working women, students, safe, affordable">
+    <title>JP Women Hostel - Safe & Comfortable Accommodation in New Panvel</title>
+    
+    <!-- Preconnect for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="loader-text">JP Women Hostel</div>
+            <div class="loader-spinner"></div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h2>JP Women Hostel</h2>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#facilities" class="nav-link">Facilities</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#rooms" class="nav-link">Rooms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#gallery" class="nav-link">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#menu" class="nav-link">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#reviews" class="nav-link">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+                <div class="nav-hamburger" id="nav-hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="hero-title-line">Safe</span>
+                <span class="hero-title-line">Comfortable</span>
+                <span class="hero-title-line">Affordable</span>
+            </h1>
+            <p class="hero-subtitle">Your home away from home in New Panvel</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">Book Now</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <p>Scroll down</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Us</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-description">
+                        JP Women Hostel in New Panvel offers safe and budget-friendly accommodation 
+                        for working women and girl students. With a focus on security, hygiene, and 
+                        comfort, our hostel ensures a homely atmosphere where residents can focus on 
+                        studies and career without worries.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="50">0</div>
+                            <div class="stat-label">Happy Residents</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="5">0</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="24">0</div>
+                            <div class="stat-label">Hour Security</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipMXyNTOwfuZRw1mzjqF3odvUiAB70mDy5aiLaZ4=w141-h176-n-k-no-nu" alt="JP Women Hostel Building">
+                    <div class="about-image-overlay">
+                        <i class="fas fa-home"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities Section -->
+    <section id="facilities" class="facilities section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Facilities</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Everything you need for comfortable living</p>
+            </div>
+            <div class="facilities-grid">
+                <div class="facility-card" data-aos="fade-up">
+                    <div class="facility-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="facility-title">24/7 Security</h3>
+                    <p class="facility-description">CCTV surveillance and caretakers ensure complete safety for all residents.</p>
+                </div>
+                <div class="facility-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="facility-icon">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <h3 class="facility-title">Study Friendly</h3>
+                    <p class="facility-description">Quiet, clean rooms with study tables and high-speed Wi-Fi access.</p>
+                </div>
+                <div class="facility-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="facility-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 class="facility-title">Nutritious Meals</h3>
+                    <p class="facility-description">Freshly prepared meals served daily with hygiene as our top priority.</p>
+                </div>
+                <div class="facility-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="facility-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3 class="facility-title">Free Wi-Fi</h3>
+                    <p class="facility-description">High-speed internet connectivity for studies and work needs.</p>
+                </div>
+                <div class="facility-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="facility-icon">
+                        <i class="fas fa-washing-machine"></i>
+                    </div>
+                    <h3 class="facility-title">Laundry Service</h3>
+                    <p class="facility-description">Convenient laundry facilities available for all residents.</p>
+                </div>
+                <div class="facility-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="facility-icon">
+                        <i class="fas fa-parking"></i>
+                    </div>
+                    <h3 class="facility-title">Parking Space</h3>
+                    <p class="facility-description">Safe and secure parking area for two-wheelers and bicycles.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section id="rooms" class="rooms section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Rooms</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Choose from our comfortable accommodation options</p>
+            </div>
+            <div class="rooms-grid">
+                <div class="room-card" data-aos="fade-right">
+                    <div class="room-image">
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipOmXVF89RdW91d5mejwP3Z_ai2GaoozaUUZGOL9=w141-h141-n-k-no-nu" alt="Shared Room">
+                        <div class="room-overlay">
+                            <div class="room-price">₹8,000/month</div>
+                        </div>
+                    </div>
+                    <div class="room-content">
+                        <h3 class="room-title">Shared Rooms</h3>
+                        <p class="room-description">Spacious rooms with 2–3 beds, individual cupboards, and excellent ventilation.</p>
+                        <ul class="room-amenities">
+                            <li><i class="fas fa-bed"></i> 2-3 Beds</li>
+                            <li><i class="fas fa-archive"></i> Personal Cupboard</li>
+                            <li><i class="fas fa-fan"></i> Fan & Lighting</li>
+                            <li><i class="fas fa-wifi"></i> Free Wi-Fi</li>
+                        </ul>
+                        <button class="btn btn-outline">View Details</button>
+                    </div>
+                </div>
+                <div class="room-card" data-aos="fade-left">
+                    <div class="room-image">
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipOIikX_w0UZE-Ov3W5pfULq03gdSpAHaCsxYQ0i=w141-h235-n-k-no-nu" alt="Single Room">
+                        <div class="room-overlay">
+                            <div class="room-price">₹12,000/month</div>
+                        </div>
+                    </div>
+                    <div class="room-content">
+                        <h3 class="room-title">Single Rooms</h3>
+                        <p class="room-description">Private rooms with all modern facilities, perfect for working professionals.</p>
+                        <ul class="room-amenities">
+                            <li><i class="fas fa-bed"></i> Single Bed</li>
+                            <li><i class="fas fa-archive"></i> Large Cupboard</li>
+                            <li><i class="fas fa-desk"></i> Study Table</li>
+                            <li><i class="fas fa-bath"></i> Attached Bathroom</li>
+                        </ul>
+                        <button class="btn btn-outline">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Gallery</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Take a virtual tour of our facilities</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-aos="zoom-in">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipOV8DEuFQhQ9sM7I-J0x0ZCtIIv_6sgXxQZMZQ5=s680-w680-h510-rw" alt="Hostel Building">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <i class="fas fa-expand"></i>
+                            <p>Hostel Building</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipNylSQ9BUmbHSfJZF_B8UKA_SY-vAQ5BcevGi3T=w141-h118-n-k-no-nu" alt="Room Interior">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <i class="fas fa-expand"></i>
+                            <p>Room Interior</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipObd2chJceFgk5YZb7g6C-Ouyk8AMnMT8To8fUo=w141-h101-n-k-no-nu" alt="Comfortable Beds">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <i class="fas fa-expand"></i>
+                            <p>Comfortable Beds</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Daily Menu</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Healthy and delicious meals prepared with care</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card" data-aos="fade-up">
+                    <div class="menu-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-r-CtPI6Rm66cs100IbIpb5ZYu9o1FFpKNw&s" alt="Breakfast">
+                        <div class="menu-time">7:00 - 9:00 AM</div>
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">Veg Breakfast</h3>
+                        <p class="menu-description">Upma, Poha, Idli-Sambar, and Paratha options served fresh every morning.</p>
+                        <div class="menu-items">
+                            <span class="menu-tag">Upma</span>
+                            <span class="menu-tag">Poha</span>
+                            <span class="menu-tag">Idli</span>
+                            <span class="menu-tag">Paratha</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="menu-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8IyYtMLo20Q60OxKsf0kTH0q4XJaWxENTeQ&s" alt="Lunch">
+                        <div class="menu-time">12:00 - 2:00 PM</div>
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">Veg Lunch</h3>
+                        <p class="menu-description">Rice, Dal, 2 Veg Curries, Roti, Salad – wholesome and healthy meals.</p>
+                        <div class="menu-items">
+                            <span class="menu-tag">Rice</span>
+                            <span class="menu-tag">Dal</span>
+                            <span class="menu-tag">Vegetables</span>
+                            <span class="menu-tag">Roti</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="menu-image">
+                        <img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2021/07/chicken-curry-recipe.jpg" alt="Dinner">
+                        <div class="menu-time">7:00 - 9:00 PM</div>
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">Non-Veg Dinner</h3>
+                        <p class="menu-description">Chicken Curry, Egg Curry, or Fish Fry with Rice/Roti served twice a week.</p>
+                        <div class="menu-items">
+                            <span class="menu-tag">Chicken</span>
+                            <span class="menu-tag">Fish</span>
+                            <span class="menu-tag">Eggs</span>
+                            <span class="menu-tag">Rice</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Our Residents Say</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="reviews-slider">
+                <div class="review-card active" data-aos="fade-up">
+                    <div class="review-content">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"Safe environment and homely meals! The staff is very supportive and the facilities are excellent. I feel completely secure here."</p>
+                        <div class="review-author">
+                            <div class="author-info">
+                                <h4 class="author-name">Priya Sharma</h4>
+                                <p class="author-role">Software Engineer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="review-content">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"Great location and very supportive staff. The hostel is well-maintained and has all the amenities needed for comfortable living."</p>
+                        <div class="review-author">
+                            <div class="author-info">
+                                <h4 class="author-name">Anjali Desai</h4>
+                                <p class="author-role">MBA Student</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="review-content">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"The food quality is amazing and the rooms are clean and comfortable. It truly feels like a home away from home."</p>
+                        <div class="review-author">
+                            <div class="author-info">
+                                <h4 class="author-name">Riya Patel</h4>
+                                <p class="author-role">Working Professional</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-navigation">
+                <button class="review-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="review-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contact Us</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Get in touch with us for bookings and inquiries</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card" data-aos="fade-right">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>+91 9876543210</p>
+                            <a href="tel:+919876543210" class="contact-link">Call Now</a>
+                        </div>
+                    </div>
+                    <div class="contact-card" data-aos="fade-right" data-aos-delay="100">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>jpwomenhostel@gmail.com</p>
+                            <a href="mailto:jpwomenhostel@gmail.com" class="contact-link">Send Email</a>
+                        </div>
+                    </div>
+                    <div class="contact-card" data-aos="fade-right" data-aos-delay="200">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Address</h4>
+                            <p>Near Station Road, New Panvel, Navi Mumbai</p>
+                            <a href="#" class="contact-link">Get Directions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form" data-aos="fade-left">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            <label for="name">Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" placeholder="Your Phone" required>
+                            <label for="phone">Phone</label>
+                        </div>
+                        <div class="form-group">
+                            <select id="inquiry" name="inquiry" required>
+                                <option value="">Select Inquiry Type</option>
+                                <option value="booking">Room Booking</option>
+                                <option value="visit">Schedule Visit</option>
+                                <option value="information">General Information</option>
+                            </select>
+                            <label for="inquiry">Inquiry Type</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Your Message" rows="4" required></textarea>
+                            <label for="message">Message</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">JP Women Hostel</h3>
+                    <p class="footer-description">
+                        Your safe and comfortable home away from home in New Panvel. 
+                        We provide secure accommodation for working women and students.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#facilities">Facilities</a></li>
+                        <li><a href="#rooms">Rooms</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Contact Info</h4>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-phone"></i> +91 9876543210</p>
+                        <p><i class="fas fa-envelope"></i> jpwomenhostel@gmail.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Near Station Road, New Panvel</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Hours</h4>
+                    <div class="footer-hours">
+                        <p><strong>Office Hours:</strong></p>
+                        <p>Mon - Sat: 9:00 AM - 7:00 PM</p>
+                        <p>Sunday: 10:00 AM - 5:00 PM</p>
+                        <p><strong>24/7 Security Available</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 JP Women Hostel. All Rights Reserved.</p>
+                <p>Designed with <i class="fas fa-heart"></i> for your comfort and safety.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script >// ===== LOADING SCREEN =====
+window.addEventListener('load', function() {
+    const loadingScreen = document.getElementById('loading-screen');
+    setTimeout(() => {
+        loadingScreen.classList.add('fade-out');
+        setTimeout(() => {
+            loadingScreen.remove();
+        }, 500);
+    }, 1500);
+});
+
+// ===== NAVIGATION =====
+class Navigation {
+    constructor() {
+        this.header = document.getElementById('header');
+        this.hamburger = document.getElementById('nav-hamburger');
+        this.navMenu = document.getElementById('nav-menu');
+        this.navLinks = document.querySelectorAll('.nav-link');
+        
+        this.init();
+    }
+    
+    init() {
+        this.handleScroll();
+        this.handleMobileMenu();
+        this.handleSmoothScroll();
+        this.handleActiveNavLink();
+        
+        window.addEventListener('scroll', () => this.handleScroll());
+        window.addEventListener('resize', () => this.closeMobileMenu());
+    }
+    
+    handleScroll() {
+        if (window.scrollY > 100) {
+            this.header.classList.add('scrolled');
+        } else {
+            this.header.classList.remove('scrolled');
+        }
+    }
+    
+    handleMobileMenu() {
+        this.hamburger.addEventListener('click', () => {
+            this.hamburger.classList.toggle('active');
+            this.navMenu.classList.toggle('active');
+            document.body.style.overflow = this.navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        this.navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                this.closeMobileMenu();
+            });
+        });
+    }
+    
+    closeMobileMenu() {
+        this.hamburger.classList.remove('active');
+        this.navMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    handleSmoothScroll() {
+        this.navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    const headerHeight = this.header.offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    }
+    
+    handleActiveNavLink() {
+        const sections = document.querySelectorAll('section');
+        const options = {
+            threshold: 0.3,
+            rootMargin: '-100px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+                    this.navLinks.forEach(link => link.classList.remove('active'));
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        }, options);
+        
+        sections.forEach(section => observer.observe(section));
+    }
+}
+
+// ===== BACK TO TOP BUTTON =====
+class BackToTop {
+    constructor() {
+        this.button = document.getElementById('back-to-top');
+        this.init();
+    }
+    
+    init() {
+        window.addEventListener('scroll', () => this.handleScroll());
+        this.button.addEventListener('click', () => this.scrollToTop());
+    }
+    
+    handleScroll() {
+        if (window.scrollY > 500) {
+            this.button.classList.add('visible');
+        } else {
+            this.button.classList.remove('visible');
+        }
+    }
+    
+    scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+}
+
+// ===== COUNTER ANIMATION =====
+class CounterAnimation {
+    constructor() {
+        this.counters = document.querySelectorAll('.stat-number');
+        this.init();
+    }
+    
+    init() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.animateCounter(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        this.counters.forEach(counter => observer.observe(counter));
+    }
+    
+    animateCounter(counter) {
+        const target = parseInt(counter.getAttribute('data-count'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            counter.textContent = Math.floor(current);
+        }, 16);
+    }
+}
+
+// ===== REVIEWS SLIDER =====
+class ReviewsSlider {
+    constructor() {
+        this.slider = document.querySelector('.reviews-slider');
+        this.cards = document.querySelectorAll('.review-card');
+        this.prevBtn = document.querySelector('.prev-btn');
+        this.nextBtn = document.querySelector('.next-btn');
+        this.currentIndex = 0;
+        
+        if (this.cards.length > 0) {
+            this.init();
+        }
+    }
+    
+    init() {
+        this.prevBtn.addEventListener('click', () => this.prevSlide());
+        this.nextBtn.addEventListener('click', () => this.nextSlide());
+        
+        // Auto slide every 5 seconds
+        this.autoSlide = setInterval(() => this.nextSlide(), 5000);
+        
+        // Pause on hover
+        this.slider.addEventListener('mouseenter', () => clearInterval(this.autoSlide));
+        this.slider.addEventListener('mouseleave', () => {
+            this.autoSlide = setInterval(() => this.nextSlide(), 5000);
+        });
+    }
+    
+    showSlide(index) {
+        this.cards.forEach(card => card.classList.remove('active'));
+        this.cards[index].classList.add('active');
+        this.currentIndex = index;
+    }
+    
+    nextSlide() {
+        const nextIndex = (this.currentIndex + 1) % this.cards.length;
+        this.showSlide(nextIndex);
+    }
+    
+    prevSlide() {
+        const prevIndex = (this.currentIndex - 1 + this.cards.length) % this.cards.length;
+        this.showSlide(prevIndex);
+    }
+}
+
+// ===== FORM HANDLING =====
+class FormHandler {
+    constructor() {
+        this.form = document.getElementById('contactForm');
+        this.init();
+    }
+    
+    init() {
+        if (this.form) {
+            this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+            this.setupFormValidation();
+        }
+    }
+    
+    handleSubmit(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(this.form);
+        const data = Object.fromEntries(formData.entries());
+        
+        // Show loading state
+        const submitBtn = this.form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitBtn.disabled = true;
+        
+        // Simulate form submission (replace with actual API call)
+        setTimeout(() => {
+            this.showSuccessMessage();
+            this.form.reset();
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }, 2000);
+    }
+    
+    setupFormValidation() {
+        const inputs = this.form.querySelectorAll('input, select, textarea');
+        
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => this.validateField(input));
+            input.addEventListener('input', () => this.clearError(input));
+        });
+    }
+    
+    validateField(field) {
+        const value = field.value.trim();
+        const fieldType = field.type;
+        
+        // Remove existing error
+        this.clearError(field);
+        
+        // Validation rules
+        if (field.required && !value) {
+            this.showError(field, 'This field is required');
+            return false;
+        }
+        
+        if (fieldType === 'email' && value) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                this.showError(field, 'Please enter a valid email address');
+                return false;
+            }
+        }
+        
+        if (fieldType === 'tel' && value) {
+            const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+            if (!phoneRegex.test(value.replace(/\s|-/g, ''))) {
+                this.showError(field, 'Please enter a valid phone number');
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    showError(field, message) {
+        field.style.borderColor = '#e74c3c';
+        
+        let errorElement = field.parentElement.querySelector('.error-message');
+        if (!errorElement) {
+            errorElement = document.createElement('span');
+            errorElement.className = 'error-message';
+            errorElement.style.cssText = `
+                color: #e74c3c;
+                font-size: 0.875rem;
+                position: absolute;
+                bottom: -20px;
+                left: 1rem;
+            `;
+            field.parentElement.appendChild(errorElement);
+        }
+        
+        errorElement.textContent = message;
+    }
+    
+    clearError(field) {
+        field.style.borderColor = '';
+        const errorElement = field.parentElement.querySelector('.error-message');
+        if (errorElement) {
+            errorElement.remove();
+        }
+    }
+    
+    showSuccessMessage() {
+        // Create success notification
+        const notification = document.createElement('div');
+        notification.className = 'success-notification';
+        notification.innerHTML = `
+            <div style="
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #10ac84, #1dd1a1);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 0.5rem;
+                box-shadow: 0 4px 15px rgba(16, 172, 132, 0.4);
+                z-index: 10000;
+                animation: slideInRight 0.5s ease-out;
+            ">
+                <i class="fas fa-check-circle" style="margin-right: 0.5rem;"></i>
+                Thank you! Your message has been sent successfully.
+            </div>
+        `;
+        
+        // Add animation keyframes
+        if (!document.querySelector('#success-notification-styles')) {
+            const style = document.createElement('style');
+            style.id = 'success-notification-styles';
+            style.textContent = `
+                @keyframes slideInRight {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOutRight {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        document.body.appendChild(notification);
+        
+        // Remove notification after 5 seconds
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.5s ease-out';
+            setTimeout(() => notification.remove(), 500);
+        }, 5000);
+    }
+}
+
+// ===== GALLERY MODAL =====
+class GalleryModal {
+    constructor() {
+        this.galleryItems = document.querySelectorAll('.gallery-item');
+        this.init();
+    }
+    
+    init() {
+        this.galleryItems.forEach(item => {
+            item.addEventListener('click', () => this.openModal(item));
+        });
+    }
+    
+    openModal(item) {
+        const img = item.querySelector('img');
+        const caption = item.querySelector('.gallery-content p')?.textContent || '';
+        
+        // Create modal
+        const modal = document.createElement('div');
+        modal.className = 'gallery-modal';
+        modal.innerHTML = `
+            <div class="modal-overlay">
+                <div class="modal-content">
+                    <button class="modal-close">&times;</button>
+                    <img src="${img.src}" alt="${img.alt}">
+                    ${caption ? `<p class="modal-caption">${caption}</p>` : ''}
+                </div>
+            </div>
+        `;
+        
+        // Add modal styles
+        if (!document.querySelector('#gallery-modal-styles')) {
+            const style = document.createElement('style');
+            style.id = 'gallery-modal-styles';
+            style.textContent = `
+                .gallery-modal {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 10000;
+                }
+                
+                .modal-overlay {
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.9);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 2rem;
+                    animation: fadeIn 0.3s ease-out;
+                }
+                
+                .modal-content {
+                    position: relative;
+                    max-width: 90%;
+                    max-height: 90%;
+                    animation: zoomIn 0.3s ease-out;
+                }
+                
+                .modal-content img {
+                    width: 100%;
+                    height: auto;
+                    border-radius: 0.5rem;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                }
+                
+                .modal-close {
+                    position: absolute;
+                    top: -40px;
+                    right: 0;
+                    background: none;
+                    border: none;
+                    color: white;
+                    font-size: 2rem;
+                    cursor: pointer;
+                    padding: 0.5rem;
+                    border-radius: 50%;
+                    transition: background-color 0.3s ease;
+                }
+                
+                .modal-close:hover {
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+                
+                .modal-caption {
+                    text-align: center;
+                    color: white;
+                    margin-top: 1rem;
+                    font-size: 1.1rem;
+                }
+                
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                
+                @keyframes zoomIn {
+                    from { transform: scale(0.8); opacity: 0; }
+                    to { transform: scale(1); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        document.body.appendChild(modal);
+        document.body.style.overflow = 'hidden';
+        
+        // Close modal handlers
+        const closeModal = () => {
+            modal.style.animation = 'fadeOut 0.3s ease-out';
+            setTimeout(() => {
+                modal.remove();
+                document.body.style.overflow = '';
+            }, 300);
+        };
+        
+        modal.querySelector('.modal-close').addEventListener('click', closeModal);
+        modal.querySelector('.modal-overlay').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeModal();
+        });
+        
+        // Close on Escape key
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                document.removeEventListener('keydown', handleKeyDown);
+            }
+        };
+        document.addEventListener('keydown', handleKeyDown);
+    }
+}
+
+// ===== PARALLAX EFFECT =====
+class ParallaxEffect {
+    constructor() {
+        this.elements = document.querySelectorAll('[data-parallax]');
+        this.init();
+    }
+    
+    init() {
+        if (this.elements.length > 0 && window.innerWidth > 768) {
+            window.addEventListener('scroll', () => this.handleParallax());
+        }
+    }
+    
+    handleParallax() {
+        const scrolled = window.pageYOffset;
+        
+        this.elements.forEach(element => {
+            const rate = scrolled * -0.5;
+            element.style.transform = `translateY(${rate}px)`;
+        });
+    }
+}
+
+// ===== TYPING EFFECT =====
+class TypingEffect {
+    constructor() {
+        this.element = document.querySelector('.hero-subtitle');
+        this.text = this.element ? this.element.textContent : '';
+        this.init();
+    }
+    
+    init() {
+        if (!this.element) return;
+        
+        this.element.textContent = '';
+        this.element.style.opacity = '1';
+        
+        setTimeout(() => {
+            this.typeText();
+        }, 1500);
+    }
+    
+    typeText() {
+        let i = 0;
+        const timer = setInterval(() => {
+            this.element.textContent += this.text[i];
+            i++;
+            
+            if (i >= this.text.length) {
+                clearInterval(timer);
+            }
+        }, 100);
+    }
+}
+
+// ===== SCROLL REVEAL ANIMATIONS =====
+class ScrollReveal {
+    constructor() {
+        this.elements = document.querySelectorAll('[data-reveal]');
+        this.init();
+    }
+    
+    init() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        this.elements.forEach(element => {
+            observer.observe(element);
+        });
+    }
+}
+
+// ===== THEME SWITCHER (BONUS) =====
+class ThemeSwitcher {
+    constructor() {
+        this.currentTheme = localStorage.getItem('theme') || 'light';
+        this.init();
+    }
+    
+    init() {
+        this.applyTheme();
+        this.createToggleButton();
+    }
+    
+    createToggleButton() {
+        const button = document.createElement('button');
+        button.className = 'theme-toggle';
+        button.innerHTML = '<i class="fas fa-moon"></i>';
+        button.setAttribute('aria-label', 'Toggle dark mode');
+        
+        // Add styles
+        button.style.cssText = `
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+        `;
+        
+        button.addEventListener('click', () => this.toggleTheme());
+        document.body.appendChild(button);
+        
+        this.toggleButton = button;
+    }
+    
+    toggleTheme() {
+        this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+        this.applyTheme();
+        localStorage.setItem('theme', this.currentTheme);
+    }
+    
+    applyTheme() {
+        document.documentElement.setAttribute('data-theme', this.currentTheme);
+        
+        if (this.toggleButton) {
+            this.toggleButton.innerHTML = this.currentTheme === 'light' 
+                ? '<i class="fas fa-moon"></i>' 
+                : '<i class="fas fa-sun"></i>';
+        }
+    }
+}
+
+// ===== PERFORMANCE OPTIMIZATION =====
+class PerformanceOptimizer {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        this.lazyLoadImages();
+        this.preloadCriticalAssets();
+    }
+    
+    lazyLoadImages() {
+        const images = document.querySelectorAll('img[data-src]');
+        
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+        
+        images.forEach(img => imageObserver.observe(img));
+    }
+    
+    preloadCriticalAssets() {
+        const criticalImages = [
+            'https://lh3.googleusercontent.com/p/AF1QipMXyNTOwfuZRw1mzjqF3odvUiAB70mDy5aiLaZ4=w141-h176-n-k-no-nu'
+        ];
+        
+        criticalImages.forEach(src => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = src;
+            document.head.appendChild(link);
+        });
+    }
+}
+
+// ===== INITIALIZE ALL COMPONENTS =====
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS (Animate On Scroll) library
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+    }
+    
+    // Initialize all components
+    new Navigation();
+    new BackToTop();
+    new CounterAnimation();
+    new ReviewsSlider();
+    new FormHandler();
+    new GalleryModal();
+    new ParallaxEffect();
+    new TypingEffect();
+    new ScrollReveal();
+    new PerformanceOptimizer();
+    
+    // Optional: Theme switcher (uncomment to enable)
+    // new ThemeSwitcher();
+    
+    // Add some interactive effects
+    addHoverEffects();
+    addClickEffects();
+});
+
+// ===== ADDITIONAL INTERACTIVE EFFECTS =====
+function addHoverEffects() {
+    // Add hover effect to all buttons
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px) scale(1.05)';
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+    
+    // Add hover effect to cards
+    const cards = document.querySelectorAll('.facility-card, .room-card, .menu-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+}
+
+function addClickEffects() {
+    // Add ripple effect to buttons
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple 0.6s linear;
+                pointer-events: none;
+            `;
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+    
+    // Add CSS for ripple animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes ripple {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// ===== UTILITY FUNCTIONS =====
+function debounce(func, wait, immediate) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            timeout = null;
+            if (!immediate) func(...args);
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func(...args);
+    };
+}
+
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+// ===== ERROR HANDLING =====
+window.addEventListener('error', function(e) {
+    console.warn('An error occurred:', e.error);
+    // Optionally send error to analytics or logging service
+});
+
+// ===== SERVICE WORKER REGISTRATION (FOR PWA) =====
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+                console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+                console.log('SW registration failed: ', registrationError);
+            });
+    });
+}</script>
+</body>
+</html>

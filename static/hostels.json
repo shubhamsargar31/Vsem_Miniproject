@@ -54,5 +54,15 @@
    "hostel_name":"saiDarbar Boys Hostel ",
    "page":"saiDarbar"
 
+  },
+   {
+     "id":"6",
+    "name": " J B Hostel",
+    "mess": "Both",
+    "type": "Girls",
+    "img": "/static/saidarbar/hostel.jpg",
+   "hostel_name":"J B Hostel ",
+   "page":"jbhostel"
+
   }
 ]

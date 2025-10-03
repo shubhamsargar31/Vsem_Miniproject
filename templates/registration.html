@@ -344,24 +344,19 @@
           }
         });
 
-      // Load hostel details dynamically
       async function loadHostelDetails() {
         const response = await fetch("/static/hostels.json");
         const hostels = await response.json();
 
-        // value येईल app.py मधून
         const hostelName = "{{ hostel_name }}";
 
-        // आता दोन्ही तपासणार: page किंवा name
         const hostel = hostels.find(
           (h) => h.page === hostelName || h.name === hostelName
         );
 
         if (hostel) {
-          // Hostel Name field set करा
           document.getElementById("hostelName").value = hostel.name;
 
-          // Room preferences भरा
           const roomSelect = document.getElementById("roomPref");
           hostel.rooms.forEach((r) => {
             const opt = document.createElement("option");
