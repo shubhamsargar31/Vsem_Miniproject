@@ -151,9 +151,14 @@
 
         <form
           method="POST"
-          action="{{ url_for('login', next_hostel=next_hostel) }}"
+          action="{{ url_for('login', next_hostel=next_hostel, next_page=next_page) }}"
         >
+          {% if next_hostel %}
           <input type="hidden" name="next_hostel" value="{{ next_hostel }}" />
+          {% endif %} {% if next_page %}
+          <input type="hidden" name="next_page" value="{{ next_page }}" />
+          {% endif %}
+
           <label>Email</label>
           <input
             type="email"

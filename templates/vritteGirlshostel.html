@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>City Central Hostel</title>
+    <title>Vriitee Girls Hostel</title>
     <style>
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -18,7 +18,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
+        width: 98%;
         background: linear-gradient(90deg, #3b82f6, #1d4ed8);
         color: white;
         padding: 15px 20px;
@@ -146,7 +146,7 @@
       .modal {
         display: none;
         position: fixed;
-        top: 0;
+        top: 10px;
         left: 0;
         width: 100%;
         height: 100%;
@@ -515,91 +515,118 @@
           transform: translateX(100%) rotate(45deg);
         }
       }
-
-      /* Feedback */
-      .feedback-section {
+  .feedback-section {
         background: linear-gradient(135deg, #f8fafc, #e2e8f0);
         padding: 40px;
         border-radius: 20px;
         box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
-        margin: 40px 0;
+        margin: 40px auto;
+        max-width: 1100px;
+      }
+
+      .feedback-section h2 {
+        margin: 0 0 14px 0;
+        font-size: 22px;
+        color: #0f172a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
       }
 
       .rating {
-        font-size: 2rem;
-        margin-bottom: 20px;
         text-align: center;
+        margin-bottom: 12px;
       }
 
       .rating span {
-        color: #d1d5db;
+        font-size: 28px;
+        color: #c7d2fe;
         cursor: pointer;
-        transition: all 0.3s ease;
-        margin: 0 5px;
+        transition: color 0.18s ease, transform 0.12s ease;
+        user-select: none;
       }
 
-      .rating span:hover,
       .rating span.active {
-        color: #fbbf24;
-        text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
-        transform: scale(1.2);
+        color: #fbbf24; /* gold */
+        transform: translateY(-2px);
       }
 
-      .feedback-input {
-        width: 100%;
-        padding: 15px;
+      textarea {
+        max-height: 140px;
+        resize: vertical;
+        padding: 14px 16px;
         border-radius: 12px;
-        border: 2px solid #e5e7eb;
-        margin-bottom: 20px;
-        resize: none;
-        font-size: 16px;
-        transition: all 0.3s ease;
-        font-family: inherit;
-        box-sizing: border-box;
+        border: 1.8px solid #e6eefb;
+        background: #fbfdff;
+        font-size: 15px;
+        line-height: 1.5;
+        color: #0b1220;
+        outline: none;
+        transition: box-shadow 0.18s ease, border-color 0.18s ease;
       }
 
-      .feedback-input:focus {
-        border-color: #3b82f6;
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      textarea:focus {
+        border-color: #60a5fa;
+        box-shadow: 0 6px 20px rgba(59, 130, 246, 0.08);
+      }
+
+      input[type="file"] {
+        margin-top: 10px;
+        display: block;
       }
 
       .feedback-buttons {
         display: flex;
-        gap: 15px;
+        gap: 12px;
+        margin-top: 14px;
         justify-content: center;
-        flex-wrap: wrap;
+      }
+
+      button[type="submit"],
+      .btn {
+        padding: 10px 18px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        color: white;
+        background: linear-gradient(90deg, #2563eb, #1e3a8a);
+      }
+
+      button[type="submit"]:hover,
+      .btn:hover {
+        transform: scale(1.05);
+        transition: 0.2s ease;
       }
 
       .feedback-list {
-        margin-top: 40px;
+        margin-top: 30px;
       }
 
       .feedback-item {
         display: flex;
+        gap: 12px;
+        background: #fbfdff;
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 12px;
         align-items: flex-start;
-        gap: 15px;
-        background: #fff;
-        padding: 20px;
-        margin-bottom: 15px;
-        border-radius: 15px;
-        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
-        animation: slideIn 0.5s ease;
-        border-left: 4px solid #3b82f6;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.06);
       }
 
       .feedback-avatar {
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-        color: white;
-        font-weight: 700;
+        width: 44px;
+        height: 44px;
         border-radius: 50%;
+        background: #2563eb;
+        color: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
+        font-weight: 700;
+        font-size: 18px;
         flex-shrink: 0;
-        font-size: 1.2rem;
       }
 
       .feedback-content {
@@ -608,32 +635,50 @@
 
       .feedback-rating {
         color: #fbbf24;
-        margin-bottom: 8px;
-        font-size: 1.1rem;
+        margin-bottom: 6px;
       }
 
       .feedback-text {
-        color: #374151;
-        line-height: 1.6;
+        margin-bottom: 8px;
+        color: #0b1220;
       }
 
       .feedback-time {
-        color: #9ca3af;
-        font-size: 0.8rem;
-        margin-top: 5px;
+        font-size: 13px;
+        color: #6b7280;
       }
 
-      @keyframes slideIn {
+      .feedback-media img,
+      .feedback-media video {
+        max-width: 200px;
+        max-height: 150px;
+        border-radius: 8px;
+        display: block;
+        margin-top: 6px;
+      }
+
+      /* Toast animation helpers */
+      @keyframes slideInRight {
         from {
+          transform: translateX(100%);
           opacity: 0;
-          transform: translateX(-20px);
         }
         to {
-          opacity: 1;
           transform: translateX(0);
+          opacity: 1;
         }
       }
 
+      @keyframes slideOutRight {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+      }
       /* Responsive Design */
       @media (max-width: 768px) {
         .navbar .nav-links {
@@ -695,6 +740,51 @@
       .fade-in {
         animation: fadeInUp 0.6s ease forwards;
       }
+
+
+      .feedback-input-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  textarea {
+    width: 94%;
+    resize: vertical;
+    padding: 14px 50px 14px 16px; /* right padding वाढवलं */
+    border-radius: 12px;
+    border: 1.8px solid #e6eefb;
+    background: #fbfdff;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #0b1220;
+    outline: none;
+    transition: box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+
+  textarea:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.08);
+  }
+
+  /* Camera Icon inside textarea */
+  .upload-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 14px;
+    font-size: 22px;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .upload-icon:hover {
+    color: #2563eb;
+    transform: scale(1.1);
+  }
+
+  .upload-icon input {
+    display: none;
+  }
     </style>
   </head>
   <body>
@@ -755,11 +845,11 @@
         <p><strong>Phone:</strong> +91 9876543212</p>
         <p><strong>Email:</strong> Vriiteehostel@gmail.com</p>
 
-        <h3>🕒 Office Hours</h3>
+        <!-- <h3>🕒 Office Hours</h3>
         <p>
           <strong>Monday - Saturday:</strong> 9:00 AM - 8:00 PM<br />
           <strong>Sunday:</strong> 10:00 AM - 6:00 PM
-        </p>
+        </p> -->
 
         <button class="close-btn" onclick="closeModal()">Close</button>
       </div>
@@ -827,10 +917,7 @@
             src="/static/virteehostel/keylocker.jpg"
             alt="Quiet Study Room with Library"
           />
-          <img
-            src="/static/virteehostel/gym.jpg"
-            alt="Spacious Dining Area"
-          />
+          <img src="/static/virteehostel/gym.jpg" alt="Spacious Dining Area" />
           <img
             src="/static/virteehostel/singleroom.jpg"
             alt="Well-equipped Gym Facilities"
@@ -849,112 +936,119 @@
 
     <!-- Facilities -->
     <section class="container" id="facilities">
-  <div class="card fade-in">
-    <h2>✨ World-Class Facilities</h2>
-    <div class="facilities-grid">
-      <div class="facility-item">
-        <div class="facility-icon">🔒</div>
-        <div>
-          <h3>24/7 Security & CCTV</h3>
-          <p>Complete safety with round-the-clock security and surveillance</p>
+      <div class="card fade-in">
+        <h2>✨ World-Class Facilities</h2>
+        <div class="facilities-grid">
+          <div class="facility-item">
+            <div class="facility-icon">🔒</div>
+            <div>
+              <h3>24/7 Security & CCTV</h3>
+              <p>
+                Complete safety with round-the-clock security and surveillance
+              </p>
+            </div>
+          </div>
+          <div class="facility-item">
+            <div class="facility-icon">🥗</div>
+            <div>
+              <h3>Fully Equipped Kitchen</h3>
+              <p>Nutritious, home-style vegetarian meals prepared with care</p>
+            </div>
+          </div>
+          <div class="facility-item">
+            <div class="facility-icon">📶</div>
+            <div>
+              <h3>High-Speed WiFi</h3>
+              <p>Unlimited high-speed internet access throughout the hostel</p>
+            </div>
+          </div>
+          <div class="facility-item">
+            <div class="facility-icon">🧹</div>
+            <div>
+              <h3>Daily Housekeeping</h3>
+              <p>Clean and hygienic rooms maintained daily</p>
+            </div>
+          </div>
+          <div class="facility-item">
+            <div class="facility-icon">🏠</div>
+            <div>
+              <h3>Girls-Specific Living Arrangements</h3>
+              <p>
+                Comfortable and private accommodations tailored for female
+                residents
+              </p>
+            </div>
+          </div>
+          <div class="facility-item">
+            <div class="facility-icon">💰</div>
+            <div>
+              <h3>Flexible Rental Options</h3>
+              <p>Various rental plans available to suit different budgets</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="facility-item">
-        <div class="facility-icon">🥗</div>
-        <div>
-          <h3>Fully Equipped Kitchen</h3>
-          <p>Nutritious, home-style vegetarian meals prepared with care</p>
-        </div>
-      </div>
-      <div class="facility-item">
-        <div class="facility-icon">📶</div>
-        <div>
-          <h3>High-Speed WiFi</h3>
-          <p>Unlimited high-speed internet access throughout the hostel</p>
-        </div>
-      </div>
-      <div class="facility-item">
-        <div class="facility-icon">🧹</div>
-        <div>
-          <h3>Daily Housekeeping</h3>
-          <p>Clean and hygienic rooms maintained daily</p>
-        </div>
-      </div>
-      <div class="facility-item">
-        <div class="facility-icon">🏠</div>
-        <div>
-          <h3>Girls-Specific Living Arrangements</h3>
-          <p>Comfortable and private accommodations tailored for female residents</p>
-        </div>
-      </div>
-      <div class="facility-item">
-        <div class="facility-icon">💰</div>
-        <div>
-          <h3>Flexible Rental Options</h3>
-          <p>Various rental plans available to suit different budgets</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- Food Menu -->
-<section class="container" id="menu">
-  <div class="card fade-in">
-    <h2>🍽 Pure Vegetarian Mess Menu</h2>
-    <div class="food-menu">
-      <div class="food-card">
-        <img
-          src="/static/virteehostel/breakfast.jpg"
-          alt="Nutritious Breakfast Spread"
-        />
-        <div class="food-card-content">
-          <h3>🌅 Breakfast</h3>
-          <p>
-            Start your day with wholesome vegetarian options: Poha, Upma, Idli-Sambar,
-            Dhokla, Stuffed Parathas, Fresh Tea & Coffee
-          </p>
-          <div class="food-time">7:00 AM - 10:00 AM</div>
+    <!-- Food Menu -->
+    <section class="container" id="menu">
+      <div class="card fade-in">
+        <h2>🍽 Pure Vegetarian Mess Menu</h2>
+        <div class="food-menu">
+          <div class="food-card">
+            <img
+              src="/static/virteehostel/breakfast.jpg"
+              alt="Nutritious Breakfast Spread"
+            />
+            <div class="food-card-content">
+              <h3>🌅 Breakfast</h3>
+              <p>
+                Start your day with wholesome vegetarian options: Poha, Upma,
+                Idli-Sambar, Dhokla, Stuffed Parathas, Fresh Tea & Coffee
+              </p>
+              <div class="food-time">7:00 AM - 10:00 AM</div>
+            </div>
+          </div>
+
+          <div class="food-card">
+            <img
+              src="/static/virteehostel/lunch1.jpg"
+              alt="Traditional Lunch Thali"
+            />
+            <div class="food-card-content">
+              <h3>☀️ Lunch</h3>
+              <p>
+                Nutritious main meals: Fresh Chapati, Steamed Rice, Dal,
+                Seasonal Vegetable Curry, Fresh Salad, Curd
+              </p>
+              <div class="food-time">12:30 PM - 2:30 PM</div>
+            </div>
+          </div>
+
+          <div class="food-card">
+            <img
+              src="/static/virteehostel/lunch.jpg"
+              alt="Delicious Dinner Options"
+            />
+            <div class="food-card-content">
+              <h3>🌙 Dinner</h3>
+              <p>
+                Simple and light vegetarian dinner: Roti/Chapati, Jeera Rice,
+                Dal Curry, Mixed Vegetable Sabzi
+              </p>
+              <div class="food-time">7:30 PM - 9:30 PM</div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="food-card">
-        <img src="/static/virteehostel/lunch1.jpg" alt="Traditional Lunch Thali" />
-        <div class="food-card-content">
-          <h3>☀️ Lunch</h3>
-          <p>
-            Nutritious main meals: Fresh Chapati, Steamed Rice, Dal,
-            Seasonal Vegetable Curry, Fresh Salad, Curd
-          </p>
-          <div class="food-time">12:30 PM - 2:30 PM</div>
-        </div>
-      </div>
-
-      <div class="food-card">
-        <img
-          src="/static/virteehostel/lunch.jpg"
-          alt="Delicious Dinner Options"
-        />
-        <div class="food-card-content">
-          <h3>🌙 Dinner</h3>
-          <p>
-            Simple and light vegetarian dinner: Roti/Chapati, Jeera Rice,
-            Dal Curry, Mixed Vegetable Sabzi
-          </p>
-          <div class="food-time">7:30 PM - 9:30 PM</div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      style="
-        margin-top: 60px;
-        background: linear-gradient(135deg, #eff6ff, #dbeafe);
-        padding: 25px;
-        border-radius: 15px;
-      "
-    >
-
+        <div
+          style="
+            margin-top: 60px;
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            padding: 25px;
+            border-radius: 15px;
+          "
+        >
           <h3 style="color: #3b82f6; margin-bottom: 15px">
             🕐 Mess Timings & Guidelines
           </h3>
@@ -980,282 +1074,244 @@
     </section>
 
     <!-- Rooms -->
-   <section class="container" id="rooms">
-  <div class="card fade-in">
-    <h2>🛏 Room Types & Pricing</h2>
-    <div class="room-grid">
-      <div class="room-card">
-        <h3>Single Room (Non-AC)</h3>
-        <div class="room-price">₹8,000 / month</div>
-        <p class="room-availability">Available: 3 rooms</p>
-        <ul style="list-style: none; padding: 0; margin: 15px 0">
-          <li>✓ Study desk & chair</li>
-          <li>✓ Storage wardrobe</li>
-          <li>✓ Attached bathroom</li>
-        </ul>
-      </div>
+    <section class="container" id="rooms">
+      <div class="card fade-in">
+        <h2>🛏 Room Types & Pricing</h2>
+        <div class="room-grid">
+          <div class="room-card">
+            <h3>Single Room (Non-AC)</h3>
+            <div class="room-price">₹8,000 / month</div>
+            <p class="room-availability">Available: 3 rooms</p>
+            <ul style="list-style: none; padding: 0; margin: 15px 0">
+              <li>✓ Study desk & chair</li>
+              <li>✓ Storage wardrobe</li>
+              <li>✓ Attached bathroom</li>
+            </ul>
+          </div>
 
-      <div class="room-card">
-        <h3>Single Room (AC)</h3>
-        <div class="room-price">₹12,000 / month</div>
-        <p class="room-availability">Available: 2 rooms</p>
-        <ul style="list-style: none; padding: 0; margin: 15px 0">
-          <li>✓ Air conditioning</li>
-          <li>✓ Premium furniture</li>
-          <li>✓ Attached bathroom</li>
-        </ul>
-      </div>
+          <div class="room-card">
+            <h3>Single Room (AC)</h3>
+            <div class="room-price">₹12,000 / month</div>
+            <p class="room-availability">Available: 2 rooms</p>
+            <ul style="list-style: none; padding: 0; margin: 15px 0">
+              <li>✓ Air conditioning</li>
+              <li>✓ Premium furniture</li>
+              <li>✓ Attached bathroom</li>
+            </ul>
+          </div>
 
-      <div class="room-card">
-        <h3>Double Sharing (Non-AC)</h3>
-        <div class="room-price">₹5,500 / month per person</div>
-        <p class="room-availability">Available: 8 rooms</p>
-        <ul style="list-style: none; padding: 0; margin: 15px 0">
-          <li>✓ Two study desks</li>
-          <li>✓ Individual storage</li>
-          <li>✓ Shared bathroom</li>
-        </ul>
-      </div>
+          <div class="room-card">
+            <h3>Double Sharing (Non-AC)</h3>
+            <div class="room-price">₹5,500 / month per person</div>
+            <p class="room-availability">Available: 8 rooms</p>
+            <ul style="list-style: none; padding: 0; margin: 15px 0">
+              <li>✓ Two study desks</li>
+              <li>✓ Individual storage</li>
+              <li>✓ Shared bathroom</li>
+            </ul>
+          </div>
 
-      <div class="room-card">
-        <h3>Double Sharing (AC)</h3>
-        <div class="room-price">₹8,500 / month per person</div>
-        <p class="room-availability">Available: 6 rooms</p>
-        <ul style="list-style: none; padding: 0; margin: 15px 0">
-          <li>✓ Air conditioning</li>
-          <li>✓ Premium amenities</li>
-          <li>✓ Shared bathroom</li>
-        </ul>
-      </div>
-    </div>
-
-    <div
-      style="
-        margin-top: 40px;
-        background: linear-gradient(135deg, #f0fdf4, #dcfce7);
-        padding: 25px;
-        border-radius: 15px;
-        border-left: 4px solid #16a34a;
-      "
-    >
-      <h3 style="color: #16a34a; margin-bottom: 15px">📋 Booking Information</h3>
-      <ul style="list-style: none; padding: 0">
-        <li style="padding: 8px 0; color: #374151">💳 Security Deposit: ₹5,000 (refundable)</li>
-        <li style="padding: 8px 0; color: #374151">📅 Minimum Stay: 3 months</li>
-        <li style="padding: 8px 0; color: #374151">💰 Payment: Monthly advance required</li>
-        <li style="padding: 8px 0; color: #374151">📄 Documents: ID proof, College ID required</li>
-        <li style="padding: 8px 0; color: #374151">📞 For bookings, call: +91 9876543210</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-
-    <!-- Stats -->
-<section class="container" id="stats">
-  <div class="card fade-in">
-    <h2>📊 Why Choose Us?</h2>
-    <div class="stats-grid">
-      <div class="stat-box">
-        <span class="stat-number">150+</span>
-        <p>Happy Students</p>
-      </div>
-      <div class="stat-box">
-        <span class="stat-number">19</span>
-        <p>Available Rooms</p>
-      </div>
-      <div class="stat-box">
-        <span class="stat-number">15+</span>
-        <p>Years of Excellence</p>
-      </div>
-      <div class="stat-box">
-        <span class="stat-number">4.8⭐</span>
-        <p>Student Rating</p>
-      </div>
-    </div>
-
-    <div
-      style="
-        margin-top: 40px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-      "
-    >
-      <div
-        style="
-          text-align: center;
-          padding: 20px;
-          background: linear-gradient(135deg, #fef3c7, #fed7aa);
-          border-radius: 15px;
-        "
-      >
-        <div style="font-size: 2rem; margin-bottom: 10px">🎓</div>
-        <h4>95% Student Satisfaction</h4>
-      </div>
-      <div
-        style="
-          text-align: center;
-          padding: 20px;
-          background: linear-gradient(135deg, #ecfdf5, #d1fae5);
-          border-radius: 15px;
-        "
-      >
-        <div style="font-size: 2rem; margin-bottom: 10px">🍽️</div>
-        <h4>Excellent Food Quality</h4>
-      </div>
-      <div
-        style="
-          text-align: center;
-          padding: 20px;
-          background: linear-gradient(135deg, #eff6ff, #dbeafe);
-          border-radius: 15px;
-        "
-      >
-        <div style="font-size: 2rem; margin-bottom: 10px">🔐</div>
-        <h4>100% Safety Record</h4>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-    <!-- Feedback -->
-    <section class="container" id="feedback">
-      <div class="feedback-section fade-in">
-        <h2>💬 Student Feedback</h2>
-
-        <div class="rating" id="ratingStars">
-          <span data-value="1">★</span>
-          <span data-value="2">★</span>
-          <span data-value="3">★</span>
-          <span data-value="4">★</span>
-          <span data-value="5">★</span>
+          <div class="room-card">
+            <h3>Double Sharing (AC)</h3>
+            <div class="room-price">₹8,500 / month per person</div>
+            <p class="room-availability">Available: 6 rooms</p>
+            <ul style="list-style: none; padding: 0; margin: 15px 0">
+              <li>✓ Air conditioning</li>
+              <li>✓ Premium amenities</li>
+              <li>✓ Shared bathroom</li>
+            </ul>
+          </div>
         </div>
 
-        <textarea
-          id="feedbackInput"
-          class="feedback-input"
-          rows="4"
-          placeholder="Share your experience with Vritee Girl Hostel..."
-        ></textarea>
-
-        <div class="feedback-buttons">
-          <button class="btn" onclick="submitFeedback()">
-            Submit Feedback
-          </button>
-          <a href="{{ url_for('login', next_hostel='VRIITEE Girls hostel') }}">
-          <button
-            class="btn"
-            onclick="showRegistration()"
-            style="background: linear-gradient(90deg, #059669, #047857)"  
-          >
-            Student Registration
-          </button>
-          </a>
-        </div>
-
-        <div class="feedback-list" id="feedbackList">
-          <!-- Sample feedback items -->
-          <div class="feedback-item">
-            <div class="feedback-avatar">A</div>
-            <div class="feedback-content">
-              <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
-              <div class="feedback-text">
-               My experience at the hostel has been extremely positive. Right from the beginning of my college life to the very end, the hostel provided a safe, comfortable, and homely environment. The warden was always approachable and supportive, and her assurance truly helped me settle in without any worries. Being one of the first hostel inmates, I always felt a personal touch in the way things were managed. I’m grateful for the care and smooth experience throughout my stay.
-              </div>
-              <div class="feedback-time">2 days ago</div>
-            </div>
-          </div>
-          <div class="feedback-item">
-            <div class="feedback-avatar">R</div>
-            <div class="feedback-content">
-              <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
-              <div class="feedback-text">
-               Great hostel! Very close to the college and other facilities are also nearby. Good homemade food is available. Security overall is good with warden being there for any concerns you might have. Near to the metro station as well
-              </div>
-              <div class="feedback-time">1 week ago</div>
-            </div>
-          </div>
-          <div class="feedback-item">
-            <div class="feedback-avatar">S</div>
-            <div class="feedback-content">
-              <div class="feedback-rating">⭐⭐⭐⭐</div>
-              <div class="feedback-text">
-              I had a wonderful experience. I found the warden and the head of the hostel to be very caring, taking personal care of each and every student in the hostel. They provide good quality food and ensure security. Overall, the management is excellent. The room sizes are adequate, and the number of students per room is reasonable. I am 100% satisfied with Vritee girls’ hostel system.♥️
-              </div>
-              <div class="feedback-time">2 weeks ago</div>
-            </div>
-          </div>
+        <div
+          style="
+            margin-top: 40px;
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #16a34a;
+          "
+        >
+          <h3 style="color: #16a34a; margin-bottom: 15px">
+            📋 Booking Information
+          </h3>
+          <ul style="list-style: none; padding: 0">
+            <li style="padding: 8px 0; color: #374151">
+              💳 Security Deposit: ₹5,000 (refundable)
+            </li>
+            <li style="padding: 8px 0; color: #374151">
+              📅 Minimum Stay: 3 months
+            </li>
+            <li style="padding: 8px 0; color: #374151">
+              💰 Payment: Monthly advance required
+            </li>
+            <li style="padding: 8px 0; color: #374151">
+              📄 Documents: ID proof, College ID required
+            </li>
+            <li style="padding: 8px 0; color: #374151">
+              📞 For bookings, call: +91 9876543210
+            </li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <script>
-      // Mobile menu functionality
-      function toggleMobileMenu() {
-        const mobileMenu = document.getElementById("mobileMenu");
-        mobileMenu.classList.toggle("active");
-      }
+    <!-- Stats -->
+    <section class="container" id="stats">
+      <div class="card fade-in">
+        <h2>📊 Why Choose Us?</h2>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-number">150+</span>
+            <p>Happy Students</p>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">19</span>
+            <p>Available Rooms</p>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">15+</span>
+            <p>Years of Excellence</p>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">4.8⭐</span>
+            <p>Student Rating</p>
+          </div>
+        </div>
 
-      function closeMobileMenu() {
-        const mobileMenu = document.getElementById("mobileMenu");
-        mobileMenu.classList.remove("active");
-      }
+        <div
+          style="
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+          "
+        >
+          <div
+            style="
+              text-align: center;
+              padding: 20px;
+              background: linear-gradient(135deg, #fef3c7, #fed7aa);
+              border-radius: 15px;
+            "
+          >
+            <div style="font-size: 2rem; margin-bottom: 10px">🎓</div>
+            <h4>95% Student Satisfaction</h4>
+          </div>
+          <div
+            style="
+              text-align: center;
+              padding: 20px;
+              background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+              border-radius: 15px;
+            "
+          >
+            <div style="font-size: 2rem; margin-bottom: 10px">🍽️</div>
+            <h4>Excellent Food Quality</h4>
+          </div>
+          <div
+            style="
+              text-align: center;
+              padding: 20px;
+              background: linear-gradient(135deg, #eff6ff, #dbeafe);
+              border-radius: 15px;
+            "
+          >
+            <div style="font-size: 2rem; margin-bottom: 10px">🔐</div>
+            <h4>100% Safety Record</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+ <section class="feedback-section">
+  <h2>💬 Student Feedback</h2>
 
-      // Modal functionality
-      function openModal() {
-        document.getElementById("contactModal").style.display = "flex";
-      }
+  <form method="POST" enctype="multipart/form-data">
+    <div class="rating" id="ratingStars">
+      <span data-value="1">★</span>
+      <span data-value="2">★</span>
+      <span data-value="3">★</span>
+      <span data-value="4">★</span>
+      <span data-value="5">★</span>
+    </div>
+    <!-- Hidden input to store selected rating -->
+    <input type="hidden" name="rating" id="ratingInput" value="0">
 
-      function closeModal() {
-        document.getElementById("contactModal").style.display = "none";
-      }
+    <div class="feedback-input-wrapper">
+      <textarea
+        name="feedback_text"
+        id="feedbackInput"
+        placeholder="Write your feedback..."
+        required
+      ></textarea>
 
-      // Close modal when clicking outside
-      window.onclick = function (event) {
-        const modal = document.getElementById("contactModal");
-        if (event.target === modal) {
-          modal.style.display = "none";
-        }
-      };
+      <!-- camera icon with hidden file input -->
+      <label class="upload-icon">
+        📷
+        <input type="file" name="media_file" id="fileInput" accept="image/*,video/*" />
+      </label>
+    </div>
 
-      // Rating system
-      let selectedRating = 0;
-      const stars = document.querySelectorAll("#ratingStars span");
+    <div class="feedback-buttons">
+      <button type="submit"onclick="submitFeedback()"class="btn">Submit Feedback</button>
+    </div>
+  </form>
 
-      stars.forEach((star, index) => {
-        star.addEventListener("click", () => {
-          selectedRating = index + 1;
-          updateStarDisplay();
-        });
+  <div class="feedback-buttons">
+    <a href="{{ url_for('login', next_hostel='VRIITEE Girls hostel') }}">
+      <button
+        type="button"
+        class="btn"
+        id="registrationBtn"
+        style="background: linear-gradient(90deg, #059669, #047857)"
+      >
+        Student Registration
+      </button>
+    </a>
+  </div>
 
-        star.addEventListener("mouseover", () => {
-          highlightStars(index + 1);
-        });
-      });
+  <div class="feedback-list">
+    {% for fb in feedbacks %}
+    <div class="feedback-item" style="opacity:0; transition: opacity 0.6s ease;">
+      <div class="feedback-avatar">{{ fb.email[0]|upper }}</div>
+      <div class="feedback-content">
+        <div class="feedback-rating">
+          {% for i in range(fb.rating) %}⭐{% endfor %}
+        </div>
+        <div class="feedback-text">{{ fb.feedback_text }}</div>
 
-      document
-        .getElementById("ratingStars")
-        .addEventListener("mouseleave", () => {
-          updateStarDisplay();
-        });
+        {% if fb.media_file %}
+          {% if fb.media_file.endswith(('png','jpg','jpeg','gif')) %}
+          <div class="feedback-media">
+            <img src="{{ url_for('static', filename='uploads/' + fb.media_file) }}" alt="media" />
+          </div>
+          {% else %}
+          <div class="feedback-media">
+            <video src="{{ url_for('static', filename='uploads/' + fb.media_file) }}" controls></video>
+          </div>
+          {% endif %}
+        {% endif %}
 
-      function highlightStars(rating) {
-        stars.forEach((star, index) => {
-          if (index < rating) {
-            star.classList.add("active");
-          } else {
-            star.classList.remove("active");
-          }
-        });
-      }
+        <div class="feedback-time">
+          {{ fb.timestamp.strftime('%d %b %Y, %H:%M') }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
 
-      function updateStarDisplay() {
-        highlightStars(selectedRating);
-      }
+<script>
 
-      // Feedback submission
+function openModal() {
+  document.getElementById('contactModal').style.display = 'flex';
+}
+function closeModal() {
+  document.getElementById('contactModal').style.display = 'none';
+}
+
+
+// Feedback submission
       function submitFeedback() {
         const feedbackText = document
           .getElementById("feedbackInput")
@@ -1297,135 +1353,72 @@
 
         // Show success message
         showToast("Thank you for your feedback!");
-      }
-
-      // Registration functionality
-      function showRegistration() {
-        showToast(
-          "Student registration portal will be available soon! Please contact the office for now."
-        );
-        window.location.href = "/login";
-      }
-
-      // Booking information
-      function showBookingInfo() {
-        showToast(
-          "For room booking, please call +91 9876543210 or visit our office during business hours."
-        );
-      }
-
-      // Toast notification
-      function showToast(message) {
-        const toast = document.createElement("div");
-        toast.style.cssText = `
-          position: fixed;
-          top: 100px;
-          right: 20px;
-          background: linear-gradient(90deg, #10b981, #059669);
-          color: white;
-          padding: 15px 25px;
-          border-radius: 10px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-          z-index: 10000;
-          animation: slideInRight 0.5s ease;
-          max-width: 300px;
-          font-weight: 500;
-        `;
-        toast.textContent = message;
-        document.body.appendChild(toast);
-
-        setTimeout(() => {
-          toast.style.animation = "slideOutRight 0.5s ease";
-          setTimeout(() => {
-            document.body.removeChild(toast);
-          }, 500);
-        }, 3000);
-      }
-
-      // Add CSS for toast animations
-      const toastStyles = document.createElement("style");
-      toastStyles.textContent = `
-        @keyframes slideInRight {
-          from {
-            transform: translateX(100%);
-            opacity: 0;
-          }
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-        @keyframes slideOutRight {
-          from {
-            transform: translateX(0);
-            opacity: 1;
-          }
-          to {
-            transform: translateX(100%);
-            opacity: 0;
-          }
-        }
-      `;
-      document.head.appendChild(toastStyles);
-
-      // Smooth scrolling for navigation links
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute("href"));
-          if (target) {
-            target.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }
-        });
-      });
-
-      // Intersection Observer for fade-in animations
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px",
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.style.animation = "fadeInUp 0.6s ease forwards";
-          }
-        });
-      }, observerOptions);
-
-      // Observe all fade-in elements
-      document.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll(".fade-in").forEach((el) => {
-          el.style.opacity = "0";
-          el.style.transform = "translateY(30px)";
-          observer.observe(el);
-        });
-      });
-
-      // Navbar scroll effect
-      let lastScrollTop = 0;
-      window.addEventListener("scroll", () => {
-        const navbar = document.querySelector(".navbar");
-        const scrollTop =
-          window.pageYOffset || document.documentElement.scrollTop;
-
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-          navbar.style.transform = "translateY(-100%)";
-        } else {
-          navbar.style.transform = "translateY(0)";
         }
 
-        // Add background opacity based on scroll
-        const opacity = Math.min(scrollTop / 100, 1);
-        navbar.style.background = `linear-gradient(90deg, rgba(59, 130, 246, ${
-          0.9 + opacity * 0.1
-        }), rgba(29, 78, 216, ${0.9 + opacity * 0.1}))`;
 
-        lastScrollTop = scrollTop;
-      });
-    </script>
-  </body>
+  // -------------------- STAR RATING --------------------
+  const stars = document.querySelectorAll("#ratingStars span");
+  const ratingInput = document.getElementById("ratingInput");
+  let selectedRating = 0;
+
+  stars.forEach((star, index) => {
+    star.addEventListener("click", () => {
+      selectedRating = index + 1;
+      ratingInput.value = selectedRating;
+      updateStars();
+    });
+
+    star.addEventListener("mouseover", () => highlightStars(index + 1));
+    star.addEventListener("mouseleave", updateStars);
+  });
+
+  function highlightStars(rating) {
+    stars.forEach((s, i) => {
+      s.style.color = i < rating ? "#facc15" : "#ccc";
+    });
+  }
+
+  function updateStars() {
+    highlightStars(selectedRating);
+  }
+
+  // -------------------- FILE SIZE VALIDATION --------------------
+  const fileInput = document.getElementById("fileInput");
+  fileInput.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file && file.size > 20 * 1024 * 1024) {
+      alert("File too large! (Max 20MB)");
+      this.value = "";
+    }
+  });
+
+  // -------------------- TOAST MESSAGE --------------------
+  function showToast(msg, color = "#2563eb") {
+    const toast = document.createElement("div");
+    toast.textContent = msg;
+    toast.style.cssText = `
+      position:fixed;bottom:30px;right:30px;
+      background:${color};
+      color:white;padding:12px 18px;
+      border-radius:10px;font-weight:600;
+      animation:fadeInUp 0.4s ease;
+    `;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = 0;
+      setTimeout(() => toast.remove(), 500);
+    }, 2500);
+  }
+
+  // -------------------- FADE-IN EFFECT --------------------
+  window.addEventListener("scroll", () => {
+    document.querySelectorAll(".feedback-item").forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 50) {
+        el.style.opacity = 1;
+      }
+    });
+  });
+</script>
+</body>
 </html>
