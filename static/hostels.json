@@ -20,7 +20,7 @@
    "hostel_name":"R Boys Hostel ",
    "page":"RBoyshostel",
    "rooms": ["Single Room", "Double Sharing","Triple Shearing"],
-    "types": ["AC", "Non-AC"],
+    "types": ["Non-AC"],
     "gym":false
   },
   {
@@ -32,7 +32,7 @@
    "hostel_name":"Sunrise Hostel",
    "page":"sunrisehostel",
    "rooms": ["Single Room", "Double Sharing","Triple Shearing"],
-    "types": ["AC", "Non-AC"]
+  "types": ["AC", "Non-AC"]
   },
   {
     "id":"4",
@@ -52,8 +52,10 @@
     "type": "Boys",
     "img": "/static/saidarbar/hostel.jpg",
    "hostel_name":"saiDarbar Boys Hostel ",
-   "page":"saiDarbar"
-
+   "page":"saiDarbar",
+   "rooms": ["Single Room", "Double Sharing","Triple Shearing","4-Shearing"],
+    "types": ["AC", "Non-AC"],
+    "gym":false
   },
    {
      "id":"6",

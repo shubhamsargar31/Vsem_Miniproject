@@ -1080,154 +1080,107 @@
       </div>
     </section>
 
-    <section class="container" id="feedback">
-      <div class="feedback-section fade-in">
-        <h2>💬 Student Feedback</h2>
+<section class="container" id="feedback">
+  <div class="feedback-section fade-in">
+    <h2>💬 Student Feedback</h2>
 
-        <div class="rating" id="ratingStars">
-          <span data-value="1">★</span>
-          <span data-value="2">★</span>
-          <span data-value="3">★</span>
-          <span data-value="4">★</span>
-          <span data-value="5">★</span>
+    <!-- Feedback Form -->
+    <form id="feedbackForm" method="POST" enctype="multipart/form-data">
+  <!-- Rating Stars -->
+  <div class="rating" id="ratingStars">
+    <span data-value="1">★</span>
+    <span data-value="2">★</span>
+    <span data-value="3">★</span>
+    <span data-value="4">★</span>
+    <span data-value="5">★</span>
+  </div>
+  <input type="hidden" name="rating" id="ratingValue" required>
+
+  <!-- Feedback Textarea + Media Upload -->
+  <div class="feedback-input-wrapper" style="position: relative; display: flex; align-items: center; margin-top: 10px;">
+    <textarea
+      id="feedbackInput"
+      name="feedback_text"
+      class="feedback-input"
+      rows="4"
+      placeholder="Share your experience with R Boys Hostel..."
+      style="flex: 1; padding-right: 100px;"
+      required
+    ></textarea>
+
+    <div style="position: absolute; right: 10px; display: flex; gap: 10px;">
+      <!-- Image upload -->
+      <label for="imageUpload" style="cursor: pointer; font-size: 22px;" title="Upload image">📷</label>
+      <input type="file" id="imageUpload" name="media_file" accept="image/*,video/*" style="display: none;" onchange="previewMedia(event)">
+    </div>
+  </div>
+
+  <!-- Media Preview -->
+  <div id="mediaPreview" style="margin-top: 10px;"></div>
+
+<!-- Buttons Container -->
+<div class="feedback-buttons" style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
+  <!-- Submit Feedback Button -->
+  <button type="submit" form="feedbackForm" class="btn" 
+          style="width: 150px; background: linear-gradient(90deg, #5d0f68, #047857); padding: 8px 12px; font-size: 14px; border-radius: 6px;">
+    Submit Feedback
+  </button>
+
+  <!-- Student Registration Button -->
+  <a href="{{ url_for('login', next_hostel='R Boys hostel') }}" style="text-decoration: none;">
+    <button type="button" class="btn" 
+            style="width: 150px; background: linear-gradient(90deg, #047857, #065f46); padding: 8px 12px; font-size: 14px; border-radius: 6px;">
+      Student Registration
+    </button>
+  </a>
+</div>
+
+
+
+    <!-- Feedback List -->
+    <div class="feedback-list" id="feedbackList" style="margin-top: 20px;">
+      {% for fb in feedbacks %}
+      <div class="feedback-item" style="display:flex; gap:10px; margin-bottom:15px;">
+        <div class="feedback-avatar" style="width:40px;height:40px;background:#059669;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;">
+          {{ fb.email[0]|upper }}
         </div>
-
-        <textarea
-          id="feedbackInput"
-          class="feedback-input"
-          rows="4"
-          placeholder="Share your experience with R Boys Hostel..."
-        ></textarea>
-
-        <div class="feedback-buttons">
-          <button class="btn" onclick="submitFeedback()">
-            Submit Feedback
-          </button>
-           <a href="{{ url_for('login', next_hostel='R BOYS HOSTEL') }}">
-          <button
-            class="btn"
-            onclick="showRegistration()"
-            style="background: linear-gradient(90deg, #059669, #047857)"
-          >
-            Student Registration
-          </button>
-        </div>
-         </a>
-
-        <div class="feedback-list" id="feedbackList">
-          <!-- Sample feedback items -->
-          <div class="feedback-item">
-            <div class="feedback-avatar">A</div>
-            <div class="feedback-content">
-              <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
-              <div class="feedback-text">
-                Excellent hostel with great facilities! The food is amazing and
-                the study environment is perfect for academics. Highly
-                recommended!
-              </div>
-              <div class="feedback-time">2 days ago</div>
-            </div>
-          </div>
-          <div class="feedback-item">
-            <div class="feedback-avatar">R</div>
-            <div class="feedback-content">
-              <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
-              <div class="feedback-text">
-                Living here for 2 years now. The management is very supportive
-                and the community is like family. Great WiFi for online classes!
-              </div>
-              <div class="feedback-time">1 week ago</div>
-            </div>
-          </div>
-          <div class="feedback-item">
-            <div class="feedback-avatar">S</div>
-            <div class="feedback-content">
-              <div class="feedback-rating">⭐⭐⭐⭐</div>
-              <div class="feedback-text">
-                Clean rooms, good food, and excellent security. The gym
-                facilities are a bonus. Only wish the library had more books.
-              </div>
-              <div class="feedback-time">2 weeks ago</div>
-            </div>
-          </div>
+        <div class="feedback-content">
+          <div class="feedback-rating">⭐{{ "⭐" * (fb.rating - 1) }}</div>
+          <div class="feedback-text">{{ fb.feedback_text }}</div>
+          <div class="feedback-time" style="font-size:12px; color:gray;">{{ fb.timestamp.strftime("%b %d, %Y %H:%M") }}</div>
+          {% if fb.media_file %}
+            {% if fb.media_file.endswith(('.mp4', '.mov', '.avi')) %}
+              <video src="{{ url_for('static', filename='uploads/' + fb.media_file) }}" controls style="max-width:250px; margin-top:5px; border-radius:10px;"></video>
+            {% else %}
+              <img src="{{ url_for('static', filename='uploads/' + fb.media_file) }}" style="max-width:200px; margin-top:5px; border-radius:10px;">
+            {% endif %}
+          {% endif %}
         </div>
       </div>
-    </section>
-
-    <script>
-      function openModal() {
-        const modal = document.getElementById("contactModal");
-        modal.style.display = "flex";
-      }
-
-      function closeModal() {
-        const modal = document.getElementById("contactModal");
-        modal.style.display = "none";
-      }
-
-      window.onclick = function (event) {
-        const modal = document.getElementById("contactModal");
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
-      };
-      function showRegistration(){
-         window.location.href = "/login";
-      }
-
-  function toggleMobileMenu() {
-    const mobileMenu = document.getElementById("mobileMenu");
-    mobileMenu.classList.toggle("active");
-  }
-
-  function closeMobileMenu() {
-    const mobileMenu = document.getElementById("mobileMenu");
-    mobileMenu.classList.remove("active");
-  }
-
-  // Modal functionality
-  function openModal() {
-    document.getElementById("contactModal").style.display = "flex";
-  }
-
-  function closeModal() {
-    document.getElementById("contactModal").style.display = "none";
-  }
-
-  // Close modal when clicking outside
-  window.onclick = function (event) {
-    const modal = document.getElementById("contactModal");
-    if (event.target === modal) {
-      modal.style.display = "none";
-    }
-  };
-
-  // Rating system
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<script>
+  // ====== Star Rating System ======
   let selectedRating = 0;
   const stars = document.querySelectorAll("#ratingStars span");
+  const ratingInput = document.getElementById("ratingValue");
 
   stars.forEach((star, index) => {
     star.addEventListener("click", () => {
       selectedRating = index + 1;
+      ratingInput.value = selectedRating;
       updateStarDisplay();
     });
-
-    star.addEventListener("mouseover", () => {
-      highlightStars(index + 1);
-    });
+    star.addEventListener("mouseover", () => highlightStars(index + 1));
   });
 
-  document.getElementById("ratingStars").addEventListener("mouseleave", () => {
-    updateStarDisplay();
-  });
+  document.getElementById("ratingStars").addEventListener("mouseleave", () => updateStarDisplay());
 
   function highlightStars(rating) {
     stars.forEach((star, index) => {
-      if (index < rating) {
-        star.classList.add("active");
-      } else {
-        star.classList.remove("active");
-      }
+      star.classList.toggle("active", index < rating);
     });
   }
 
@@ -1235,19 +1188,37 @@
     highlightStars(selectedRating);
   }
 
-  // Feedback submission
+  // ====== Media Preview ======
+  function previewMedia(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById("mediaPreview");
+    preview.innerHTML = "";
+
+    if (!file) return;
+
+    const url = URL.createObjectURL(file);
+    if (file.type.startsWith("image/")) {
+      const img = document.createElement("img");
+      img.src = url;
+      img.style.maxWidth = "200px";
+      img.style.borderRadius = "10px";
+      preview.appendChild(img);
+    } else if (file.type.startsWith("video/")) {
+      const video = document.createElement("video");
+      video.src = url;
+      video.controls = true;
+      video.style.maxWidth = "250px";
+      video.style.borderRadius = "10px";
+      preview.appendChild(video);
+    }
+  }
+
+  // ====== Feedback Submission ======
   function submitFeedback() {
     const feedbackText = document.getElementById("feedbackInput").value.trim();
 
-    if (feedbackText === "") {
-      alert("Please enter your feedback!");
-      return;
-    }
-
-    if (selectedRating === 0) {
-      alert("Please select a star rating!");
-      return;
-    }
+    if (!feedbackText) { alert("Please enter your feedback!"); return; }
+    if (selectedRating === 0) { alert("Please select a star rating!"); return; }
 
     const feedbackList = document.getElementById("feedbackList");
     const newFeedback = document.createElement("div");
@@ -1265,34 +1236,18 @@
         <div class="feedback-time">${timeStamp}</div>
       </div>
     `;
-
     feedbackList.insertBefore(newFeedback, feedbackList.firstChild);
 
-    // Reset form
+    // Reset
     document.getElementById("feedbackInput").value = "";
     selectedRating = 0;
     updateStarDisplay();
+    document.getElementById("mediaPreview").innerHTML = "";
 
-    // Show success message
     showToast("Thank you for your feedback!");
   }
 
-  // Registration functionality
-  function showRegistration() {
-    showToast(
-      "Student registration portal will be available soon! Please contact the office for now."
-    );
-    window.location.href = "/login";
-  }
-
-  // Booking information
-  function showBookingInfo() {
-    showToast(
-      "For room booking, please call +91 9876543210 or visit our office during business hours."
-    );
-  }
-
-  // Toast notification
+  // ====== Toast Notifications ======
   function showToast(message) {
     const toast = document.createElement("div");
     toast.style.cssText = `
@@ -1303,7 +1258,7 @@
       color: white;
       padding: 15px 25px;
       border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       z-index: 10000;
       animation: slideInRight 0.5s ease;
       max-width: 300px;
@@ -1314,62 +1269,66 @@
 
     setTimeout(() => {
       toast.style.animation = "slideOutRight 0.5s ease";
-      setTimeout(() => {
-        document.body.removeChild(toast);
-      }, 500);
+      setTimeout(() => document.body.removeChild(toast), 500);
     }, 3000);
   }
 
-  // Add CSS for toast animations
   const toastStyles = document.createElement("style");
   toastStyles.textContent = `
     @keyframes slideInRight {
-      from {
-        transform: translateX(100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
     }
     @keyframes slideOutRight {
-      from {
-        transform: translateX(0);
-        opacity: 1;
-      }
-      to {
-        transform: translateX(100%);
-        opacity: 0;
-      }
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
     }
   `;
   document.head.appendChild(toastStyles);
 
-  // Smooth scrolling for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute("href"));
-      if (target) {
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    });
-  });
-  // Menu switcher
-  function switchMenu(tab, event) {
-    document
-      .querySelectorAll(".menu-tab")
-      .forEach((t) => t.classList.remove("active"));
-    event.target.classList.add("active");
-    document.querySelectorAll(".dish").forEach((d) => (d.style.display = "none"));
-    document.querySelectorAll("." + tab).forEach((d) => (d.style.display = "block"));
+  // ====== Modal ======
+  function openModal() { document.getElementById("contactModal").style.display = "flex"; }
+  function closeModal() { document.getElementById("contactModal").style.display = "none"; }
+  window.onclick = (event) => {
+    const modal = document.getElementById("contactModal");
+    if (event.target === modal) closeModal();
   }
 
+  // ====== Mobile Menu ======
+  function toggleMobileMenu() {
+    const mobileMenu = document.getElementById("mobileMenu");
+    mobileMenu.classList.toggle("active");
+  }
+  function closeMobileMenu() {
+    const mobileMenu = document.getElementById("mobileMenu");
+    mobileMenu.classList.remove("active");
+  }
 
-    </script>
-  </body>
+  // ====== Smooth Scroll ======
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  // ====== Registration / Booking ======
+  function showRegistration() {
+    showToast("Student registration portal will be available soon! Please contact the office.");
+    window.location.href = "/login";
+  }
+  function showBookingInfo() {
+    showToast("For room booking, please call +91 9876543210 or visit our office.");
+  }
+
+  // ====== Menu Tab Switcher ======
+  function switchMenu(tab, event) {
+    document.querySelectorAll(".menu-tab").forEach(t => t.classList.remove("active"));
+    event.target.classList.add("active");
+    document.querySelectorAll(".dish").forEach(d => d.style.display = "none");
+    document.querySelectorAll("." + tab).forEach(d => d.style.display = "block");
+  }
+</script>
+</body>
 </html>

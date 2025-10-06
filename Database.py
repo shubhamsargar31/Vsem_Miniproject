@@ -15,7 +15,37 @@ class User(db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
 
+
+    
+class saidarbar(db.Model): 
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), nullable=False)
+    hostel_name = db.Column(db.String(120), nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+    feedback_text = db.Column(db.Text, nullable=False)
+    media_file = db.Column(db.String(200), nullable=True)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+class Deccan(db.Model):  # Model name matches your table
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), nullable=False)
+    hostel_name = db.Column(db.String(120), nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+    feedback_text = db.Column(db.Text, nullable=False)
+    media_file = db.Column(db.String(200), nullable=True)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+class sunrise(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(150), nullable=False)
+    hostel_name = db.Column(db.String(150), nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+    feedback_text = db.Column(db.Text, nullable=False)
+    media_file = db.Column(db.String(250))
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
 class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,6 +56,14 @@ class Feedback(db.Model):
     media_file = db.Column(db.String(250))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
+class FeedbackRboys(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(150), nullable=False)
+    hostel_name = db.Column(db.String(150), nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+    feedback_text = db.Column(db.Text, nullable=False)
+    media_file = db.Column(db.String(250))
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)

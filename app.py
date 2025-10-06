@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.utils import secure_filename
-from Database import db, User, Feedback, Student
+from Database import db, User, Feedback, Student,FeedbackRboys,sunrise,Deccan,saidarbar
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
@@ -31,6 +31,52 @@ def home():
 @app.route("/first")
 def first():
     return render_template("first.html")
+
+
+
+@app.route("/RBoyshostel", methods=["GET","POST"])
+def RBoyshostel():
+    # Ensure session works
+    if "user" not in session:
+        flash("Please login to submit feedback", "warning")
+        return redirect(url_for("login", next_hostel="R Boys hostel"))
+
+    if request.method == "POST":
+        feedback_text = request.form.get("feedback_text", "").strip()
+        rating_str = request.form.get("rating", "").strip()
+        email = session["user"]
+
+        try:
+            rating = int(rating_str) if rating_str else 0
+        except ValueError:
+            rating = 0
+
+        media_file = None
+        file = request.files.get("media_file")
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+            media_file = filename
+
+        if feedback_text and rating > 0:
+            fb = FeedbackRboys(
+                email=email,
+                hostel_name="R Boys hostel",
+                rating=rating,
+                feedback_text=feedback_text,
+                media_file=media_file
+            )
+            db.session.add(fb)
+            db.session.commit()
+            flash("Feedback submitted successfully!", "success")
+            return redirect(url_for("RBoyshostel"))
+        else:
+            flash("Please enter feedback text and select a rating.", "error")
+
+    feedbacks = FeedbackRboys.query.filter_by(hostel_name="R Boys hostel").order_by(FeedbackRboys.timestamp.desc()).all()
+    return render_template("RBoyshostel.html", feedbacks=feedbacks)
+
+
 
 @app.route("/vritteGirlshostel", methods=["GET","POST"])
 def vritteGirlshostel():
@@ -65,13 +111,103 @@ def vritteGirlshostel():
             )
             db.session.add(fb)
             db.session.commit()
-            # flash("Feedback submitted successfully!", "success")
             return redirect(url_for("vritteGirlshostel"))
         else:
             flash("Please enter feedback text and select a rating.", "error")
 
     feedbacks = Feedback.query.filter_by(hostel_name="VRIITEE Girls hostel").order_by(Feedback.timestamp.desc()).all()
     return render_template("vritteGirlshostel.html", feedbacks=feedbacks)
+
+
+@app.route("/sunrisehostel", methods=["GET", "POST"])
+def sunrisehostel():
+    if request.method == "POST":
+        if "user" not in session:
+            flash("Please login first to submit feedback", "warning")
+            return redirect(url_for("login", next_hostel="Sunrise Hostel"))
+
+        feedback_text = request.form.get("feedback_text").strip()
+        rating = int(request.form.get("rating", 0))
+        email = session["user"]
+
+        media_file = None
+        file = request.files.get("media_file")
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+            media_file = filename
+
+        if feedback_text and rating > 0:
+            fb = sunrise(
+                email=email,
+                hostel_name="Sunrise Hostel",
+                rating=rating,
+                feedback_text=feedback_text,
+                media_file=media_file
+            )
+            db.session.add(fb)
+            db.session.commit()
+            flash("Feedback submitted successfully!", "success")
+            return redirect(url_for("sunrisehostel"))
+        else:
+            flash("Please enter feedback text and select rating!", "error")
+
+    feedbacks = sunrise.query.order_by(sunrise.timestamp.desc()).all()
+    return render_template("sunrisehostel.html", feedbacks=feedbacks)
+
+
+
+@app.route("/saiDarbar", methods=["GET", "POST"])
+def saidarbar_page():
+    if "user" not in session:
+        flash("Please login to submit feedback", "warning")
+        return redirect(url_for("login", next_hostel="SaiDarbar Hostel"))
+
+    if request.method == "POST":
+        feedback_text = request.form.get("feedback_text", "").strip()
+        rating_str = request.form.get("rating", "").strip()
+        email = session["user"]
+
+        try:
+            rating = int(rating_str)
+        except ValueError:
+            rating = 0
+
+        media_file = None
+        file = request.files.get("media_file")
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+            media_file = filename
+
+        if feedback_text and rating > 0:
+            fb = saidarbar(  
+                email=email,
+                hostel_name="SaiDarbar Hostel",  
+                rating=rating,
+                feedback_text=feedback_text,
+                media_file=media_file
+            )
+            db.session.add(fb)
+            db.session.commit()
+            flash("Feedback submitted successfully!", "success")
+            return redirect(url_for("saidarbar_page"))
+        else:
+            flash("Please enter feedback text and select a rating.", "error")
+
+    feedbacks = saidarbar.query.filter_by(hostel_name="SaiDarbar Hostel").order_by(saidarbar.timestamp.desc()).all()
+    return render_template("saiDarbar.html", feedbacks=feedbacks)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -151,6 +287,8 @@ def signup():
         return redirect(url_for("login"))
 
     return render_template("signup.html")
+
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

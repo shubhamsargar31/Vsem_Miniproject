@@ -18,7 +18,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
+        width: 98%;
         background: linear-gradient(90deg, #007bff, #0056b3);
         color: white;
         padding: 15px;
@@ -270,131 +270,82 @@
         margin-bottom: 10px;
       }
 
-      /* Feedback */
-      .feedback-section textarea {
-        width: 100%;
-        padding: 12px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        margin-bottom: 15px;
-        resize: none;
-        font-size: 15px;
-      }
-      .feedback-section button {
-        background: #007bff;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 8px;
-        font-size: 15px;
-        cursor: pointer;
-        font-weight: bold;
-      }
-      .feedback-section button:hover {
-        background: #0056b3;
-      }
-      .feedback-item {
-        background: #fff;
-        padding: 15px;
-        margin-bottom: 10px;
-        border-radius: 10px;
-        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
-        font-size: 15px;
-      }
-      /* Feedback Section */
-      .feedback-section {
-        background: #f8faff;
-        padding: 25px;
-        border-radius: 15px;
-        box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
-      }
-
-      .feedback-section textarea {
-        width: 100%;
-        padding: 12px;
-        border-radius: 10px;
-        border: 1px solid #ccc;
-        margin-bottom: 15px;
-        resize: none;
-        font-size: 15px;
-        box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
-        transition: border 0.3s;
-      }
-
-      .feedback-section textarea:focus {
-        border: 1px solid #007bff;
+      /* Textarea focus */
+      #feedbackInput:focus {
         outline: none;
+        border-color: #10b981;
+        box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
       }
 
-      .feedback-section button {
-        background: linear-gradient(90deg, #007bff, #0056b3);
-        color: white;
-        border: none;
-        padding: 12px 20px;
+      * Feedback Form */ #feedbackForm textarea {
+        width: 100%;
+        padding: 12px 45px 12px 12px; /* Right padding for icon */
         border-radius: 10px;
+        border: 1px solid #ccc;
+        resize: vertical;
         font-size: 15px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.3s;
+        outline: none;
+        transition: border 0.2s, box-shadow 0.2s;
       }
 
-      .feedback-section button:hover {
-        background: linear-gradient(90deg, #0056b3, #004199);
+      #feedbackForm textarea:focus {
+        border-color: #10b981;
+        box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+      }
+
+      /* Upload Icon */
+      #feedbackForm label[for="mediaUpload"] {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        font-size: 22px;
+        cursor: pointer;
+      }
+
+      /* Buttons */
+      #feedbackForm .btn {
+        padding: 12px 20px;
+        border-radius: 8px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s, background 0.3s;
+      }
+      #feedbackForm .btn:hover {
         transform: scale(1.05);
       }
 
-      /* Rating Stars */
-      .rating {
-        font-size: 22px;
-        color: #ccc;
+      /* Star Rating */
+      #ratingStars {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        font-size: 28px;
         margin-bottom: 12px;
-        cursor: pointer;
       }
-      .rating span.active {
+      #ratingStars span {
+        cursor: pointer;
+        color: #ccc;
+        transition: transform 0.2s;
+      }
+      #ratingStars span.active {
         color: gold;
-        text-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
+        transform: scale(1.2);
       }
 
       /* Feedback List */
       .feedback-list {
         margin-top: 20px;
       }
-
       .feedback-item {
         display: flex;
-        align-items: flex-start;
         gap: 12px;
         background: #fff;
         padding: 15px;
-        margin-bottom: 12px;
-        border-radius: 12px;
-        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-        font-size: 15px;
-        animation: fadeIn 0.4s ease;
-      }
-
-      .feedback-item .avatar {
-        width: 40px;
-        height: 40px;
-        background: #007bff;
-        color: white;
-        font-weight: bold;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .feedback-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 15px;
-        background: #fff;
-        padding: 20px;
         margin-bottom: 15px;
-        border-radius: 15px;
-        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         animation: slideIn 0.5s ease;
-        border-left: 4px solid #3b82f6;
       }
 
       .feedback-avatar {
@@ -432,6 +383,7 @@
         margin-top: 5px;
       }
 
+      /* Animations */
       @keyframes slideIn {
         from {
           opacity: 0;
@@ -443,15 +395,6 @@
         }
       }
 
-
-      .feedback-item .text {
-        flex: 1;
-      }
-      .register-btn {
-        float: right;
-      }
-
-      /* Animation */
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -623,33 +566,154 @@
         </div>
       </div>
     </div>
+    <section class="container" id="feedbackSection">
+      <h2>💬 Student Feedback</h2>
 
-    <!-- Customer Feedback Section -->
-    <div class="card feedback-section" id="feedbackSection">
-      <h2>💬 Customer Feedback</h2>
+      <form id="feedbackForm" method="POST" enctype="multipart/form-data">
+        <!-- Rating -->
+        <div class="rating" id="ratingStars"></div>
+        <input type="hidden" name="rating" id="ratingValue" required />
 
-      <!-- Rating Stars -->
-      <div class="rating" id="ratingStars">⭐ ⭐ ⭐ ⭐ ⭐</div>
+        <!-- Feedback + Media Upload Wrapper -->
+        <div
+          class="feedback-input-wrapper"
+          style="position: relative; margin-top: 10px"
+        >
+          <textarea
+            name="feedback_text"
+            id="feedbackInput"
+            rows="5"
+            placeholder="Write your feedback here..."
+            required
+            style="
+              width: 95%;
+              padding-right: 50px;
+              border-radius: 10px;
+              border: 1px solid #ccc;
+              resize: vertical;
+            "
+          ></textarea>
 
-      <!-- Feedback Input -->
-      <textarea
-        id="feedbackInput"
-        rows="4"
-        placeholder="Write your feedback here..."
-      ></textarea>
+          <!-- Upload Icon inside textarea -->
+          <label
+            for="mediaUpload"
+            style="
+              position: absolute;
+              top: 10px;
+              right: 10px;
+              cursor: pointer;
+              font-size: 22px;
+            "
+            title="Upload Image/Video"
+            >📷</label
+          >
+          <input
+            type="file"
+            name="media_file"
+            id="mediaUpload"
+            accept="image/*,video/*"
+            style="display: none"
+            onchange="previewMedia(event)"
+          />
+        </div>
 
-      <button id="submitFeedbackBtn" onclick="addFeedback()">
-        Submit Feedback
-      </button>
+        <!-- Media Preview -->
+        <div id="mediaPreview" style="margin-top: 10px"></div>
 
- <a href="{{ url_for('login', next_hostel='Sunrise Hostel') }}">
-      <button class="register-btn" onclick="addregisteration()">
-        Student Register
-      </button>
-</a>
-      <div class="feedback-list" id="feedbackList">
-          <!-- Sample feedback items -->
-          <div class="feedback-item">
+        <!-- Buttons -->
+        <!-- Buttons -->
+        <div
+          style="
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            justify-content: flex-start;
+          "
+        >
+          <!-- Submit Feedback Button -->
+          <button
+            type="submit"
+            class="btn"
+            style="
+              flex: 0 0 150px;
+              background: linear-gradient(30deg, #5d0f68, #047857);
+              font-size: 14px;
+              padding: 8px 12px;
+            "
+          >
+            Submit Feedback
+          </button>
+
+          <!-- Student Register Button -->
+          <a
+            href="{{ url_for('login', next_hostel='Sunrise Hostel') }}"
+            style="text-decoration: none"
+          >
+            <button
+              type="button"
+              class="btn"
+              style="
+                flex: 0 0 150px;
+                background: linear-gradient(90deg, #047857, #065f46);
+                font-size: 14px;
+                padding: 8px 12px;
+              "
+            >
+              Student Register
+            </button>
+          </a>
+        </div>
+      </form>
+
+      <!-- Feedback List -->
+      <div class="feedback-list" id="feedbackList" style="margin-top: 20px">
+        {% for fb in feedbacks %}
+        <div
+          class="feedback-item"
+          style="display: flex; gap: 10px; margin-bottom: 15px"
+        >
+          <div
+            class="feedback-avatar"
+            style="
+              width: 40px;
+              height: 40px;
+              background: #059669;
+              color: white;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-weight: bold;
+            "
+          >
+            {{ fb.email[0]|upper }}
+          </div>
+          <div class="feedback-content">
+            <div class="feedback-rating">⭐{{ "⭐"*(fb.rating-1) }}</div>
+            <div class="feedback-text">{{ fb.feedback_text }}</div>
+            <div class="feedback-time" style="font-size: 12px; color: gray">
+              {{ fb.timestamp.strftime("%b %d, %Y %H:%M") }}
+            </div>
+            {% if fb.media_file %} {% if
+            fb.media_file.endswith(('.mp4','.mov','.avi')) %}
+            <video
+              src="{{ url_for('static', filename='uploads/'+fb.media_file) }}"
+              controls
+              style="max-width: 250px; margin-top: 5px; border-radius: 10px"
+            ></video>
+            {% else %}
+            <img
+              src="{{ url_for('static', filename='uploads/'+fb.media_file) }}"
+              style="max-width: 200px; margin-top: 5px; border-radius: 10px"
+            />
+            {% endif %} {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    <!-- Sample feedback items -->
+    <!-- <div class="feedback-item">
             <div class="feedback-avatar">A</div>
             <div class="feedback-content">
               <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
@@ -683,7 +747,7 @@
               <div class="feedback-time">2 weeks ago</div>
             </div>
           </div>
-        </div>
+        </div>-->
     <script>
       function openModal() {
         document.getElementById("contactModal").style.display = "flex";
@@ -693,15 +757,9 @@
         document.getElementById("contactModal").style.display = "none";
       }
 
-      window.onclick = function (event) {
-        let modal = document.getElementById("contactModal");
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
-      };
+      // Star Rating
       let stars = document.getElementById("ratingStars");
       let selectedRating = 0;
-
       stars.innerHTML = "";
       for (let i = 1; i <= 5; i++) {
         let span = document.createElement("span");
@@ -709,18 +767,43 @@
         span.dataset.value = i;
         span.onclick = function () {
           selectedRating = i;
-          document.querySelectorAll("#ratingStars span").forEach((s) => {
-            s.classList.toggle("active", s.dataset.value <= i);
-          });
+          document
+            .querySelectorAll("#ratingStars span")
+            .forEach((s) => s.classList.toggle("active", s.dataset.value <= i));
+          document.getElementById("ratingValue").value = selectedRating;
         };
         stars.appendChild(span);
       }
 
-      //registration
-      function addregisteration() {
-        window.location.href = "/login";
-      }
+      // Media Preview
+      function previewMedia(event) {
+        let preview = document.getElementById("mediaPreview");
+        preview.innerHTML = "";
+        let file = event.target.files[0];
+        if (!file) return;
 
+        let url = URL.createObjectURL(file);
+        if (file.type.startsWith("video")) {
+          let vid = document.createElement("video");
+          vid.src = url;
+          vid.controls = true;
+          vid.style.maxWidth = "200px";
+          vid.style.borderRadius = "10px";
+          preview.appendChild(vid);
+        } else {
+          let img = document.createElement("img");
+          img.src = url;
+          img.style.maxWidth = "200px";
+          img.style.borderRadius = "10px";
+          preview.appendChild(img);
+        }
+      }
+      window.onclick = function (event) {
+        let modal = document.getElementById("contactModal");
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
       // Add Feedback
       function addFeedback() {
         let input = document.getElementById("feedbackInput");
@@ -759,90 +842,6 @@
           .querySelectorAll("#ratingStars span")
           .forEach((s) => s.classList.remove("active"));
       }
-
-// window.onload = function() {
-//   document.getElementById("submitFeedbackBtn").style.display = "none"; // Hide submit feedback
-//   document.getElementById("feedbackInput").style.display = "none"; // Hide textarea
-//   document.getElementById("viewFeedbackBtn").style.display = "inline-block"; // Show view feedback button
-// };
-
-// function saveFeedbackToStorage(feedback) {
-//   let allFeedback = JSON.parse(localStorage.getItem("hostelFeedback") || "[]");
-//   allFeedback.unshift(feedback);
-//   localStorage.setItem("hostelFeedback", JSON.stringify(allFeedback));
-// }
-
-// function getFeedbackFromStorage() {
-//   return JSON.parse(localStorage.getItem("hostelFeedback") || "[]");
-// }
-
-// function showStoredFeedback() {
-//   let feedbackList = document.getElementById("feedbackList");
-//   feedbackList.innerHTML = ""; // Clear old
-//   let allFeedback = getFeedbackFromStorage();
-
-//   if (allFeedback.length === 0) {
-//     feedbackList.innerHTML = "<p>No feedback yet.</p>";
-//     return;
-//   }
-
-//   allFeedback.forEach(fb => {
-//     let div = document.createElement("div");
-//     div.className = "feedback-item";
-
-//     let avatar = document.createElement("div");
-//     avatar.className = "avatar";
-//     avatar.innerText = fb.text[0].toUpperCase();
-
-//     let textDiv = document.createElement("div");
-//     textDiv.className = "text";
-//     textDiv.innerHTML = `<strong>${"⭐".repeat(fb.rating)}</strong><br>${fb.text}`;
-
-//     div.appendChild(avatar);
-//     div.appendChild(textDiv);
-
-//     feedbackList.appendChild(div);
-//   });
-// }
-
-// // Button click handlers
-// function addregisteration() {
-//   // After register: show feedback input and submit, hide view button
-//   alert("Registered successfully! You can now submit feedback.");
-//   document.getElementById("submitFeedbackBtn").style.display = "inline-block";
-//   document.getElementById("feedbackInput").style.display = "block";
-//   document.getElementById("viewFeedbackBtn").style.display = "none";
-//   document.getElementById("feedbackList").innerHTML = ""; // clear feedback shown earlier
-// }
-
-// function addFeedback() {
-//   let input = document.getElementById("feedbackInput");
-//   let feedbackText = input.value.trim();
-//   if (feedbackText === "") {
-//     alert("Please enter your feedback!");
-//     return;
-//   }
-//   if (selectedRating === 0) {
-//     alert("Please select a star rating!");
-//     return;
-//   }
-
-//   // Save to storage
-//   saveFeedbackToStorage({ rating: selectedRating, text: feedbackText });
-
-//   // Show feedback immediately
-//   showStoredFeedback();
-
-//   input.value = "";
-//   selectedRating = 0;
-//   document.querySelectorAll("#ratingStars span").forEach((s) => s.classList.remove("active"));
-// }
-
-// // View feedback button
-// function viewFeedback() {
-//   showStoredFeedback();
-// }
-
     </script>
   </body>
 </html>

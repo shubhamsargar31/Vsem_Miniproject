@@ -336,7 +336,74 @@
       }
 
        /* Feedback */
-  
+   .feedback-input-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+       textarea {
+      width: 100%;
+      padding: 15px 50px 15px 15px;
+      border-radius: 15px;
+      border: none;
+      outline: none;
+      resize: vertical;
+      font-size: 16px;
+      color: #000;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.08);
+    }
+    .upload-icon {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 20px;
+      color: #666;
+      cursor: pointer;
+    }
+
+    .upload-icon:hover {
+      color: #000;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    #mediaPreview {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    #mediaPreview img,
+    #mediaPreview video {
+      max-width: 300px;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .btn-group {
+      margin-top: 25px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      color: #fff;
+      transition: 0.2s;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+
       .rating {
         font-size: 2rem;
         margin-bottom: 20px;
@@ -821,12 +888,13 @@
         </div>
       </section>
 
-      <!-- Feedback -->
-    <section class="container" id="feedback">
-      <div class="feedback-section fade-in">
-        <h2>💬 Student Feedback</h2>
+  <section id="feedbackSection">
+    <h2>💬 Student Feedback</h2>
 
-        <div class="rating" id="ratingStars">
+    <form id="feedbackForm" method="POST" enctype="multipart/form-data">
+      <!-- Rating -->
+      <div class="rating" id="ratingStars"></div>
+              <div class="rating" id="ratingStars">
           <span data-value="1">★</span>
           <span data-value="2">★</span>
           <span data-value="3">★</span>
@@ -834,64 +902,74 @@
           <span data-value="5">★</span>
         </div>
 
+      <input type="hidden" name="rating" id="ratingValue" required />
+
+      <!-- Textarea with upload icon -->
+      <div class="feedback-input-wrapper">
         <textarea
+          name="feedback_text"
           id="feedbackInput"
-          class="feedback-input"
-          rows="4"
+          rows="5"
           placeholder="Share your experience with Sai Darbar Hostel..."
+          required
         ></textarea>
 
-        <div class="feedback-buttons">
-          <button class="btn" onclick="submitFeedback()">
-            Submit Feedback
-          </button>
-          <a href="{{ url_for('login', next_hostel='Sai Darbar Hostel') }}">
-          <button
-            class="btn"
-            onclick="showRegistration()"
-            style="background: linear-gradient(90deg, #059669, #047857)"
-            
-          >
-            Student Registration
-          </button>
-          </a>
-        </div>
-
-        <div class="feedback-list" id="feedbackList">
-          <!-- Sample feedback items -->
-          <div class="feedback-item">
-            <div class="feedback-avatar">A</div>
-            <div class="feedback-content">
-              <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
-              <div class="feedback-text">
-               My experience at the hostel has been extremely positive. Right from the beginning of my college life to the very end, the hostel provided a safe, comfortable, and homely environment. The warden was always approachable and supportive, and her assurance truly helped me settle in without any worries. Being one of the first hostel inmates, I always felt a personal touch in the way things were managed. I’m grateful for the care and smooth experience throughout my stay.
-              </div>
-              <div class="feedback-time">2 days ago</div>
-            </div>
-          </div>
-          <div class="feedback-item">
-            <div class="feedback-avatar">R</div>
-            <div class="feedback-content">
-              <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
-              <div class="feedback-text">
-               Great hostel! Very close to the college and other facilities are also nearby. Good homemade food is available. Security overall is good with warden being there for any concerns you might have. Near to the metro station as well
-              </div>
-              <div class="feedback-time">1 week ago</div>
-            </div>
-          </div>
-          <div class="feedback-item">
-            <div class="feedback-avatar">S</div>
-            <div class="feedback-content">
-              <div class="feedback-rating">⭐⭐⭐⭐</div>
-              <div class="feedback-text">
-              I had a wonderful experience. I found the warden and the head of the hostel to be very caring, taking personal care of each and every student in the hostel. They provide good quality food and ensure security. Overall, the management is excellent. The room sizes are adequate, and the number of students per room is reasonable. I am 100% satisfied with Vritee girls’ hostel system.♥️
-              </div>
-              <div class="feedback-time">2 weeks ago</div>
-            </div>
-          </div>
-        </div>
+        <label for="mediaUpload" class="upload-icon" title="Attach Image or Video">
+          <i class="fas fa-paperclip"></i>
+        </label>
+        <input
+          type="file"
+          name="media_file"
+          id="mediaUpload"
+          accept="image/*,video/*"
+          onchange="previewMedia(event)"
+        />
       </div>
-    </section>
+
+      <!-- Media Preview -->
+      <div id="mediaPreview"></div>
+
+      <!-- Buttons -->
+      <div class="btn-group">
+        <button type="submit" class="btn btn-submit">Submit Feedback</button>
+        <a href="{{ url_for('login', next_hostel='Sai Darbar Hostel') }}">
+          <button type="button" class="btn btn-register">Student Registration</button>
+        </a>
+      </div>
+    </form>
+
+
+  <!-- Feedback List -->
+  <div class="feedback-list" id="feedbackList" style="margin-top: 20px;">
+    {% for fb in feedbacks %}
+    <div class="feedback-item" style="display:flex; gap:10px; margin-bottom:15px;">
+      <div class="feedback-avatar"
+        style="width:40px;height:40px;background:#059669;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;">
+        {{ fb.email[0]|upper }}
+      </div>
+      <div class="feedback-content">
+        <div class="feedback-rating">⭐{{ "⭐"*(fb.rating-1) }}</div>
+        <div class="feedback-text">{{ fb.feedback_text }}</div>
+        <div class="feedback-time" style="font-size:12px;color:gray;">{{ fb.timestamp.strftime("%b %d, %Y %H:%M") }}</div>
+        {% if fb.media_file %}
+        {% if fb.media_file.endswith(('.mp4','.mov','.avi')) %}
+        <video src="{{ url_for('static', filename='uploads/'+fb.media_file) }}" controls
+          style="max-width:250px; margin-top:5px; border-radius:10px;"></video>
+        {% else %}
+        <img src="{{ url_for('static', filename='uploads/'+fb.media_file) }}"
+          style="max-width:200px; margin-top:5px; border-radius:10px;" />
+        {% endif %}
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Font Awesome (for the 📎 icon) -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
     <script>
       function openModal() {

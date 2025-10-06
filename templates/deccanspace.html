@@ -20,7 +20,7 @@
       content: '';
       position: fixed;
       top: 0; left: 0;
-      width: 100%; height: 100%;
+      width: 98%; height: 100%;
       background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
       background-size: 40px 40px;
       animation: moveParticles 60s linear infinite;
@@ -35,7 +35,7 @@
     .navbar {
       position: fixed;
       top: 0;
-      width: 100%;
+      width: 98%;
       background: linear-gradient(90deg,#2563eb,#1e3a8a);
       color: #fff;
       display: flex;
@@ -465,78 +465,115 @@
       </div>
     </div>
   </div>
-   <section class="container" id="feedback">
-      <div class="feedback-section fade-in">
-        <h2>💬 Student Feedback</h2>
+  <section class="container" id="feedbackSection">
+  <h2>💬 Student Feedback</h2>
 
-        <div class="rating" id="ratingStars">
-          <span data-value="1">★</span>
-          <span data-value="2">★</span>
-          <span data-value="3">★</span>
-          <span data-value="4">★</span>
-          <span data-value="5">★</span>
-        </div>
+  <!-- Feedback Form -->
+  <form id="feedbackForm" method="POST" enctype="multipart/form-data">
+    <!-- Star Rating -->
+    <div class="rating" id="ratingStars">
+      {% for i in range(1,6) %}
+      <span data-value="{{ i }}">★</span>
+      {% endfor %}
+    </div>
+    <input type="hidden" name="rating" id="ratingValue" required />
 
-        <textarea
-          id="feedbackInput"
-          class="feedback-input"
-          rows="4"
-          placeholder="Share your experience with deccanspace Hostel..."
-        ></textarea>
+    <!-- Feedback Textarea with Media Upload -->
+    <div class="feedback-input-wrapper" style="position: relative; margin-top: 10px;">
+      <textarea name="feedback_text" id="feedbackInput" rows="7"
+        placeholder="Share your experience with Deccan Space Hostel..." required
+        style="width: 98%; padding-right: 50px; border-radius: 10px; border: 1px solid #010000; resize: vertical;">
+      </textarea>
+      <label for="mediaUpload" style="position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 22px;">📷</label>
+      <input type="file" name="media_file" id="mediaUpload" accept="image/*,video/*" style="display: none;" onchange="previewMedia(event)" />
+    </div>
 
-        <div class="feedback-buttons">
-          <button class="btn" onclick="submitFeedback()">
-            Submit Feedback
-          </button>
-          <a href="{{ url_for('login', next_hostel='Deccan Space Hostel') }}">
-          <button
-            class="btn"
-            onclick="showRegistration()"
-            style="background: linear-gradient(90deg, #059669, #047857)"
-            
-          >
-            Student Registration
-          </button>
-          </a>
-        </div>
+    <!-- Media Preview -->
+    <div id="mediaPreview" style="margin-top: 10px;"></div>
 
-        <div class="feedback-list" id="feedbackList">
-          <!-- Sample feedback items -->
-          <div class="feedback-item">
-            <div class="feedback-avatar">A</div>
-            <div class="feedback-content">
-              <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
-              <div class="feedback-text">
-               My experience at the hostel has been extremely positive. Right from the beginning of my college life to the very end, the hostel provided a safe, comfortable, and homely environment. The warden was always approachable and supportive, and her assurance truly helped me settle in without any worries. Being one of the first hostel inmates, I always felt a personal touch in the way things were managed. I’m grateful for the care and smooth experience throughout my stay.
-              </div>
-              <div class="feedback-time">2 days ago</div>
-            </div>
-          </div>
-          <div class="feedback-item">
-            <div class="feedback-avatar">R</div>
-            <div class="feedback-content">
-              <div class="feedback-rating">⭐⭐⭐⭐⭐</div>
-              <div class="feedback-text">
-               Great hostel! Very close to the college and other facilities are also nearby. Good homemade food is available. Security overall is good with warden being there for any concerns you might have. Near to the metro station as well
-              </div>
-              <div class="feedback-time">1 week ago</div>
-            </div>
-          </div>
-          <div class="feedback-item">
-            <div class="feedback-avatar">S</div>
-            <div class="feedback-content">
-              <div class="feedback-rating">⭐⭐⭐⭐</div>
-              <div class="feedback-text">
-              I had a wonderful experience. I found the warden and the head of the hostel to be very caring, taking personal care of each and every student in the hostel. They provide good quality food and ensure security. Overall, the management is excellent. The room sizes are adequate, and the number of students per room is reasonable. I am 100% satisfied with Vritee girls’ hostel system.♥️
-              </div>
-              <div class="feedback-time">2 weeks ago</div>
-            </div>
-          </div>
-        </div>
+    <!-- Buttons -->
+    <div style="display:flex; gap:20px; margin-top:10px;">
+      <button type="submit" class="btn" style="flex:0 0 150px; font-size:14px; padding:8px 12px; background:linear-gradient(30deg, #5d0f68, #047857);">Submit Feedback</button>
+      <a href="{{ url_for('login', next_hostel='Deccan Space Hostel') }}" style="text-decoration:none;">
+        <button type="button" class="btn" style="flex:0 0 150px; font-size:14px; padding:8px 12px; background:linear-gradient(90deg, #059669, #047857);">Student Registration</button>
+      </a>
+    </div>
+  </form>
+
+  <!-- Feedback List -->
+  <div class="feedback-list" id="feedbackList" style="margin-top: 20px;">
+    {% for fb in feedbacks %}
+    <div class="feedback-item" style="display:flex; gap:10px; margin-bottom:15px;">
+      <div class="feedback-avatar" style="width:40px; height:40px; background:#059669; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">
+        {{ fb.email[0]|upper }}
       </div>
-    </section>
+      <div class="feedback-content">
+        <div class="feedback-rating">⭐{{ "⭐"*(fb.rating-1) }}</div>
+        <div class="feedback-text">{{ fb.feedback_text }}</div>
+        <div class="feedback-time" style="font-size:12px; color:gray;">{{ fb.timestamp.strftime("%b %d, %Y %H:%M") }}</div>
+        {% if fb.media_file %}
+          {% if fb.media_file.endswith(('.mp4','.mov','.avi')) %}
+            <video src="{{ url_for('static', filename='uploads/'+fb.media_file) }}" controls style="max-width:250px; margin-top:5px; border-radius:10px;"></video>
+          {% else %}
+            <img src="{{ url_for('static', filename='uploads/'+fb.media_file) }}" style="max-width:200px; margin-top:5px; border-radius:10px;">
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
 
   <script>
+
+    // Star Rating
+  let selectedRating = 0;
+  const stars = document.querySelectorAll("#ratingStars span");
+  stars.forEach((star, index) => {
+    star.addEventListener("click", () => {
+      selectedRating = index + 1;
+      document.getElementById("ratingValue").value = selectedRating;
+      updateStars();
+    });
+    star.addEventListener("mouseover", () => {
+      highlightStars(index + 1);
+    });
+  });
+  document.getElementById("ratingStars").addEventListener("mouseleave", updateStars);
+
+  function highlightStars(rating) {
+    stars.forEach((star, index) => {
+      star.classList.toggle("active", index < rating);
+    });
+  }
+
+  function updateStars() {
+    highlightStars(selectedRating);
+  }
+
+  // Media Preview
+  function previewMedia(event) {
+    const preview = document.getElementById("mediaPreview");
+    preview.innerHTML = "";
+    const file = event.target.files[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+
+    if (file.type.startsWith("video")) {
+      const vid = document.createElement("video");
+      vid.src = url;
+      vid.controls = true;
+      vid.style.maxWidth = "250px";
+      vid.style.borderRadius = "10px";
+      preview.appendChild(vid);
+    } else {
+      const img = document.createElement("img");
+      img.src = url;
+      img.style.maxWidth = "200px";
+      img.style.borderRadius = "10px";
+      preview.appendChild(img);
+    }
+  }
     // Scroll animations
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -572,42 +609,6 @@
           modal.style.display = "none";
         }
       };
-
-      // Rating system
-      let selectedRating = 0;
-      const stars = document.querySelectorAll("#ratingStars span");
-
-      stars.forEach((star, index) => {
-        star.addEventListener("click", () => {
-          selectedRating = index + 1;
-          updateStarDisplay();
-        });
-
-        star.addEventListener("mouseover", () => {
-          highlightStars(index + 1);
-        });
-      });
-
-      document
-        .getElementById("ratingStars")
-        .addEventListener("mouseleave", () => {
-          updateStarDisplay();
-        });
-
-      function highlightStars(rating) {
-        stars.forEach((star, index) => {
-          if (index < rating) {
-            star.classList.add("active");
-          } else {
-            star.classList.remove("active");
-          }
-        });
-      }
-
-      function updateStarDisplay() {
-        highlightStars(selectedRating);
-      }
-
       // Feedback submission
       function submitFeedback() {
         const feedbackText = document

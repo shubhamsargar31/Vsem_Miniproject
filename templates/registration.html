@@ -316,33 +316,35 @@
           </select>
         </div>
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn" onclick="register()">Register</button>
       </form>
     </div>
 
     <script>
-      // Validate phone numbers
-      document
-        .getElementById("registrationForm")
-        .addEventListener("submit", function (e) {
-          let phone = document.getElementById("phone").value.trim();
-          let parentPhone = document
-            .getElementById("parent_phone")
-            .value.trim();
-          let phonePattern = /^[0-9]{10}$/;
 
-          if (!phonePattern.test(phone)) {
-            alert("⚠️ Please enter a valid 10-digit Student Mobile Number.");
-            e.preventDefault();
-            return;
-          }
+       document
+    .getElementById("registrationForm")
+    .addEventListener("submit", function (e) {
+      let phone = document.getElementById("phone").value.trim();
+      let parentPhone = document.getElementById("parent_phone").value.trim();
+      let phonePattern = /^[0-9]{10}$/;
 
-          if (!phonePattern.test(parentPhone)) {
-            alert("⚠️ Please enter a valid 10-digit Parent Mobile Number.");
-            e.preventDefault();
-            return;
-          }
-        });
+      if (!phonePattern.test(phone)) {
+        alert("⚠️ Please enter a valid 10-digit Student Mobile Number.");
+        e.preventDefault();
+        return;
+      }
+
+      if (!phonePattern.test(parentPhone)) {
+        alert("⚠️ Please enter a valid 10-digit Parent Mobile Number.");
+        e.preventDefault();
+        return;
+      }
+
+
+      alert("✅ Registration Successful!");
+    });
+
 
       async function loadHostelDetails() {
         const response = await fetch("/static/hostels.json");
@@ -365,7 +367,6 @@
             roomSelect.appendChild(opt);
           });
 
-          // Room types भरा
           const typeSelect = document.getElementById("roomType");
           hostel.types.forEach((t) => {
             const opt = document.createElement("option");
