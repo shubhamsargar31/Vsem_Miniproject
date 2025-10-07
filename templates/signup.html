@@ -189,7 +189,13 @@ button:hover {
   <div class="container">
     <div class="left">
       <h2>Create Account</h2>
-      <form id="signupForm" action="/signup" method="POST">
+      <form id="signupForm" action="{{ url_for('signup', next_hostel=next_hostel, next_page=next_page) }}" method="POST">
+        {% if next_hostel %}
+        <input type="hidden" name="next_hostel" value="{{ next_hostel }}">
+        {% endif %}
+        {% if next_page %}
+        <input type="hidden" name="next_page" value="{{ next_page }}">
+        {% endif %}
         <input type="text" id="fullname" name="fullname" placeholder="Full Name" required>
         <span id="nameError" class="error">Please enter your name</span>
 
@@ -210,7 +216,7 @@ button:hover {
     <div class="right">
       <h2>Welcome Back!</h2>
       <p>Login and explore the best Hostels near you for a comfortable stay.</p>
-      <a href="/login" class="login-btn">Login</a>
+      <a href="{{ url_for('login', next_hostel=next_hostel, next_page=next_page) }}" class="login-btn">Login</a>
     </div>
   </div>
 

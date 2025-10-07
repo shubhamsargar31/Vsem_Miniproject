@@ -1,70 +1,115 @@
 [
-   {
-    "id":"1",
-    "name": "VRIITEE Girls hostel",
-    "mess": "Veg",
-    "type": "Girls",
-    "img": "/static/virteehostel/image.png",
-   "hostel_name":"City Central Hostel",
-   "page":"vritteGirlshostel",
-   "rooms": ["Single Room", "Double Sharing"],
-    "types": ["AC", "Non-AC"],
-    "gym": true
-  },
   {
-    "id":"2",
-    "name": "R BOYS HOSTEL",
+    "id": "2",
+    "name": "R Boys Hostel",
     "mess": "Veg",
     "type": "Boys",
     "img": "/static/Rboys/RBoys.png",
-   "hostel_name":"R Boys Hostel ",
-   "page":"RBoyshostel",
-   "rooms": ["Single Room", "Double Sharing","Triple Shearing"],
-    "types": ["Non-AC"],
-    "gym":false
+    "hostel_name": "R Boys Hostel",
+    "page": "RBoyshostel",
+    "rooms": [
+      "Single Room",
+      "Double Sharing",
+      "Triple Sharing"
+    ],
+    "types": [
+      "AC",
+      "Non-AC"
+    ],
+    "gym": false
   },
   {
-    "id":"3",
+    "id": "3",
+    "name": "VRIITEE Girls Hostel",
+    "mess": "Veg",
+    "type": "Girls",
+    "img": "/static/virteehostel/image.png",
+    "hostel_name": "VRIITEE Girls Hostel",
+    "page": "vritteGirlshostel",
+    "rooms": [
+      "Single Room",
+      "Double Sharing"
+    ],
+    "types": [
+      "AC",
+      "Non-AC"
+    ],
+    "gym": true
+  },
+  {
+    "id": "4",
     "name": "Sunrise Hostel",
     "mess": "Veg",
     "type": "Girls",
     "img": "/static/sunrise.jpg",
-   "hostel_name":"Sunrise Hostel",
-   "page":"sunrisehostel",
-   "rooms": ["Single Room", "Double Sharing","Triple Shearing"],
-  "types": ["AC", "Non-AC"]
+    "hostel_name": "Sunrise Hostel",
+    "page": "sunrisehostel",
+    "rooms": [
+      "Single Room",
+      "Double Sharing"
+    ],
+    "types": [
+      "AC",
+      "Non-AC"
+    ],
+    "gym": false
   },
   {
-    "id":"4",
-    "name": "Deccan Space Hostel",
+    "id": "5",
+    "name": "J B Hostel",
+    "mess": "Both",
+    "type": "Girls",
+    "img": "/static/image.png",
+    "hostel_name": "J B Hostel",
+    "page": "jbhostel",
+    "rooms": [
+      "Single Room",
+      "Double Sharing",
+      "Triple Sharing"
+    ],
+    "types": [
+      "AC",
+      "Non-AC"
+    ],
+    "gym": false
+  },
+  {
+    "id": "6",
+    "name": "SaiDarbar Hostel",
+    "mess": "Both",
+    "type": "Boys",
+    "img": "/static/saidarbar/hostel.jpg",
+    "hostel_name": "SaiDarbar Hostel",
+    "page": "saiDarbar",
+    "rooms": [
+      "Single Room",
+      "Double Sharing",
+      "Triple Sharing",
+      "4-Sharing"
+    ],
+    "types": [
+      "AC",
+      "Non-AC"
+    ],
+    "gym": false
+  },
+  {
+    "id": "7",
+    "name": "Deccan Space Hostels",
     "mess": "Veg",
     "type": "Boys",
     "img": "/static/deccanspace/decanspace.png",
-   "hostel_name":"Deccan Sapace Hostel ",
-   "page":"Deccan",
-   "rooms": ["Single Room", "Double Sharing","Triple Shearing"],
-    "types": ["AC", "Non-AC"]
-  },
-  {
-     "id":"5",
-    "name": "Sai Darbar Boys Hostel",
-    "mess": "Both",
-    "type": "Boys",
-    "img": "/static/saidarbar/hostel.jpg",
-   "hostel_name":"saiDarbar Boys Hostel ",
-   "page":"saiDarbar",
-   "rooms": ["Single Room", "Double Sharing","Triple Shearing","4-Shearing"],
-    "types": ["AC", "Non-AC"],
-    "gym":false
-  },
-   {
-     "id":"6",
-    "name": " J B Hostel",
-    "mess": "Both",
-    "type": "Girls",
-    "img": "/static/saidarbar/hostel.jpg",
-   "hostel_name":"J B Hostel ",
-   "page":"jbhostel"
-
+    "hostel_name": "Deccan Space Hostels",
+    "page": "deccanspace",
+    "rooms": [
+      "Single Room",
+      "Double Sharing",
+      "Triple Sharing"
+    ],
+    "types": [
+      "AC",
+      "Non-AC"
+    ],
+    "gym": false
   }
 ]

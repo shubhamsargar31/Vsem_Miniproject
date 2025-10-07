@@ -347,43 +347,98 @@
 
 
       async function loadHostelDetails() {
-        const response = await fetch("/static/hostels.json");
-        const hostels = await response.json();
+        try {
+          const response = await fetch("{{ url_for('static', filename='hostels.json') }}");
+          const hostels = await response.json();
 
-        const hostelName = "{{ hostel_name }}";
+          const suppliedPage = ("{{ hostel_name|default('') }}" || "").trim();
+          const suppliedDisplay = ("{{ display_name|default('') }}" || "").trim();
+          const inputDisplay = (document.getElementById('hostelName')?.value || '').trim();
+          const qs = new URLSearchParams(window.location.search);
+          const qpHostel = (qs.get('hostel') || qs.get('page') || qs.get('hostel_name') || qs.get('next_hostel') || '').trim();
+          const qpDisplay = (qs.get('display') || qs.get('name') || '').trim();
+          const norm = (s) => (s || "").toLowerCase().replace(/\s+/g, "").replace(/[^a-z0-9]/g, "");
 
-        const hostel = hostels.find(
-          (h) => h.page === hostelName || h.name === hostelName
-        );
+          let hostel = hostels.find((h) => (h.page || "").trim() === suppliedPage)
+                   || hostels.find((h) => (h.name || "").trim() === suppliedPage || (h.hostel_name || "").trim() === suppliedPage)
+                   || hostels.find((h) => (h.name || "").trim() === suppliedDisplay || (h.hostel_name || "").trim() === suppliedDisplay)
+                   || hostels.find((h) => norm(h.name) === norm(suppliedDisplay))
+                   || hostels.find((h) => norm(h.hostel_name || "") === norm(suppliedDisplay))
+                   || hostels.find((h) => (h.page || "").trim() === qpHostel || (h.name || "").trim() === qpHostel || (h.hostel_name || "").trim() === qpHostel)
+                   || hostels.find((h) => norm(h.name) === norm(qpDisplay) || norm(h.hostel_name || "") === norm(qpDisplay))
+                   || hostels.find((h) => norm(h.name) === norm(inputDisplay))
+                   || hostels.find((h) => norm(h.hostel_name || "") === norm(inputDisplay));
 
-        if (hostel) {
-          document.getElementById("hostelName").value = hostel.name;
+          if (!hostel) {
+            // Fallback: if only one hostel is present, use it; else show placeholders
+            if (Array.isArray(hostels) && hostels.length === 1) {
+              hostel = hostels[0];
+            }
+          }
 
           const roomSelect = document.getElementById("roomPref");
-          hostel.rooms.forEach((r) => {
-            const opt = document.createElement("option");
-            opt.value = r;
-            opt.textContent = r;
-            roomSelect.appendChild(opt);
-          });
-
           const typeSelect = document.getElementById("roomType");
-          hostel.types.forEach((t) => {
-            const opt = document.createElement("option");
-            opt.value = t;
-            opt.textContent = t;
-            typeSelect.appendChild(opt);
-          });
+          roomSelect.innerHTML = "";
+          typeSelect.innerHTML = "";
 
-          if (hostel.gym) {
-            document.getElementById("gymSection").style.display = "block";
+          if (hostel) {
+            document.getElementById("hostelName").value = hostel.name || suppliedDisplay || suppliedPage;
+
+            const rooms = Array.isArray(hostel.rooms) ? hostel.rooms : [];
+            const types = Array.isArray(hostel.types) ? hostel.types : [];
+
+            if (rooms.length) {
+              rooms.forEach((r) => {
+                const opt = document.createElement("option");
+                opt.value = r;
+                opt.textContent = r;
+                roomSelect.appendChild(opt);
+              });
+            } else {
+              const opt = document.createElement("option");
+              opt.textContent = "No rooms available";
+              opt.disabled = true;
+              opt.selected = true;
+              roomSelect.appendChild(opt);
+            }
+
+            if (types.length) {
+              types.forEach((t) => {
+                const opt = document.createElement("option");
+                opt.value = t;
+                opt.textContent = t;
+                typeSelect.appendChild(opt);
+              });
+            } else {
+              const opt = document.createElement("option");
+              opt.textContent = "No types available";
+              opt.disabled = true;
+              opt.selected = true;
+              typeSelect.appendChild(opt);
+            }
+
+            document.getElementById("gymSection").style.display = hostel.gym ? "block" : "none";
           } else {
+            // No matching hostel found; keep placeholders
+            const opt1 = document.createElement("option");
+            opt1.textContent = "Select hostel first";
+            opt1.disabled = true;
+            opt1.selected = true;
+            roomSelect.appendChild(opt1);
+
+            const opt2 = document.createElement("option");
+            opt2.textContent = "Select hostel first";
+            opt2.disabled = true;
+            opt2.selected = true;
+            typeSelect.appendChild(opt2);
             document.getElementById("gymSection").style.display = "none";
           }
+        } catch (err) {
+          console.error("Failed to load hostels.json", err);
         }
       }
-
-      window.onload = loadHostelDetails;
+        
+      document.addEventListener('DOMContentLoaded', loadHostelDetails);
     </script>
   </body>
 </html>

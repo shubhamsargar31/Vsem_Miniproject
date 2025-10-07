@@ -200,6 +200,24 @@
         transform: translateY(-2px);
       }
 
+      /* Feedback submit button styles - matching registration button */
+      .feedback-submit-btn {
+        width: 150px !important;
+        padding: 8px 12px !important;
+        font-size: 14px !important;
+        border-radius: 6px !important;
+        background: linear-gradient(90deg, #5d0f68, #047857) !important;
+        color: white !important;
+        border: none !important;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+      }
+
+      .feedback-submit-btn:hover {
+        background: linear-gradient(90deg, #7c1d88, #059669) !important;
+        transform: translateY(-1px);
+      }
+
       @keyframes modalSlideIn {
         from {
           opacity: 0;
@@ -800,6 +818,7 @@
         <a href="#rooms">Rooms</a>
         <a href="#stats">Stats</a>
         <a href="#feedback">Feedback</a>
+        <a href="{{ url_for('logout') }}" class="logout-btn" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; padding: 6px 12px; border-radius: 15px; margin-left: 15px; transition: all 0.3s ease; display: inline-flex; align-items: center; font-size: 14px; font-weight: 500;"><i class="fas fa-sign-out-alt" style="margin-right: 4px; font-size: 12px;"></i>Logout</a>
       </div>
       <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
     </nav>
@@ -814,6 +833,7 @@
       <a href="#rooms" onclick="closeMobileMenu()">Rooms</a>
       <a href="#stats" onclick="closeMobileMenu()">Stats</a>
       <a href="#feedback" onclick="closeMobileMenu()">Feedback</a>
+      <a href="{{ url_for('logout') }}" onclick="closeMobileMenu()" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; padding: 8px 16px; border-radius: 15px; margin: 10px; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; font-size: 14px;"><i class="fas fa-sign-out-alt" style="margin-right: 4px; font-size: 12px;"></i>Logout</a>
     </div>
 
     <!-- Hero Section -->
@@ -1247,10 +1267,17 @@
 <!-- Buttons Container -->
 <div class="feedback-buttons" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
   <!-- Submit Feedback Button -->
-  <button type="submit" onclick="submitFeedback()" class="btn" 
-          style="width: 150px; padding: 8px 12px; font-size: 14px; border-radius: 6px; background: linear-gradient(90deg, #5d0f68, #047857);">
-    Submit Feedback
-  </button>
+{% if is_logged_in_for_hostel('VRIITEE Girls hostel') %}
+    <button type="submit" class="btn feedback-submit-btn">
+      Submit Feedback
+    </button>
+  {% else %}
+    <a href="{{ url_for('login', next_page='vritteGirlshostel') }}" style="text-decoration: none;">
+      <button type="button" class="btn feedback-submit-btn">
+        Submit Feedback (Login Required)
+      </button>
+    </a>
+  {% endif %}
 
   <!-- Student Registration Button -->
   <a href="{{ url_for('login', next_hostel='VRIITEE Girls hostel') }}" style="text-decoration: none;">

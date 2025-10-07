@@ -1,0 +1,5 @@
+/* JB Hostel extra styles (optional). Keep here to avoid 404s. */
+:root{--jb-accent:#b83280}
+.rating span{cursor:pointer}
+.rating span.active{color:#fbbf24}
+.feedback-section .btn{position:relative}

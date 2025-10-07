@@ -1555,7 +1555,9 @@ ul {
                         <a href="#reviews" class="nav-link">Reviews</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#contact" class="nav-link">Contact</a>
+                        <a href="{{ url_for('logout') }}" class="nav-link logout-btn" style="background: linear-gradient(135deg, #ff6b9d, #c44569); color: white; padding: 6px 12px; border-radius: 15px; margin-left: 15px; transition: all 0.3s ease; font-size: 14px; font-weight: 500;">
+                            <i class="fas fa-sign-out-alt" style="margin-right: 4px; font-size: 12px;"></i>Logout
+                        </a>
                     </li>
                 </ul>
                 <div class="nav-hamburger" id="nav-hamburger">
@@ -1837,204 +1839,77 @@ ul {
         </div>
     </section>
 
-    <!-- Reviews Section -->
-    <section id="reviews" class="reviews section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">What Our Residents Say</h2>
-                <div class="section-divider"></div>
-            </div>
-            <div class="reviews-slider">
-                <div class="review-card active" data-aos="fade-up">
-                    <div class="review-content">
-                        <div class="review-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="review-text">"Safe environment and homely meals! The staff is very supportive and the facilities are excellent. I feel completely secure here."</p>
-                        <div class="review-author">
-                            <div class="author-info">
-                                <h4 class="author-name">Priya Sharma</h4>
-                                <p class="author-role">Software Engineer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="review-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="review-content">
-                        <div class="review-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="review-text">"Great location and very supportive staff. The hostel is well-maintained and has all the amenities needed for comfortable living."</p>
-                        <div class="review-author">
-                            <div class="author-info">
-                                <h4 class="author-name">Anjali Desai</h4>
-                                <p class="author-role">MBA Student</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="review-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="review-content">
-                        <div class="review-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="review-text">"The food quality is amazing and the rooms are clean and comfortable. It truly feels like a home away from home."</p>
-                        <div class="review-author">
-                            <div class="author-info">
-                                <h4 class="author-name">Riya Patel</h4>
-                                <p class="author-role">Working Professional</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="review-navigation">
-                <button class="review-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="review-btn next-btn"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Contact Us</h2>
-                <div class="section-divider"></div>
-                <p class="section-subtitle">Get in touch with us for bookings and inquiries</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-card" data-aos="fade-right">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Phone</h4>
-                            <p>+91 9876543210</p>
-                            <a href="tel:+919876543210" class="contact-link">Call Now</a>
-                        </div>
-                    </div>
-                    <div class="contact-card" data-aos="fade-right" data-aos-delay="100">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Email</h4>
-                            <p>jpwomenhostel@gmail.com</p>
-                            <a href="mailto:jpwomenhostel@gmail.com" class="contact-link">Send Email</a>
-                        </div>
-                    </div>
-                    <div class="contact-card" data-aos="fade-right" data-aos-delay="200">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Address</h4>
-                            <p>Near Station Road, New Panvel, Navi Mumbai</p>
-                            <a href="#" class="contact-link">Get Directions</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form" data-aos="fade-left">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
-                            <label for="name">Name</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Your Email" required>
-                            <label for="email">Email</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" id="phone" name="phone" placeholder="Your Phone" required>
-                            <label for="phone">Phone</label>
-                        </div>
-                        <div class="form-group">
-                            <select id="inquiry" name="inquiry" required>
-                                <option value="">Select Inquiry Type</option>
-                                <option value="booking">Room Booking</option>
-                                <option value="visit">Schedule Visit</option>
-                                <option value="information">General Information</option>
-                            </select>
-                            <label for="inquiry">Inquiry Type</label>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" placeholder="Your Message" rows="4" required></textarea>
-                            <label for="message">Message</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-full">
-                            <span>Send Message</span>
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3 class="footer-title">JP Women Hostel</h3>
-                    <p class="footer-description">
-                        Your safe and comfortable home away from home in New Panvel. 
-                        We provide secure accommodation for working women and students.
-                    </p>
-                    <div class="footer-social">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-subtitle">Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#facilities">Facilities</a></li>
-                        <li><a href="#rooms">Rooms</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-subtitle">Contact Info</h4>
-                    <div class="footer-contact">
-                        <p><i class="fas fa-phone"></i> +91 9876543210</p>
-                        <p><i class="fas fa-envelope"></i> jpwomenhostel@gmail.com</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Near Station Road, New Panvel</p>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-subtitle">Hours</h4>
-                    <div class="footer-hours">
-                        <p><strong>Office Hours:</strong></p>
-                        <p>Mon - Sat: 9:00 AM - 7:00 PM</p>
-                        <p>Sunday: 10:00 AM - 5:00 PM</p>
-                        <p><strong>24/7 Security Available</strong></p>
-                    </div>
-                </div>
+
+
+    <!-- Student Feedback Section -->
+    <section class="container" id="feedbackSection">
+      <div class="feedback-section" style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;">
+        <h2 style="text-align:center; margin-bottom: 10px;">💬 Student Feedback</h2>
+        <p style="text-align:center; color:#555; margin-bottom: 20px;">Share your experience at J B Hostel</p>
+
+        <form id="feedbackForm" method="POST" enctype="multipart/form-data" style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+          <!-- Rating -->
+          <div class="rating" id="ratingStars" style="font-size: 32px; text-align: center; margin-bottom: 20px; color: #ffd700;">
+            <span data-value="1" style="cursor: pointer; transition: all 0.2s ease; color: #e2e8f0;">★</span>
+            <span data-value="2" style="cursor: pointer; transition: all 0.2s ease; color: #e2e8f0;">★</span>
+            <span data-value="3" style="cursor: pointer; transition: all 0.2s ease; color: #e2e8f0;">★</span>
+            <span data-value="4" style="cursor: pointer; transition: all 0.2s ease; color: #e2e8f0;">★</span>
+            <span data-value="5" style="cursor: pointer; transition: all 0.2s ease; color: #e2e8f0;">★</span>
+          </div>
+          <input type="hidden" name="rating" id="ratingValue" required />
+
+          <!-- Feedback + Upload -->
+          <div class="feedback-input-wrapper" style="position: relative; margin-top: 10px;">
+            <textarea name="feedback_text" id="feedbackInput" rows="8" placeholder="Write your feedback..." required style="width: 98%; padding: 15px; padding-right: 80px; border-radius: 10px; border: 2px solid #e2e8f0; background-color: white; min-height: 150px; font-size: 16px; line-height: 1.5; resize: vertical;"></textarea>
+
+            <div style="position:absolute; right:15px; top:15px; display:flex; gap:10px;">
+              <label for="mediaUpload" title="Upload image/video" style="cursor:pointer; font-size:24px; background: #f8f9fa; padding: 8px; border-radius: 6px; transition: all 0.2s ease;">📷</label>
+              <input type="file" id="mediaUpload" name="media_file" accept="image/*,video/*" style="display:none" onchange="previewMedia(event)">
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 JP Women Hostel. All Rights Reserved.</p>
-                <p>Designed with <i class="fas fa-heart"></i> for your comfort and safety.</p>
+          </div>
+
+          <div id="mediaPreview" style="margin-top:10px;"></div>
+
+          <div style="display:flex; gap: 15px; margin-top: 20px; flex-wrap: wrap; justify-content: center;">
+            {% if session.get('user') %}
+              <button type="submit" class="btn" style="background: linear-gradient(135deg, #667eea, #764ba2); color:white; padding: 8px 12px; width: 150px; font-size: 14px; border-radius: 6px; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3); border: none; cursor: pointer; transition: all 0.3s ease;">Submit Feedback</button>
+            {% else %}
+              <a href="{{ url_for('login', next_page='jbhostel') }}" style="text-decoration:none;">
+                <button type="button" class="btn" style="background: linear-gradient(135deg, #667eea, #764ba2); color:white; padding: 8px 12px; width: 150px; font-size: 14px; border-radius: 6px; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3); border: none; cursor: pointer; transition: all 0.3s ease;">Submit Feedback</button>
+              </a>
+            {% endif %}
+
+            <a href="{{ url_for('login', next_hostel='jbhostel') }}" style="text-decoration:none;">
+              <button type="button" class="btn" style="background: linear-gradient(135deg, #11998e, #38ef7d); color:white; padding: 8px 12px; width: 150px; font-size: 14px; border-radius: 6px; font-weight: 600; box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3); border: none; cursor: pointer; transition: all 0.3s ease;">Student Registration</button>
+            </a>
+          </div>
+        </form>
+
+        <div class="feedback-list" id="feedbackList" style="margin-top: 20px;">
+          {% for fb in feedbacks %}
+          <div class="feedback-item" style="display:flex; gap:10px; margin-bottom:15px; background:#fff; padding:14px; border-radius:12px; box-shadow: 0 4px 16px rgba(0,0,0,0.06);">
+            <div class="feedback-avatar" style="width:40px; height:40px; background:#059669; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">
+              {{ fb.email[0]|upper }}
             </div>
+            <div class="feedback-content" style="flex:1;">
+              <div class="feedback-rating">{% for i in range(fb.rating) %}⭐{% endfor %}</div>
+              <div class="feedback-text">{{ fb.feedback_text }}</div>
+              <div class="feedback-time" style="font-size:12px; color:gray;">{{ fb.timestamp.strftime('%b %d, %Y %H:%M') }}</div>
+              {% if fb.media_file %}
+                {% if fb.media_file.endswith(('.mp4', '.mov', '.avi')) %}
+                  <video src="{{ url_for('static', filename='uploads/' + fb.media_file) }}" controls style="max-width:250px; margin-top:5px; border-radius:10px;"></video>
+                {% else %}
+                  <img src="{{ url_for('static', filename='uploads/' + fb.media_file) }}" style="max-width:200px; margin-top:5px; border-radius:10px;" />
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
         </div>
-    </footer>
+      </div>
+    </section>
 
     <!-- AOS Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.js"></script>
@@ -2866,6 +2741,85 @@ if ('serviceWorker' in navigator) {
                 console.log('SW registration failed: ', registrationError);
             });
     });
-}</script>
+}
+  // Star rating behavior
+  (function(){
+    const stars = document.querySelectorAll('#ratingStars span');
+    const ratingInput = document.getElementById('ratingValue');
+    let selected = 0;
+    const highlight = (n)=>{
+      stars.forEach((s,i)=>{
+        if(i < n){
+          s.style.color = '#ffd700';
+          s.style.transform = 'scale(1.1)';
+        } else {
+          s.style.color = '#e2e8f0';
+          s.style.transform = 'scale(1)';
+        }
+      });
+    };
+    stars.forEach((star, idx)=>{
+      star.addEventListener('click', ()=>{ 
+        selected = idx+1; 
+        ratingInput.value = selected; 
+        highlight(selected); 
+      });
+      star.addEventListener('mouseover', ()=> highlight(idx+1));
+    });
+    document.getElementById('ratingStars').addEventListener('mouseleave', ()=> highlight(selected));
+    
+    // Add hover effects
+    stars.forEach(star => {
+      star.addEventListener('mouseenter', function(){
+        this.style.filter = 'brightness(1.2)';
+      });
+      star.addEventListener('mouseleave', function(){
+        this.style.filter = 'brightness(1)';
+      });
+    });
+  })();
+
+  // Button hover effects
+  document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-2px) scale(1.02)';
+        this.style.boxShadow = this.style.boxShadow.replace('0.3', '0.5');
+      });
+      btn.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+        this.style.boxShadow = this.style.boxShadow.replace('0.5', '0.3');
+      });
+    });
+    
+    // Upload button hover effect
+    const uploadBtn = document.querySelector('label[for="mediaUpload"]');
+    if (uploadBtn) {
+      uploadBtn.addEventListener('mouseenter', function() {
+        this.style.background = '#e9ecef';
+        this.style.transform = 'scale(1.1)';
+      });
+      uploadBtn.addEventListener('mouseleave', function() {
+        this.style.background = '#f8f9fa';
+        this.style.transform = 'scale(1)';
+      });
+    }
+  });
+
+  // Media preview (image/video)
+  function previewMedia(event){
+    const file = event.target.files && event.target.files[0];
+    const preview = document.getElementById('mediaPreview');
+    preview.innerHTML = '';
+    if(!file) return;
+    const url = URL.createObjectURL(file);
+    if (file.type.startsWith('image/')){
+      const img = document.createElement('img'); img.src = url; img.style.maxWidth='200px'; img.style.borderRadius='10px'; preview.appendChild(img);
+    } else if (file.type.startsWith('video/')){
+      const v = document.createElement('video'); v.src=url; v.controls=true; v.style.maxWidth='250px'; v.style.borderRadius='10px'; preview.appendChild(v);
+    }
+  }
+</script>
 </body>
 </html>

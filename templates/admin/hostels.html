@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Hostels</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body { 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+      }
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1 {
+        color: white;
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      }
+      nav {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+      }
+      nav a { 
+        color: white;
+        text-decoration: none;
+        margin-right: 20px;
+        padding: 10px 20px;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+      nav a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      }
+      .actions {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+      }
+      .actions a, .actions button {
+        background: rgba(255, 255, 255, 0.9);
+        color: #667eea;
+        text-decoration: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        margin-right: 15px;
+        border: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      .actions a:hover, .actions button:hover {
+        background: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      }
+      .table-container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        overflow-x: auto;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        backdrop-filter: blur(10px);
+      }
+      table { 
+        border-collapse: collapse; 
+        width: 100%;
+        border: none;
+        min-width: 800px;
+      }
+      th, td { 
+        padding: 15px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+      }
+      th { 
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      tbody tr {
+        transition: all 0.3s ease;
+      }
+      tbody tr:hover {
+        background: rgba(102, 126, 234, 0.05);
+        transform: scale(1.001);
+      }
+      form {
+        display: inline;
+      }
+      .action-links a, .action-links button {
+        color: #667eea;
+        text-decoration: none;
+        margin-right: 10px;
+        padding: 5px 12px;
+        border-radius: 15px;
+        background: rgba(102, 126, 234, 0.1);
+        transition: all 0.3s ease;
+        border: none;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .action-links a:hover, .action-links button:hover {
+        background: rgba(102, 126, 234, 0.2);
+        transform: scale(1.05);
+      }
+      .action-links button {
+        color: #e74c3c;
+        background: rgba(231, 76, 60, 0.1);
+      }
+      .action-links button:hover {
+        background: rgba(231, 76, 60, 0.2);
+      }
+      .logout-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 10px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+      .logout-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    
+    <div class="container">
+      <h1>Hostels Management</h1>
+      
+      <nav>
+        <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('admin.feedbacks') }}">Feedbacks</a>
+        <a href="{{ url_for('admin.students') }}">Students</a>
+      </nav>
+
+      <div class="actions">
+        <a href="{{ url_for('admin.hostels_new') }}">New Hostel</a>
+        <form method="post" action="{{ url_for('admin.hostels_import') }}">
+          <button type="submit">Import from hostels.json</button>
+        </form>
+        <form method="post" action="{{ url_for('admin.hostels_export') }}">
+          <button type="submit">Export to hostels.json</button>
+        </form>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Page</th>
+              <th>Mess</th>
+              <th>Type</th>
+              <th>Rooms</th>
+              <th>Types</th>
+              <th>Gym</th>
+              <th>Image</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for h in rows %}
+            <tr>
+              <td>{{ h.id }}</td>
+              <td>{{ h.name }}</td>
+              <td>{{ h.page }}</td>
+              <td>{{ h.mess }}</td>
+              <td>{{ h.type }}</td>
+              <td>{{ (h.rooms or '[]') }}</td>
+              <td>{{ (h.types or '[]') }}</td>
+              <td>{{ 'Yes' if h.gym else 'No' }}</td>
+              <td>{{ h.img }}</td>
+              <td class="action-links">
+                <a href="{{ url_for('admin.hostels_view', id=h.id) }}">View</a>
+                <a href="{{ url_for('admin.hostels_edit', id=h.id) }}">Edit</a>
+                <form method="post" action="{{ url_for('admin.hostels_delete', id=h.id) }}" onsubmit="return confirm('Delete this hostel?');">
+                  <button type="submit">Delete</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

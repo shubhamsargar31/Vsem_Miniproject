@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Students</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body { 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+      }
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1 {
+        color: white;
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      }
+      nav {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+      }
+      nav a { 
+        color: white;
+        text-decoration: none;
+        margin-right: 20px;
+        padding: 10px 20px;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+      nav a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      }
+      .search-container {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+      }
+      .search-form {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .search-input {
+        padding: 12px 20px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.9);
+        font-size: 16px;
+        min-width: 300px;
+        transition: all 0.3s ease;
+      }
+      .search-input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+      }
+      .search-btn, .clear-btn {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 25px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .search-btn {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+      }
+      .search-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+      }
+      .clear-btn {
+        background: rgba(255, 255, 255, 0.9);
+        color: #666;
+      }
+      .clear-btn:hover {
+        background: white;
+        transform: translateY(-2px);
+      }
+      .search-info {
+        color: white;
+        margin-top: 10px;
+        font-style: italic;
+      }
+      .table-container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        overflow-x: auto;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        backdrop-filter: blur(10px);
+      }
+      table { 
+        border-collapse: collapse; 
+        width: 100%;
+        border: none;
+        min-width: 800px;
+      }
+      th, td { 
+        padding: 15px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+      }
+      th { 
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        position: sticky;
+        top: 0;
+      }
+      tbody tr {
+        transition: all 0.3s ease;
+      }
+      tbody tr:hover {
+        background: rgba(102, 126, 234, 0.05);
+        transform: scale(1.001);
+      }
+      .id-link {
+        color: #667eea;
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 12px;
+        background: rgba(102, 126, 234, 0.1);
+        transition: all 0.3s ease;
+      }
+      .id-link:hover {
+        background: rgba(102, 126, 234, 0.2);
+        transform: scale(1.05);
+      }
+      .logout-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 10px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+      .logout-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    
+    <div class="container">
+      <h1>Students Management</h1>
+      
+      <nav>
+        <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('admin.feedbacks') }}">Feedbacks</a>
+        <a href="{{ url_for('admin.hostels') }}">Hostels</a>
+      </nav>
+
+      <div class="search-container">
+        <form method="GET" class="search-form">
+          <input type="text" name="search" class="search-input" 
+                 placeholder="Search by name or email..." 
+                 value="{{ search_query or '' }}">
+          <button type="submit" class="search-btn">Search</button>
+          {% if search_query %}
+            <a href="{{ url_for('admin.students') }}" class="clear-btn" style="text-decoration: none; display: inline-block;">Clear</a>
+          {% endif %}
+        </form>
+        {% if search_query %}
+          <div class="search-info">Showing results for: "{{ search_query }}" ({{ rows|length }} found)</div>
+        {% endif %}
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Hostel</th>
+              <th>Room</th>
+              <th>AC Type</th>
+              <th>College ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for s in rows %}
+            <tr>
+              <td>{{ s.surname }} {{ s.firstname }} {{ s.middlename }}</td>
+              <td>{{ s.email }}</td>
+              <td>{{ s.phone }}</td>
+              <td>{{ s.hostel_name }}</td>
+              <td>{{ s.room }}</td>
+              <td>{{ s.ac_room }}</td>
+              <td>
+                {% if s.college_id_photo %}
+                  <a href="{{ url_for('static', filename='uploads/' ~ s.college_id_photo) }}" target="_blank" class="id-link">View ID</a>
+                {% else %}None{% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+            {% if search_query and not rows %}
+            <tr>
+              <td colspan="7" style="text-align: center; color: #999; padding: 40px; font-style: italic;">
+                No students found matching "{{ search_query }}"
+              </td>
+            </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

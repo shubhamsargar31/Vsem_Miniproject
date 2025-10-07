@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hostel Details</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body { 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+        padding: 20px;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      h1 {
+        color: white;
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      }
+      nav {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 15px;
+        margin-bottom: 25px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+      }
+      nav a { 
+        color: white;
+        text-decoration: none;
+        margin-right: 20px;
+        padding: 8px 16px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+      nav a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+      h2 {
+        color: white;
+        font-size: 1.5rem;
+        margin: 30px 0 15px 0;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      }
+      .grid { 
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+      }
+      .card { 
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        padding: 20px;
+        min-width: 280px;
+        flex: 1;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        backdrop-filter: blur(10px);
+      }
+      .card h3 {
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+      }
+      .meta dt { 
+        font-weight: 600;
+        color: #555;
+        margin-top: 8px;
+      }
+      .meta dd { 
+        margin: 2px 0 8px 0;
+        color: #666;
+      }
+      .table-container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        backdrop-filter: blur(10px);
+        margin-bottom: 25px;
+      }
+      table { 
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td { 
+        padding: 12px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+      }
+      th { 
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        font-weight: 600;
+      }
+      tbody tr:hover {
+        background: rgba(102, 126, 234, 0.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>{{ hostel.name }}</h1>
+      
+      <nav>
+        <a href="{{ url_for('admin.hostels') }}">← Back to Hostels</a>
+        <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+      </nav>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Summary</h3>
+          <dl class="meta">
+            <dt>Page</dt><dd>{{ hostel.page }}</dd>
+            <dt>Mess</dt><dd>{{ hostel.mess }}</dd>
+            <dt>Type</dt><dd>{{ hostel.type }}</dd>
+            <dt>Gym</dt><dd>{{ 'Yes' if hostel.gym else 'No' }}</dd>
+            <dt>Image</dt><dd>{{ hostel.img }}</dd>
+          </dl>
+        </div>
+        <div class="card">
+          <h3>Room Details</h3>
+          <dt>Rooms</dt>
+          <dd>{{ hostel.rooms }}</dd>
+          <dt>Types</dt>
+          <dd>{{ hostel.types }}</dd>
+        </div>
+      </div>
+
+      <h2>Registrations ({{ students|length }})</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Room</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for s in students %}
+            <tr>
+              <td>{{ s.surname }} {{ s.firstname }} {{ s.middlename }}</td>
+              <td>{{ s.email }}</td>
+              <td>{{ s.phone }}</td>
+              <td>{{ s.room }}</td>
+              <td>{{ s.ac_room }}</td>
+            </tr>
+            {% endfor %}
+            {% if not students %}
+            <tr><td colspan="5">No registrations found for this hostel.</td></tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Feedback ({{ feedbacks|length }})</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Email</th>
+              <th>Rating</th>
+              <th>Text</th>
+              <th>Media</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for it in feedbacks %}
+            <tr>
+              <td>{{ it.model }} ({{ it.hostel }})</td>
+              <td>{{ it.email }}</td>
+              <td>{{ it.rating }}/5</td>
+              <td style="max-width:400px">{{ it.text }}</td>
+              <td>
+                {% if it.media_file %}
+                  <a target="_blank" href="{{ url_for('static', filename='uploads/' ~ it.media_file) }}" style="color: #667eea;">view</a>
+                {% else %}None{% endif %}
+              </td>
+              <td>{{ it.timestamp.strftime('%Y-%m-%d') if it.timestamp else '-' }}</td>
+            </tr>
+            {% endfor %}
+            {% if not feedbacks %}
+            <tr><td colspan="6">No feedback found for this hostel.</td></tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

@@ -143,10 +143,13 @@
 
         <!-- Flash Messages -->
         <div class="flash-messages">
-          {% with messages = get_flashed_messages(with_categories=true) %} {% if
-          messages %} {% for category, message in messages %}
-          <!-- <div class="flash {{ category }}">{{ message }}</div> -->
-          {% endfor %} {% endif %} {% endwith %}
+          {% with messages = get_flashed_messages(with_categories=true) %} 
+          {% if messages %} 
+          {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+          {% endfor %} 
+          {% endif %} 
+          {% endwith %}
         </div>
 
         <form
@@ -155,7 +158,8 @@
         >
           {% if next_hostel %}
           <input type="hidden" name="next_hostel" value="{{ next_hostel }}" />
-          {% endif %} {% if next_page %}
+          {% endif %}
+          {% if next_page %}
           <input type="hidden" name="next_page" value="{{ next_page }}" />
           {% endif %}
 
@@ -168,12 +172,38 @@
           />
 
           <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter Password"
-            required
-          />
+          <div style="position: relative;">
+            <input
+              type="password"
+              id="passwordInput"
+              name="password"
+              placeholder="Enter Password"
+              autocomplete="current-password"
+              spellcheck="false"
+              data-lpignore="true"
+              style="padding-right: 45px;"
+              required
+            />
+            <button 
+              type="button" 
+              id="togglePassword"
+              style="
+                position: absolute;
+                right: 12px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                cursor: pointer;
+                font-size: 16px;
+                padding: 0;
+                margin: 0;
+                color: #666;
+              "
+            >
+              👁️
+            </button>
+          </div>
 
           <button type="submit">Login</button>
         </form>
@@ -185,8 +215,36 @@
         <p>
           Sign up and discover the Best Hostels Near You for a Comfortable Stay
         </p>
-        <a href="/signup" class="signup-btn">Sign Up</a>
+        <a href="{{ url_for('signup', next_hostel=next_hostel, next_page=next_page) }}" class="signup-btn">Sign Up</a>
       </div>
     </div>
+    
+    <script>
+      // Password visibility toggle
+      document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('passwordInput');
+        const toggleButton = document.getElementById('togglePassword');
+        
+        if (passwordInput.type === 'password') {
+          passwordInput.type = 'text';
+          toggleButton.innerHTML = '🙈';
+          toggleButton.title = 'Hide password';
+        } else {
+          passwordInput.type = 'password';
+          toggleButton.innerHTML = '👁️';
+          toggleButton.title = 'Show password';
+        }
+      });
+      
+      // Additional security: Clear password on page unload
+      window.addEventListener('beforeunload', function() {
+        document.getElementById('passwordInput').value = '';
+      });
+      
+      // Prevent password from being cached
+      document.getElementById('passwordInput').addEventListener('input', function() {
+        this.setAttribute('data-modified', 'true');
+      });
+    </script>
   </body>
 </html>

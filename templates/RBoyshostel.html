@@ -75,7 +75,14 @@
     .nav-menu {
       display: flex;
       list-style: none;
-      gap: 30px;
+      gap: 20px;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .nav-menu li {
+      display: flex;
       align-items: center;
     }
 
@@ -819,6 +826,7 @@
             <li><a href="#rooms">Rooms</a></li>
             <li><a href="#amenities">Amenities</a></li>
             <li><a onclick="openModal(); closeMobileMenu();">Contact us</a></li>
+            <li><a href="{{ url_for('logout') }}" class="logout-btn" style="background: linear-gradient(135deg, #8b45c0, #6c3bad); color: white; padding: 6px 12px; border-radius: 15px; margin-left: 15px; transition: all 0.3s ease; display: inline-flex; align-items: center; font-size: 14px; font-weight: 500;"><i class="fas fa-sign-out-alt" style="margin-right: 4px; font-size: 12px;"></i>Logout</a></li>
           </ul>
           <div class="hamburger">
             <span></span>
@@ -1121,13 +1129,22 @@
 <!-- Buttons Container -->
 <div class="feedback-buttons" style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
   <!-- Submit Feedback Button -->
-  <button type="submit" form="feedbackForm" class="btn" 
-          style="width: 150px; background: linear-gradient(90deg, #5d0f68, #047857); padding: 8px 12px; font-size: 14px; border-radius: 6px;">
-    Submit Feedback
-  </button>
+{% if session.get('user') %}
+    <button type="submit" form="feedbackForm" class="btn" 
+            style="width: 150px; background: linear-gradient(90deg, #5d0f68, #047857); padding: 8px 12px; font-size: 14px; border-radius: 6px;">
+      Submit Feedback
+    </button>
+  {% else %}
+    <a href="{{ url_for('login', next_page='RBoyshostel') }}" style="text-decoration: none;">
+      <button type="button" class="btn" 
+              style="width: 150px; background: linear-gradient(90deg, #5d0f68, #047857); padding: 8px 12px; font-size: 14px; border-radius: 6px;">
+        Submit Feedback
+      </button>
+    </a>
+  {% endif %}
 
   <!-- Student Registration Button -->
-  <a href="{{ url_for('login', next_hostel='R Boys hostel') }}" style="text-decoration: none;">
+  <a href="{{ url_for('login', next_hostel='RBoyshostel') }}" style="text-decoration: none;">
     <button type="button" class="btn" 
             style="width: 150px; background: linear-gradient(90deg, #047857, #065f46); padding: 8px 12px; font-size: 14px; border-radius: 6px;">
       Student Registration

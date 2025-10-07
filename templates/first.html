@@ -137,7 +137,15 @@
     </style>
   </head>
   <body>
-    <div class="navbar">🏨 Multi Hostel Web Application</div>
+    <div class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px;">
+      <div style="font-size: 20px; font-weight: bold;">🏨 Multi Hostel Web Application</div>
+      <a href="{{ url_for('logout') }}" 
+         style="color: white; text-decoration: none; padding: 8px 16px; background: rgba(255,255,255,0.2); border-radius: 6px; font-size: 14px; transition: all 0.3s ease;"
+         onmouseover="this.style.background='rgba(255,255,255,0.3)'"
+         onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+        🚪 Logout
+      </a>
+    </div>
 
     <div class="container">
       <div class="filter-box">
