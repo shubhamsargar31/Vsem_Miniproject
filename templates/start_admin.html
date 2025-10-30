@@ -110,6 +110,35 @@
         font-size: 2rem;
         color: #667eea;
       }
+      /* Flash messages */
+      .flash-messages {
+        margin: 15px 0;
+        width: 100%;
+      }
+      .flash {
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: center;
+      }
+      .flash.success {
+        background: #d4edda;
+        color: #155724;
+      }
+      .flash.error {
+        background: #f8d7da;
+        color: #721c24;
+      }
+      .flash.warning {
+        background: #fff3cd;
+        color: #856404;
+      }
+      .flash.info {
+        background: #d1ecf1;
+        color: #0c5460;
+      }
     </style>
   </head>
   <body>
@@ -118,6 +147,17 @@
         <div class="admin-icon">🔒</div>
         <h1>Admin Login</h1>
         <p class="sub">Administrator Access Portal</p>
+        
+        <!-- Flash Messages -->
+        <div class="flash-messages">
+          {% with messages = get_flashed_messages(with_categories=true) %} 
+          {% if messages %} 
+          {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+          {% endfor %} 
+          {% endif %} 
+          {% endwith %}
+        </div>
         
         <form method="POST" action="{{ url_for('start_admin') }}">
           <label>Email Address</label>
@@ -135,5 +175,21 @@
         <div class="note">Skip takes you to the public landing page</div>
       </div>
     </div>
+    
+    <script>
+      // Auto-clear flash messages after 4 seconds
+      document.addEventListener('DOMContentLoaded', function() {
+        const flashMessages = document.querySelectorAll('.flash');
+        flashMessages.forEach(function(message) {
+          setTimeout(function() {
+            message.style.opacity = '0';
+            message.style.transition = 'opacity 0.5s ease';
+            setTimeout(function() {
+              message.remove();
+            }, 500);
+          }, 4000); // 4 seconds
+        });
+      });
+    </script>
   </body>
 </html>

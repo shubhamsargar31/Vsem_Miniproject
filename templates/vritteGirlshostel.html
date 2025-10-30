@@ -848,23 +848,61 @@
 
     <!-- Contact Modal -->
     <div id="contactModal" class="modal">
-      <div class="modal-content">
-        <h3>📍 Hostel Address</h3>
-        <p>
-          <strong>Vriitee Hostel</strong><br />
-          Plot No. 24, Sector 33, Kharghar, Navi Mumbai – 410210, Maharashtra
-          Near NMIMS College
-        </p>
+      <div class="modal-content" style="max-width: 700px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; margin: auto; top: 50%; transform: translateY(-50%);">
+        <!-- Close Button (X) -->
+        <button onclick="closeModal()" style="position: absolute; top: 15px; right: 15px; background: #ef4444; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; font-size: 18px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 1000; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);" onmouseover="this.style.background='#dc2626'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='#ef4444'; this.style.transform='scale(1)'">✕</button>
+        
+        <h3 style="color: #3b82f6; margin-bottom: 15px; font-size: 1.6rem; text-align: center;">📍 Contact Information</h3>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 15px;">
+          <!-- Left Column - Contact Details -->
+          <div>
+            <h4 style="color: #1d4ed8; margin-bottom: 15px;">Hostel Address</h4>
+            <p style="margin-bottom: 15px;">
+              <strong>Vriitee Girls Hostel</strong><br />
+              Plot No. 24, Sector 33, Kharghar, Navi Mumbai – 410210, Maharashtra<br />
+              Near NMIMS College
+            </p>
 
-        <h3>☎ Contact Information</h3>
-        <p><strong>Main Office:</strong> +91 8591714474</p>
-        <p><strong>Emergency:</strong> +91 9819317824</p>
+            <h4 style="color: #1d4ed8; margin-bottom: 10px;">Contact Information</h4>
+            <p><strong>Main Office:</strong> +91 8591714474</p>
+            <p><strong>Emergency:</strong> +91 9819317824</p>
 
-        <h3>👨‍💼 Hostel Manager</h3>
-        <p><strong>Name:</strong> Mr. Rajesh Kumar</p>
-        <p><strong>Phone:</strong> +91 9876543212</p>
-        <p><strong>Email:</strong> Vriiteehostel@gmail.com</p>
-        <button class="close-btn" onclick="closeModal()">Close</button>
+            <h4 style="color: #1d4ed8; margin-bottom: 10px; margin-top: 15px;">Hostel Manager</h4>
+            <p><strong>Name:</strong> Mr. Rajesh Kumar</p>
+            <p><strong>Phone:</strong> +91 9876543212</p>
+            <p><strong>Email:</strong> Vriiteehostel@gmail.com</p>
+
+            <button onclick="openMapModal()" style="background: linear-gradient(90deg, #10b981, #059669); color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; margin-top: 15px; font-weight: 600; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+              📍 View on Map
+            </button>
+          </div>
+
+          <!-- Right Column - Quick Map Preview -->
+          <div>
+            <div id="map-preview" style="width: 100%; height: 250px; border-radius: 10px; border: 2px solid #e5e7eb; background: #f9fafb; display: flex; align-items: center; justify-content: center; color: #6b7280; font-size: 14px;">
+              Click "View on Map" to see location
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          <button class="close-btn" onclick="closeModal()" style="background: linear-gradient(90deg, #3b82f6, #1d4ed8); margin: 0;">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map Modal -->
+    <div id="mapModal" class="modal" style="z-index: 2001;">
+      <div class="modal-content" style="max-width: 90%; height: 80%; position: relative;">
+        <!-- Close Button (X) -->
+        <button onclick="closeMapModal()" style="position: absolute; top: 15px; right: 15px; background: #ef4444; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; font-size: 18px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 1000; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2);" onmouseover="this.style.background='#dc2626'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='#ef4444'; this.style.transform='scale(1)'">✕</button>
+        
+        <h3 style="color: #3b82f6; margin-bottom: 20px; text-align: center;">📍 Vriitee Girls Hostel Location</h3>
+        <div id="map" style="width: 100%; height: 500px; border-radius: 10px; border: 2px solid #e5e7eb;"></div>
+        <div style="text-align: center; margin-top: 20px;">
+          <button class="close-btn" onclick="closeMapModal()" style="background: linear-gradient(90deg, #3b82f6, #1d4ed8);">Close Map</button>
+        </div>
       </div>
     </div>
 
@@ -1320,6 +1358,11 @@
   </div>
 </section>
 
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<!-- Leaflet JavaScript -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script>
 
 function openModal() {
@@ -1328,6 +1371,65 @@ function openModal() {
 function closeModal() {
   document.getElementById('contactModal').style.display = 'none';
 }
+
+// Map Modal Functions
+function openMapModal() {
+  document.getElementById('mapModal').style.display = 'flex';
+  // Initialize map when modal opens
+  setTimeout(initMap, 100);
+}
+
+function closeMapModal() {
+  document.getElementById('mapModal').style.display = 'none';
+}
+
+  // Leaflet Map Integration
+  function initMap() {
+    // Clear any existing map
+    const mapContainer = document.getElementById('map');
+    mapContainer.innerHTML = '';
+    
+    // Vriitee Girls Hostel Location (coordinates for Kharghar)
+    const hostelLat = 19.064675702843665;
+    const hostelLng = 73.08091535717026;
+    
+    // Initialize the map
+    const map = L.map('map').setView([hostelLat, hostelLng], 16);
+    
+    // Add tile layer (OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+    
+    // Create custom marker icon
+    const customIcon = L.divIcon({
+      html: '<div style="background-color: #ef4444; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>',
+      className: 'custom-div-icon',
+      iconSize: [26, 26],
+      iconAnchor: [13, 13]
+    });
+    
+    // Add marker
+    const marker = L.marker([hostelLat, hostelLng], {icon: customIcon}).addTo(map);
+    
+    // Add popup with hostel information
+    marker.bindPopup(`
+      <div style="padding: 10px; min-width: 200px;">
+        <h4 style="color: #3b82f6; margin: 0 0 10px 0; font-size: 16px;">🏨 Vriitee Girls Hostel</h4>
+        <p style="margin: 5px 0; font-size: 13px;"><strong>📍 Address:</strong><br>Plot No. 24, Sector 33, Kharghar<br>Navi Mumbai - 410210</p>
+        <p style="margin: 5px 0; font-size: 13px;"><strong>📞 Phone:</strong> +91 8591714474</p>
+        <p style="margin: 5px 0; font-size: 13px;"><strong>✉️ Email:</strong> Vriiteehostel@gmail.com</p>
+      </div>
+    `).openPopup();
+    
+    // Add click event to show directions
+    marker.on('click', function() {
+      const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${hostelLat},${hostelLng}`;
+      if (confirm('Open directions to Vriitee Girls Hostel in Google Maps?')) {
+        window.open(directionsUrl, '_blank');
+      }
+    });
+  }
 
 
 // Feedback submission

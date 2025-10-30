@@ -54,6 +54,10 @@ def landing():
 
 @app.route("/start-admin", methods=["GET", "POST"])
 def start_admin():
+    # Clear old flash messages on GET request to prevent accumulation
+    if request.method == "GET":
+        session.pop('_flashes', None)
+        
     if request.method == "POST":
         action = request.form.get("action")
         if action == "skip":
@@ -464,6 +468,10 @@ def signup():
 def login():
     next_hostel = request.form.get("next_hostel") or request.args.get("next_hostel")
     next_page = request.form.get("next_page") or request.args.get("next_page")
+    
+    # Clear old flash messages on GET request to prevent accumulation
+    if request.method == "GET":
+        session.pop('_flashes', None)
 
     if request.method == "POST":
         email = request.form.get("email")

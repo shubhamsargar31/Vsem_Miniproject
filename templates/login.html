@@ -245,6 +245,20 @@
       document.getElementById('passwordInput').addEventListener('input', function() {
         this.setAttribute('data-modified', 'true');
       });
+      
+      // Auto-clear flash messages after 4 seconds
+      document.addEventListener('DOMContentLoaded', function() {
+        const flashMessages = document.querySelectorAll('.flash');
+        flashMessages.forEach(function(message) {
+          setTimeout(function() {
+            message.style.opacity = '0';
+            message.style.transition = 'opacity 0.5s ease';
+            setTimeout(function() {
+              message.remove();
+            }, 500);
+          }, 4000); // 4 seconds
+        });
+      });
     </script>
   </body>
 </html>
